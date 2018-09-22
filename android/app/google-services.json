@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "588210084717",
+    "firebase_url": "https://reactbs-d85dd.firebaseio.com",
+    "project_id": "reactbs-d85dd",
+    "storage_bucket": "reactbs-d85dd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:588210084717:android:c7b049c55d9f9615",
+        "android_client_info": {
+          "package_name": "com.gmhelper.gmhelper"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "588210084717-t29a48nq3r8nqo2g6pc41j8hqsio4pla.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBl-qyEuMEn5lK8O3eUw4SURzRTxc0dPTY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
