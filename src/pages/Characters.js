@@ -18,13 +18,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importDefault(require("react"));
 var Characters = /** @class */ (function (_super) {
-    __extends(Characters, _super);
-    function Characters() {
+    __extends(Players, _super);
+    function Players() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    Characters.prototype.render = function () {
+    Players.prototype.render = function () {
         return null;
     };
-    return Characters;
+    return Players;
 }(react_1.default.Component));
-exports.Characters = Characters;
+exports.Players = Players;
