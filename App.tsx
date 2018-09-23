@@ -8,6 +8,9 @@ import {NPCs} from "./src/pages/NPCs";
 import {Mobs} from "./src/pages/Mobs";
 import {CharacterModel} from "./src/data/CharacterModel";
 import {FloatingAction} from "react-native-floating-action";
+import {
+  createStackNavigator,
+} from 'react-navigation';
 
 type StateType = {
   players: CharacterModel[];
@@ -32,15 +35,18 @@ export default class App extends React.Component<StateType> {
     };
   }
 
+
+
   componentDidMount() {
     // firebase things?
   }
 
   render() {
+    const { navigate } = this.props.navigation;
     return (
       <Router>
         <Scene key='root' tabs={true} hideNavBar={true}>
-          <Scene key='tab1' title='Players' component={Players} onPress={() => Actions.Players({text: 'hello'})}
+          <Scene key='tab1' title='Players' component={Players} onPress={() => navigate('players', {text: 'name'})}
                  icon={TabIcon} initial={true}/>
           <Scene key='tab2' title='NPCs' component={NPCs} icon={TabIcon}/>
           <Scene key='tab3' title='Mobs' component={Mobs} icon={TabIcon}/>

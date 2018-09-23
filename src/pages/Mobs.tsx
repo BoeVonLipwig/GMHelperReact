@@ -12,13 +12,17 @@ export class Mobs extends React.Component {
     );
   }
 
+  private addChar() {
+
+  }
+
 
   fabButton() {
 
     const actions = [{
-      text: FabConfig.save.text,
-      position: FabConfig.save.position,
-      name: FabConfig.save.name,
+      text: FabConfig.add.text,
+      position: FabConfig.add.position,
+      name: FabConfig.add.name,
     }];
 
     return (
@@ -30,10 +34,6 @@ export class Mobs extends React.Component {
         }
       }/>
     )
-
-  }
-
-  private addChar() {
 
   }
 }

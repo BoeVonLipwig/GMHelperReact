@@ -40,9 +40,10 @@ var App = /** @class */ (function (_super) {
         // firebase things?
     };
     App.prototype.render = function () {
+        var navigate = this.props.navigation.navigate;
         return (react_1.default.createElement(react_native_router_flux_1.Router, null,
             react_1.default.createElement(react_native_router_flux_1.Scene, { key: 'root', tabs: true, hideNavBar: true },
-                react_1.default.createElement(react_native_router_flux_1.Scene, { key: 'tab1', title: 'Players', component: Players_1.Players, onPress: function () { return react_native_router_flux_1.Actions.Players({ text: 'hello' }); }, icon: TabIcon, initial: true }),
+                react_1.default.createElement(react_native_router_flux_1.Scene, { key: 'tab1', title: 'Players', component: Players_1.Players, onPress: function () { return navigate('players', { text: 'name' }); }, icon: TabIcon, initial: true }),
                 react_1.default.createElement(react_native_router_flux_1.Scene, { key: 'tab2', title: 'NPCs', component: NPCs_1.NPCs, icon: TabIcon }),
                 react_1.default.createElement(react_native_router_flux_1.Scene, { key: 'tab3', title: 'Mobs', component: Mobs_1.Mobs, icon: TabIcon }))));
     };

@@ -29,20 +29,20 @@ var Mobs = /** @class */ (function (_super) {
             react_1.default.createElement(react_native_1.Text, null, "Hello"),
             this.fabButton()));
     };
+    Mobs.prototype.addChar = function () {
+    };
     Mobs.prototype.fabButton = function () {
         var _this = this;
         var actions = [{
-                text: exports.FabConfig.save.text,
-                position: exports.FabConfig.save.position,
-                name: exports.FabConfig.save.name,
+                text: exports.FabConfig.add.text,
+                position: exports.FabConfig.add.position,
+                name: exports.FabConfig.add.name,
             }];
         return (react_1.default.createElement(react_native_floating_action_1.FloatingAction, { actions: actions, overrideWithAction: true, onPressItem: function (name) {
                 if (exports.FabConfig.add.name.localeCompare(name + "") == 0) {
                     _this.addChar();
                 }
             } }));
-    };
-    Mobs.prototype.addChar = function () {
     };
     return Mobs;
 }(react_1.default.Component));
