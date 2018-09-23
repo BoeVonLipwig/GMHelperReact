@@ -19,8 +19,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importDefault(require("react"));
 var react_native_1 = require("react-native");
 var react_native_router_flux_1 = require("react-native-router-flux");
-var Characters_1 = require("./src/pages/Characters");
-var Maps_1 = require("./src/pages/Maps");
+var Players_1 = require("./src/pages/Players");
+var NPCs_1 = require("./src/pages/NPCs");
+var Mobs_1 = require("./src/pages/Mobs");
+// @ts-ignore
+var TabIcon = function (_a) {
+    var title = _a.title;
+    return (react_1.default.createElement(react_native_1.Text, null, title));
+};
 var App = /** @class */ (function (_super) {
     __extends(App, _super);
     function App(props) {
@@ -35,26 +41,11 @@ var App = /** @class */ (function (_super) {
     };
     App.prototype.render = function () {
         return (react_1.default.createElement(react_native_router_flux_1.Router, null,
-            react_1.default.createElement(react_native_router_flux_1.Scene, { key: 'root', tabs: true },
-                react_1.default.createElement(react_native_router_flux_1.Scene, { key: 'tab1', title: 'Players', component: Characters_1.Characters, icon: TabIcon }),
-                react_1.default.createElement(react_native_router_flux_1.Scene, { key: 'tab2', title: 'NPCs', component: Characters_1.Characters, icon: TabIcon }),
-                react_1.default.createElement(react_native_router_flux_1.Scene, { key: 'tab3', title: 'Mobs', component: Characters_1.Characters, icon: TabIcon }),
-                react_1.default.createElement(react_native_router_flux_1.Scene, { key: 'tab4', title: 'Maps', component: Maps_1.Maps, icon: TabIcon }))));
+            react_1.default.createElement(react_native_router_flux_1.Scene, { key: 'root', tabs: true, hideNavBar: true },
+                react_1.default.createElement(react_native_router_flux_1.Scene, { key: 'tab1', title: 'Players', component: Players_1.Players, onPress: function () { return react_native_router_flux_1.Actions.Players({ text: 'hello' }); }, icon: TabIcon, initial: true }),
+                react_1.default.createElement(react_native_router_flux_1.Scene, { key: 'tab2', title: 'NPCs', component: NPCs_1.NPCs, icon: TabIcon }),
+                react_1.default.createElement(react_native_router_flux_1.Scene, { key: 'tab3', title: 'Mobs', component: Mobs_1.Mobs, icon: TabIcon }))));
     };
     return App;
 }(react_1.default.Component));
 exports.default = App;
-var TabIcon = /** @class */ (function (_super) {
-    __extends(TabIcon, _super);
-    function TabIcon() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    TabIcon.prototype.render = function () {
-        return (react_1.default.createElement(react_native_1.View, { style: { width: '100%', height: '100%', justifyContent: 'center' } },
-            react_1.default.createElement(react_native_1.Text, { style: {
-                    textAlign: 'center',
-                    fontSize: 20
-                } }, this.props.name)));
-    };
-    return TabIcon;
-}(react_1.default.Component));

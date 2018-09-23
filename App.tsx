@@ -1,17 +1,28 @@
 import React from 'react';
 import {Component} from 'react';
 import {StyleSheet, Platform, Image, Text, View, ScrollView} from 'react-native';
-
 import firebase from 'react-native-firebase';
-import {Router, Scene} from "react-native-router-flux";
-import {Characters} from "./src/pages/Characters";
-import {Maps} from "./src/pages/Maps";
+import {Actions, Router, Scene} from "react-native-router-flux";
+import {Players} from "./src/pages/Players";
+import {NPCs} from "./src/pages/NPCs";
+import {Mobs} from "./src/pages/Mobs";
+import {CharacterModel} from "./src/data/CharacterModel";
+import {FloatingAction} from "react-native-floating-action";
 
-type PropType = {
-  name: string;
+type StateType = {
+  players: CharacterModel[];
+  npcs: CharacterModel[];
+  mobs: CharacterModel[];
 }
 
-export default class App extends React.Component {
+// @ts-ignore
+const TabIcon = ({title}) => {
+  return (
+    <Text>{title}</Text>
+  )
+};
+
+export default class App extends React.Component<StateType> {
 
   constructor(props: any) {
     super(props);
@@ -28,28 +39,14 @@ export default class App extends React.Component {
   render() {
     return (
       <Router>
-        <Scene key='root' tabs={true}>
-          <Scene key='tab1' title='Players' component={Characters} icon={TabIcon}/>
-          <Scene key='tab2' title='NPCs' component={Characters} icon={TabIcon}/>
-          <Scene key='tab3' title='Mobs' component={Characters} icon={TabIcon}/>
-          <Scene key='tab4' title='Maps' component={Maps} icon={TabIcon}/>
+        <Scene key='root' tabs={true} hideNavBar={true}>
+          <Scene key='tab1' title='Players' component={Players} onPress={() => Actions.Players({text: 'hello'})}
+                 icon={TabIcon} initial={true}/>
+          <Scene key='tab2' title='NPCs' component={NPCs} icon={TabIcon}/>
+          <Scene key='tab3' title='Mobs' component={Mobs} icon={TabIcon}/>
         </Scene>
       </Router>
     );
   }
 
-}
-
-class TabIcon extends React.Component {
-
-  render() {
-    return (
-      <View style={{width: '100%', height: '100%', justifyContent: 'center'}}>
-        <Text style={{
-          textAlign: 'center',
-          fontSize: 20
-        }}>{this.props.name}</Text>
-      </View>
-    );
-  }
 }

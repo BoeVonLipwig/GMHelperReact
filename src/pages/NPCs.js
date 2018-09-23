@@ -17,14 +17,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importDefault(require("react"));
-var Maps = /** @class */ (function (_super) {
-    __extends(Maps, _super);
-    function Maps() {
+var NPCs = /** @class */ (function (_super) {
+    __extends(NPCs, _super);
+    function NPCs() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    Maps.prototype.render = function () {
+    NPCs.prototype.render = function () {
         return null;
     };
-    return Maps;
+    return NPCs;
 }(react_1.default.Component));
-exports.Maps = Maps;
+exports.NPCs = NPCs;
