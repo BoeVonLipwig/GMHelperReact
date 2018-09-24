@@ -21,14 +21,9 @@ var react_native_1 = require("react-native");
 var react_native_floating_action_1 = require("react-native-floating-action");
 var Mobs = /** @class */ (function (_super) {
     __extends(Mobs, _super);
-    function Mobs() {
-        return _super !== null && _super.apply(this, arguments) || this;
+    function Mobs(props) {
+        return _super.call(this, props) || this;
     }
-    Mobs.prototype.render = function () {
-        return (react_1.default.createElement(react_native_1.View, { style: { flex: 1 } },
-            react_1.default.createElement(react_native_1.Text, null, "Hello"),
-            this.fabButton()));
-    };
     Mobs.prototype.addChar = function () {
     };
     Mobs.prototype.fabButton = function () {
@@ -44,9 +39,33 @@ var Mobs = /** @class */ (function (_super) {
                 }
             } }));
     };
+    Mobs.prototype.gotoCharacter = function (mobs, i) {
+    };
+    Mobs.prototype.render = function () {
+        var _this = this;
+        return (react_1.default.createElement(react_native_1.View, { style: { flex: 1 } },
+            this.props.mobs.map(function (mob, i) {
+                return react_1.default.createElement(react_native_1.TouchableOpacity, { onPress: function () { return _this.gotoCharacter(mob, i); }, style: exports.styles.listItem, key: i },
+                    react_1.default.createElement(react_native_1.Text, null, mob.race));
+            }),
+            this.fabButton()));
+    };
     return Mobs;
 }(react_1.default.Component));
 exports.Mobs = Mobs;
+exports.styles = react_native_1.StyleSheet.create({
+    listItem: {
+        borderRadius: 0,
+        borderWidth: 0.5,
+        borderColor: '#d6d7da',
+        backgroundColor: "#d6d6d6",
+        width: "90%",
+        height: 40,
+        alignItems: "center",
+        justifyContent: 'center',
+        alignSelf: "center",
+    }
+});
 exports.FabConfig = {
     add: {
         text: "Add",

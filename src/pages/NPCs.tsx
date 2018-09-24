@@ -1,14 +1,22 @@
 import React from 'react';
 import {Component} from 'react';
-import {StyleSheet, Platform, Image, Text, View, ScrollView} from 'react-native';
+import {StyleSheet, Platform, Image, Text, View, ScrollView, TouchableOpacity} from 'react-native';
 import {FloatingAction} from "react-native-floating-action";
+import {CharacterModel} from "../data/CharacterModel";
 
-export class NPCs extends React.Component {
+type Props = {
+  npcs: CharacterModel[],
+  updateNPCs: (npcs: CharacterModel[]) => {}
+}
 
-  render() {
-    return (
-      <View style={{flex: 1}}><Text>Hello</Text>{this.fabButton()}</View>
-    );
+export class NPCs extends React.Component<Props> {
+
+  constructor(props: Props) {
+    super(props);
+  }
+
+  private addChar() {
+
   }
 
   fabButton() {
@@ -31,10 +39,42 @@ export class NPCs extends React.Component {
 
   }
 
-  private addChar() {
+  private gotoCharacter(npc: CharacterModel, i: any) {
 
   }
+
+  render() {
+    return (
+      <View style={{flex: 1}}>{this.props.npcs.map((npcs, i) =>
+        <TouchableOpacity
+          onPress={() => this.gotoCharacter(npcs, i)}
+          style={styles.listItem}
+          key={i}
+        >
+          <Text>{npcs.name}</Text>
+        </TouchableOpacity>)
+      }{this.fabButton()}</View>
+
+    );
+  }
 }
+
+
+export const styles = StyleSheet.create({
+    listItem: {
+      borderRadius: 0,
+      borderWidth: 0.5,
+      borderColor: '#d6d7da',
+
+      backgroundColor: "#d6d6d6",
+      width: "90%",
+      height: 40,
+      alignItems: "center",
+      justifyContent: 'center',
+      alignSelf: "center",
+    }
+  }
+);
 
 export const FabConfig = {
   add: {

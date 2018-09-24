@@ -21,13 +21,10 @@ var react_native_1 = require("react-native");
 var react_native_floating_action_1 = require("react-native-floating-action");
 var NPCs = /** @class */ (function (_super) {
     __extends(NPCs, _super);
-    function NPCs() {
-        return _super !== null && _super.apply(this, arguments) || this;
+    function NPCs(props) {
+        return _super.call(this, props) || this;
     }
-    NPCs.prototype.render = function () {
-        return (react_1.default.createElement(react_native_1.View, { style: { flex: 1 } },
-            react_1.default.createElement(react_native_1.Text, null, "Hello"),
-            this.fabButton()));
+    NPCs.prototype.addChar = function () {
     };
     NPCs.prototype.fabButton = function () {
         var _this = this;
@@ -42,11 +39,33 @@ var NPCs = /** @class */ (function (_super) {
                 }
             } }));
     };
-    NPCs.prototype.addChar = function () {
+    NPCs.prototype.gotoCharacter = function (npc, i) {
+    };
+    NPCs.prototype.render = function () {
+        var _this = this;
+        return (react_1.default.createElement(react_native_1.View, { style: { flex: 1 } },
+            this.props.npcs.map(function (npcs, i) {
+                return react_1.default.createElement(react_native_1.TouchableOpacity, { onPress: function () { return _this.gotoCharacter(npcs, i); }, style: exports.styles.listItem, key: i },
+                    react_1.default.createElement(react_native_1.Text, null, npcs.name));
+            }),
+            this.fabButton()));
     };
     return NPCs;
 }(react_1.default.Component));
 exports.NPCs = NPCs;
+exports.styles = react_native_1.StyleSheet.create({
+    listItem: {
+        borderRadius: 0,
+        borderWidth: 0.5,
+        borderColor: '#d6d7da',
+        backgroundColor: "#d6d6d6",
+        width: "90%",
+        height: 40,
+        alignItems: "center",
+        justifyContent: 'center',
+        alignSelf: "center",
+    }
+});
 exports.FabConfig = {
     add: {
         text: "Add",

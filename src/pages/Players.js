@@ -21,13 +21,10 @@ var react_native_1 = require("react-native");
 var react_native_floating_action_1 = require("react-native-floating-action");
 var Players = /** @class */ (function (_super) {
     __extends(Players, _super);
-    function Players() {
-        return _super !== null && _super.apply(this, arguments) || this;
+    function Players(props) {
+        return _super.call(this, props) || this;
     }
-    Players.prototype.render = function () {
-        return (react_1.default.createElement(react_native_1.View, { style: { flex: 1 } },
-            react_1.default.createElement(react_native_1.Text, null, "hi"),
-            this.fabButton()));
+    Players.prototype.addChar = function () {
     };
     Players.prototype.fabButton = function () {
         var _this = this;
@@ -42,11 +39,33 @@ var Players = /** @class */ (function (_super) {
                 }
             } }));
     };
-    Players.prototype.addChar = function () {
+    Players.prototype.gotoCharacter = function (player, i) {
+    };
+    Players.prototype.render = function () {
+        var _this = this;
+        return (react_1.default.createElement(react_native_1.View, { style: { flex: 1 } },
+            this.props.players.map(function (player, i) {
+                return react_1.default.createElement(react_native_1.TouchableOpacity, { onPress: function () { return _this.gotoCharacter(player, i); }, style: exports.styles.listItem, key: i },
+                    react_1.default.createElement(react_native_1.Text, null, player.name));
+            }),
+            this.fabButton()));
     };
     return Players;
 }(react_1.default.Component));
 exports.Players = Players;
+exports.styles = react_native_1.StyleSheet.create({
+    listItem: {
+        borderRadius: 0,
+        borderWidth: 0.5,
+        borderColor: '#d6d7da',
+        backgroundColor: "#d6d6d6",
+        width: "90%",
+        height: 40,
+        alignItems: "center",
+        justifyContent: 'center',
+        alignSelf: "center",
+    }
+});
 exports.FabConfig = {
     add: {
         text: "Add",

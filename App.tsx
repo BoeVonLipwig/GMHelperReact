@@ -8,9 +8,6 @@ import {NPCs} from "./src/pages/NPCs";
 import {Mobs} from "./src/pages/Mobs";
 import {CharacterModel} from "./src/data/CharacterModel";
 import {FloatingAction} from "react-native-floating-action";
-import {
-  createStackNavigator,
-} from 'react-navigation';
 
 type StateType = {
   players: CharacterModel[];
@@ -25,34 +22,56 @@ const TabIcon = ({title}) => {
   )
 };
 
-export default class App extends React.Component<StateType> {
+export default class App extends React.Component<{}, StateType> {
 
   constructor(props: any) {
     super(props);
     this.state = {
-
+      players: [],
+      npcs: [],
+      mobs: []
       // firebase things?
     };
-  }
 
+  }
 
 
   componentDidMount() {
     // firebase things?
+    let char: CharacterModel = {name: "Aarok", race: "Human", class: "Warlock"};
+    const pl = this.state.players.concat(char);
+    let npc: CharacterModel = {name: "Test NPC", race: "Human", class: "Warlock"};
+    const np = this.state.npcs.concat(npc);
+    let mob: CharacterModel = {name: "Aarok", race: "Gnoll", class: "Warlock"};
+    const mb = this.state.mobs.concat(mob);
+    this.setState({players: pl, mobs: mb, npcs: np})
   }
 
   render() {
-    const { navigate } = this.props.navigation;
     return (
       <Router>
         <Scene key='root' tabs={true} hideNavBar={true}>
-          <Scene key='tab1' title='Players' component={Players} onPress={() => navigate('players', {text: 'name'})}
-                 icon={TabIcon} initial={true}/>
-          <Scene key='tab2' title='NPCs' component={NPCs} icon={TabIcon}/>
-          <Scene key='tab3' title='Mobs' component={Mobs} icon={TabIcon}/>
+          <Scene key='tab1' title='Players' component={Players} players={this.state.players}
+                 icon={TabIcon} initial={true} updateShit={this.updatePlayers.bind(this)}/>
+          <Scene key='tab2' title='NPCs' component={NPCs} npcs={this.state.npcs} icon={TabIcon}
+                 updateShit={this.updateNPCs.bind(this)}/>
+          <Scene key='tab3' title='Mobs' component={Mobs} mobs={this.state.mobs} icon={TabIcon}
+                 updateShit={this.updateMobs.bind(this)}/>
         </Scene>
       </Router>
     );
+  }
+
+  updatePlayers(players: CharacterModel[]) {
+    this.setState({players});
+  }
+
+  updateNPCs(npcs: CharacterModel[]) {
+    this.setState({npcs});
+  }
+
+  updateMobs(mobs: CharacterModel[]) {
+    this.setState({mobs});
   }
 
 }
