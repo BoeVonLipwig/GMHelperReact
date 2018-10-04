@@ -8,7 +8,18 @@ type StateType = {
   mobs: CharacterModel[]
 }
 
-export class Mobs extends Component<StateType> {
+export class Mobs extends Component<{}, StateType> {
+
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      mobs: []
+    }
+  }
+
+  componentDidMount() {
+  }
+
 
   private addChar() {
 
@@ -20,7 +31,7 @@ export class Mobs extends Component<StateType> {
 
   render() {
     return (
-      <View style={{flex: 1}}>{this.props.mobs.map((mob, i) =>
+      <View style={{flex: 1}}>{this.state.mobs.map((mob, i) =>
         <TouchableOpacity onPress={() => this.gotoCharacter(mob, i)} style={styles.listItem} key={i}>
           <Text>{mob.race}</Text>
         </TouchableOpacity>)

@@ -6,9 +6,16 @@ import {CharacterModel} from "../data/CharacterModel";
 
 type Props = {
   character: CharacterModel,
-  updateList: (char: CharacterModel, list: String) => {}
+  updateList: (char: CharacterModel) => {}
 }
 
-export class Mobs extends Component<Props> {
-
+export class Character extends Component<Props> {
+  render() {
+    console.log("dsa");
+    return (
+      <View>
+        <Text>{this.props.character.name}</Text>
+      </View>
+    );
+  }
 }

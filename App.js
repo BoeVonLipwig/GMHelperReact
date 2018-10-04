@@ -30,12 +30,9 @@ var TabIcon = function (_a) {
 };
 var App = /** @class */ (function (_super) {
     __extends(App, _super);
-    function App(props) {
-        return _super.call(this, props) || this;
+    function App() {
+        return _super !== null && _super.apply(this, arguments) || this;
     }
-    App.prototype.componentDidMount = function () {
-        // firebase things?
-    };
     App.prototype.render = function () {
         return (react_1.default.createElement(react_native_router_flux_1.Router, null,
             react_1.default.createElement(react_native_router_flux_1.Scene, { key: 'root', tabs: true, hideNavBar: true },

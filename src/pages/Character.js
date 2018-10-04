@@ -12,13 +12,23 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var react_1 = require("react");
-var Mobs = /** @class */ (function (_super) {
-    __extends(Mobs, _super);
-    function Mobs() {
+var react_1 = __importDefault(require("react"));
+var react_2 = require("react");
+var react_native_1 = require("react-native");
+var Character = /** @class */ (function (_super) {
+    __extends(Character, _super);
+    function Character() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    return Mobs;
-}(react_1.Component));
-exports.Mobs = Mobs;
+    Character.prototype.render = function () {
+        console.log("dsa");
+        return (react_1.default.createElement(react_native_1.View, null,
+            react_1.default.createElement(react_native_1.Text, null, this.props.character.name)));
+    };
+    return Character;
+}(react_2.Component));
+exports.Character = Character;

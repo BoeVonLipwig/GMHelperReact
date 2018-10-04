@@ -3,25 +3,36 @@ import {Component} from 'react';
 import {StyleSheet, Platform, Image, Text, View, ScrollView, TouchableOpacity} from 'react-native';
 import {FloatingAction} from "react-native-floating-action";
 import {CharacterModel} from "../data/CharacterModel";
+import {Actions} from "react-native-router-flux";
 
 type StateType = {
   players: CharacterModel[]
 }
 
-export class Players extends Component< StateType> {
+export class Players extends Component<{}, StateType> {
 
-  private addChar() {
-
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      players: []
+    };
   }
 
-  private gotoCharacter(player: CharacterModel, i: number) {
+  componentDidMount() {
+    let char: CharacterModel = {name: "Aarok", race: "Human", class: "Warlock", id: 1};
+    let pl = this.state.players.concat(char);
+    this.setState({players: pl})
+  }
 
+
+  private addChar() {
   }
 
   render() {
+    console.log("asd");
     return (
-      <View style={{flex: 1}}>{this.props.players.map((player, i) =>
-        <TouchableOpacity onPress={() => this.gotoCharacter(player, i)} style={styles.listItem} key={i}>
+      <View style={{flex: 1}}>{this.state.players.map((player, i) =>
+        <TouchableOpacity onPress={() => Actions.push('Character', {player})} style={styles.listItem} key={i}>
           <Text>{player.name + " the " + player.race + " " + player.class}</Text>
         </TouchableOpacity>)
       }{this.fabButton()}</View>
@@ -62,7 +73,6 @@ export class Players extends Component< StateType> {
 
   }
 }
-
 
 export const styles = StyleSheet.create({
     listItem: {

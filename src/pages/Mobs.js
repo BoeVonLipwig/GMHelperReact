@@ -22,9 +22,15 @@ var react_native_1 = require("react-native");
 var react_native_floating_action_1 = require("react-native-floating-action");
 var Mobs = /** @class */ (function (_super) {
     __extends(Mobs, _super);
-    function Mobs() {
-        return _super !== null && _super.apply(this, arguments) || this;
+    function Mobs(props) {
+        var _this = _super.call(this, props) || this;
+        _this.state = {
+            mobs: []
+        };
+        return _this;
     }
+    Mobs.prototype.componentDidMount = function () {
+    };
     Mobs.prototype.addChar = function () {
     };
     Mobs.prototype.gotoCharacter = function (mobs, i) {
@@ -32,7 +38,7 @@ var Mobs = /** @class */ (function (_super) {
     Mobs.prototype.render = function () {
         var _this = this;
         return (react_1.default.createElement(react_native_1.View, { style: { flex: 1 } },
-            this.props.mobs.map(function (mob, i) {
+            this.state.mobs.map(function (mob, i) {
                 return react_1.default.createElement(react_native_1.TouchableOpacity, { onPress: function () { return _this.gotoCharacter(mob, i); }, style: exports.styles.listItem, key: i },
                     react_1.default.createElement(react_native_1.Text, null, mob.race));
             }),

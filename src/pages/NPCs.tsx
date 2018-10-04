@@ -13,7 +13,12 @@ export class NPCs extends Component<{}, StateType> {
 
   constructor(props: any) {
     super(props);
-    this.state
+    this.state = {
+      npcs: []
+    }
+  }
+
+  componentDidMount() {
   }
 
   private addChar() {

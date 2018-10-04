@@ -24,9 +24,13 @@ var NPCs = /** @class */ (function (_super) {
     __extends(NPCs, _super);
     function NPCs(props) {
         var _this = _super.call(this, props) || this;
-        _this.state;
+        _this.state = {
+            npcs: []
+        };
         return _this;
     }
+    NPCs.prototype.componentDidMount = function () {
+    };
     NPCs.prototype.addChar = function () {
     };
     NPCs.prototype.gotoCharacter = function (npc, i) {

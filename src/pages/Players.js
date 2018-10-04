@@ -20,20 +20,28 @@ var react_1 = __importDefault(require("react"));
 var react_2 = require("react");
 var react_native_1 = require("react-native");
 var react_native_floating_action_1 = require("react-native-floating-action");
+var react_native_router_flux_1 = require("react-native-router-flux");
 var Players = /** @class */ (function (_super) {
     __extends(Players, _super);
-    function Players() {
-        return _super !== null && _super.apply(this, arguments) || this;
+    function Players(props) {
+        var _this = _super.call(this, props) || this;
+        _this.state = {
+            players: []
+        };
+        return _this;
     }
+    Players.prototype.componentDidMount = function () {
+        var char = { name: "Aarok", race: "Human", class: "Warlock", id: 1 };
+        var pl = this.state.players.concat(char);
+        this.setState({ players: pl });
+    };
     Players.prototype.addChar = function () {
     };
-    Players.prototype.gotoCharacter = function (player, i) {
-    };
     Players.prototype.render = function () {
-        var _this = this;
+        console.log("asd");
         return (react_1.default.createElement(react_native_1.View, { style: { flex: 1 } },
-            this.props.players.map(function (player, i) {
-                return react_1.default.createElement(react_native_1.TouchableOpacity, { onPress: function () { return _this.gotoCharacter(player, i); }, style: exports.styles.listItem, key: i },
+            this.state.players.map(function (player, i) {
+                return react_1.default.createElement(react_native_1.TouchableOpacity, { onPress: function () { return react_native_router_flux_1.Actions.push('Character', { player: player }); }, style: exports.styles.listItem, key: i },
                     react_1.default.createElement(react_native_1.Text, null, player.name + " the " + player.race + " " + player.class));
             }),
             this.fabButton()));
