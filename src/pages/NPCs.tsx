@@ -4,39 +4,19 @@ import {StyleSheet, Platform, Image, Text, View, ScrollView, TouchableOpacity} f
 import {FloatingAction} from "react-native-floating-action";
 import {CharacterModel} from "../data/CharacterModel";
 
-type Props = {
-  npcs: CharacterModel[],
-  addNPCs: (npcs: CharacterModel[]) => {}
-  updateList: (char: CharacterModel, list: String) => {}
+
+type StateType = {
+  npcs: CharacterModel[]
 }
 
-export class NPCs extends Component<Props> {
+export class NPCs extends Component<{}, StateType> {
 
-  constructor(props: Props) {
+  constructor(props: any) {
     super(props);
+    this.state
   }
 
   private addChar() {
-
-  }
-
-  fabButton() {
-
-    const actions = [{
-      text: FabConfig.add.text,
-      position: FabConfig.add.position,
-      name: FabConfig.add.name,
-    }];
-
-    return (
-      <FloatingAction actions={actions} overrideWithAction={true} onPressItem={
-        (name) => {
-          if (FabConfig.add.name.localeCompare(name + "") == 0) {
-            this.addChar();
-          }
-        }
-      }/>
-    )
 
   }
 
@@ -46,17 +26,46 @@ export class NPCs extends Component<Props> {
 
   render() {
     return (
-      <View style={{flex: 1}}>{this.props.npcs.map((npcs, i) =>
-        <TouchableOpacity
-          onPress={() => this.gotoCharacter(npcs, i)}
-          style={styles.listItem}
-          key={i}
-        >
+      <View style={{flex: 1}}>{this.state.npcs.map((npcs, i) =>
+        <TouchableOpacity onPress={() => this.gotoCharacter(npcs, i)} style={styles.listItem} key={i}>
           <Text>{npcs.name}</Text>
         </TouchableOpacity>)
       }{this.fabButton()}</View>
 
     );
+  }
+
+  private download() {
+
+  }
+
+  fabButton() {
+
+    const actions = [
+      {
+        text: FabConfig.add.text,
+        position: FabConfig.add.position,
+        name: FabConfig.add.name
+      }, {
+        text: FabConfig.download.text,
+        position: FabConfig.download.position,
+        name: FabConfig.download.name
+      }
+
+    ];
+
+    return (
+      <FloatingAction actions={actions} onPressItem={
+        (name) => {
+          if (FabConfig.add.name.localeCompare(name + "") == 0) {
+            this.addChar();
+          } else {
+            this.download();
+          }
+        }
+      }/>
+    )
+
   }
 }
 
@@ -81,6 +90,11 @@ export const FabConfig = {
   add: {
     text: "Add",
     name: "add",
-    position: 1,
+    position: 1
+  },
+  download: {
+    text: "Download",
+    name: "download",
+    position: 1
   }
 };

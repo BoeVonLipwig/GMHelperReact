@@ -4,39 +4,13 @@ import {StyleSheet, Platform, Image, Text, View, ScrollView, TouchableOpacity} f
 import {FloatingAction} from "react-native-floating-action";
 import {CharacterModel} from "../data/CharacterModel";
 
-type Props = {
-  mobs: CharacterModel[],
-  addMobs: (mobs: CharacterModel[]) => {}
-  updateList: (char: CharacterModel, list: String) => {}
+type StateType = {
+  mobs: CharacterModel[]
 }
 
-export class Mobs extends Component<Props> {
-
-  constructor(props: Props) {
-    super(props);
-  }
+export class Mobs extends Component<StateType> {
 
   private addChar() {
-
-  }
-
-  fabButton() {
-
-    const actions = [{
-      text: FabConfig.add.text,
-      position: FabConfig.add.position,
-      name: FabConfig.add.name,
-    }];
-
-    return (
-      <FloatingAction actions={actions} overrideWithAction={true} onPressItem={
-        (name) => {
-          if (FabConfig.add.name.localeCompare(name + "") == 0) {
-            this.addChar();
-          }
-        }
-      }/>
-    )
 
   }
 
@@ -47,16 +21,45 @@ export class Mobs extends Component<Props> {
   render() {
     return (
       <View style={{flex: 1}}>{this.props.mobs.map((mob, i) =>
-        <TouchableOpacity
-          onPress={() => this.gotoCharacter(mob, i)}
-          style={styles.listItem}
-          key={i}
-        >
+        <TouchableOpacity onPress={() => this.gotoCharacter(mob, i)} style={styles.listItem} key={i}>
           <Text>{mob.race}</Text>
         </TouchableOpacity>)
       }{this.fabButton()}</View>
 
     );
+  }
+
+  private download() {
+
+  }
+
+  fabButton() {
+
+    const actions = [
+      {
+        text: FabConfig.add.text,
+        position: FabConfig.add.position,
+        name: FabConfig.add.name
+      }, {
+        text: FabConfig.download.text,
+        position: FabConfig.download.position,
+        name: FabConfig.download.name
+      }
+
+    ];
+
+    return (
+      <FloatingAction actions={actions} onPressItem={
+        (name) => {
+          if (FabConfig.add.name.localeCompare(name + "") == 0) {
+            this.addChar();
+          } else {
+            this.download();
+          }
+        }
+      }/>
+    )
+
   }
 }
 
@@ -81,6 +84,11 @@ export const FabConfig = {
   add: {
     text: "Add",
     name: "add",
-    position: 1,
+    position: 1
+  },
+  download: {
+    text: "Download",
+    name: "download",
+    position: 1
   }
 };

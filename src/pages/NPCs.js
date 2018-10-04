@@ -23,33 +23,46 @@ var react_native_floating_action_1 = require("react-native-floating-action");
 var NPCs = /** @class */ (function (_super) {
     __extends(NPCs, _super);
     function NPCs(props) {
-        return _super.call(this, props) || this;
+        var _this = _super.call(this, props) || this;
+        _this.state;
+        return _this;
     }
     NPCs.prototype.addChar = function () {
-    };
-    NPCs.prototype.fabButton = function () {
-        var _this = this;
-        var actions = [{
-                text: exports.FabConfig.add.text,
-                position: exports.FabConfig.add.position,
-                name: exports.FabConfig.add.name,
-            }];
-        return (react_1.default.createElement(react_native_floating_action_1.FloatingAction, { actions: actions, overrideWithAction: true, onPressItem: function (name) {
-                if (exports.FabConfig.add.name.localeCompare(name + "") == 0) {
-                    _this.addChar();
-                }
-            } }));
     };
     NPCs.prototype.gotoCharacter = function (npc, i) {
     };
     NPCs.prototype.render = function () {
         var _this = this;
         return (react_1.default.createElement(react_native_1.View, { style: { flex: 1 } },
-            this.props.npcs.map(function (npcs, i) {
+            this.state.npcs.map(function (npcs, i) {
                 return react_1.default.createElement(react_native_1.TouchableOpacity, { onPress: function () { return _this.gotoCharacter(npcs, i); }, style: exports.styles.listItem, key: i },
                     react_1.default.createElement(react_native_1.Text, null, npcs.name));
             }),
             this.fabButton()));
+    };
+    NPCs.prototype.download = function () {
+    };
+    NPCs.prototype.fabButton = function () {
+        var _this = this;
+        var actions = [
+            {
+                text: exports.FabConfig.add.text,
+                position: exports.FabConfig.add.position,
+                name: exports.FabConfig.add.name
+            }, {
+                text: exports.FabConfig.download.text,
+                position: exports.FabConfig.download.position,
+                name: exports.FabConfig.download.name
+            }
+        ];
+        return (react_1.default.createElement(react_native_floating_action_1.FloatingAction, { actions: actions, onPressItem: function (name) {
+                if (exports.FabConfig.add.name.localeCompare(name + "") == 0) {
+                    _this.addChar();
+                }
+                else {
+                    _this.download();
+                }
+            } }));
     };
     return NPCs;
 }(react_2.Component));
@@ -71,6 +84,11 @@ exports.FabConfig = {
     add: {
         text: "Add",
         name: "add",
-        position: 1,
+        position: 1
+    },
+    download: {
+        text: "Download",
+        name: "download",
+        position: 1
     }
 };

@@ -12,7 +12,8 @@ export type CharacterModel = {
   // notes: string;
   name: string;
   race: string;
-  class:string;
+  class: string;
+  id: number;
 }
 
 type stats = {

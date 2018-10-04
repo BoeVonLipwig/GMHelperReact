@@ -31,46 +31,17 @@ var TabIcon = function (_a) {
 var App = /** @class */ (function (_super) {
     __extends(App, _super);
     function App(props) {
-        var _this = _super.call(this, props) || this;
-        _this.state = {
-            players: [],
-            npcs: [],
-            mobs: []
-            // firebase things?
-        };
-        return _this;
+        return _super.call(this, props) || this;
     }
     App.prototype.componentDidMount = function () {
         // firebase things?
-        var char = { name: "Aarok", race: "Human", class: "Warlock" };
-        var pl = this.state.players.concat(char);
-        var npc = { name: "Test NPC", race: "Human", class: "Warlock" };
-        var np = this.state.npcs.concat(npc);
-        var mob = { name: "Aarok", race: "Gnoll", class: "Warlock" };
-        var mb = this.state.mobs.concat(mob);
-        this.setState({ players: pl, mobs: mb, npcs: np });
     };
     App.prototype.render = function () {
         return (react_1.default.createElement(react_native_router_flux_1.Router, null,
             react_1.default.createElement(react_native_router_flux_1.Scene, { key: 'root', tabs: true, hideNavBar: true },
-                react_1.default.createElement(react_native_router_flux_1.Scene, { key: 'tab1', title: 'Players', component: Players_1.Players, players: this.state.players, icon: TabIcon, addPlayer: this.addPlayers.bind(this), update: this.updatePlayer.bind(this), initial: true }),
-                react_1.default.createElement(react_native_router_flux_1.Scene, { key: 'tab2', title: 'NPCs', component: NPCs_1.NPCs, npcs: this.state.npcs, icon: TabIcon, addNPC: this.addNPCs.bind(this), update: this.updateNPC.bind(this) }),
-                react_1.default.createElement(react_native_router_flux_1.Scene, { key: 'tab3', title: 'Mobs', component: Mobs_1.Mobs, mobs: this.state.mobs, icon: TabIcon, addMob: this.addMobs.bind(this), update: this.updateMob.bind(this) }))));
-    };
-    App.prototype.updatePlayer = function (char) {
-    };
-    App.prototype.updateNPC = function (char) {
-    };
-    App.prototype.updateMob = function (char) {
-    };
-    App.prototype.addPlayers = function (players) {
-        this.setState({ players: players });
-    };
-    App.prototype.addNPCs = function (npcs) {
-        this.setState({ npcs: npcs });
-    };
-    App.prototype.addMobs = function (mobs) {
-        this.setState({ mobs: mobs });
+                react_1.default.createElement(react_native_router_flux_1.Scene, { key: 'tab1', title: 'Players', component: Players_1.Players, icon: TabIcon, initial: true }),
+                react_1.default.createElement(react_native_router_flux_1.Scene, { key: 'tab2', title: 'NPCs', component: NPCs_1.NPCs, icon: TabIcon }),
+                react_1.default.createElement(react_native_router_flux_1.Scene, { key: 'tab3', title: 'Mobs', component: Mobs_1.Mobs, icon: TabIcon }))));
     };
     return App;
 }(react_2.Component));

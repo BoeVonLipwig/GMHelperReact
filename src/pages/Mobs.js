@@ -22,23 +22,10 @@ var react_native_1 = require("react-native");
 var react_native_floating_action_1 = require("react-native-floating-action");
 var Mobs = /** @class */ (function (_super) {
     __extends(Mobs, _super);
-    function Mobs(props) {
-        return _super.call(this, props) || this;
+    function Mobs() {
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     Mobs.prototype.addChar = function () {
-    };
-    Mobs.prototype.fabButton = function () {
-        var _this = this;
-        var actions = [{
-                text: exports.FabConfig.add.text,
-                position: exports.FabConfig.add.position,
-                name: exports.FabConfig.add.name,
-            }];
-        return (react_1.default.createElement(react_native_floating_action_1.FloatingAction, { actions: actions, overrideWithAction: true, onPressItem: function (name) {
-                if (exports.FabConfig.add.name.localeCompare(name + "") == 0) {
-                    _this.addChar();
-                }
-            } }));
     };
     Mobs.prototype.gotoCharacter = function (mobs, i) {
     };
@@ -50,6 +37,30 @@ var Mobs = /** @class */ (function (_super) {
                     react_1.default.createElement(react_native_1.Text, null, mob.race));
             }),
             this.fabButton()));
+    };
+    Mobs.prototype.download = function () {
+    };
+    Mobs.prototype.fabButton = function () {
+        var _this = this;
+        var actions = [
+            {
+                text: exports.FabConfig.add.text,
+                position: exports.FabConfig.add.position,
+                name: exports.FabConfig.add.name
+            }, {
+                text: exports.FabConfig.download.text,
+                position: exports.FabConfig.download.position,
+                name: exports.FabConfig.download.name
+            }
+        ];
+        return (react_1.default.createElement(react_native_floating_action_1.FloatingAction, { actions: actions, onPressItem: function (name) {
+                if (exports.FabConfig.add.name.localeCompare(name + "") == 0) {
+                    _this.addChar();
+                }
+                else {
+                    _this.download();
+                }
+            } }));
     };
     return Mobs;
 }(react_2.Component));
@@ -71,6 +82,11 @@ exports.FabConfig = {
     add: {
         text: "Add",
         name: "add",
-        position: 1,
+        position: 1
+    },
+    download: {
+        text: "Download",
+        name: "download",
+        position: 1
     }
 };
