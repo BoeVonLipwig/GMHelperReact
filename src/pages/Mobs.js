@@ -17,6 +17,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importDefault(require("react"));
+var react_2 = require("react");
 var react_native_1 = require("react-native");
 var react_native_floating_action_1 = require("react-native-floating-action");
 var Mobs = /** @class */ (function (_super) {
@@ -51,7 +52,7 @@ var Mobs = /** @class */ (function (_super) {
             this.fabButton()));
     };
     return Mobs;
-}(react_1.default.Component));
+}(react_2.Component));
 exports.Mobs = Mobs;
 exports.styles = react_native_1.StyleSheet.create({
     listItem: {

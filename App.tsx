@@ -22,7 +22,7 @@ const TabIcon = ({title}) => {
   )
 };
 
-export default class App extends React.Component<{}, StateType> {
+export default class App extends Component<{}, StateType> {
 
   constructor(props: any) {
     super(props);
@@ -51,27 +51,38 @@ export default class App extends React.Component<{}, StateType> {
     return (
       <Router>
         <Scene key='root' tabs={true} hideNavBar={true}>
-          <Scene key='tab1' title='Players' component={Players} players={this.state.players}
-                 icon={TabIcon} initial={true} updateShit={this.updatePlayers.bind(this)}/>
+          <Scene key='tab1' title='Players' component={Players} players={this.state.players} icon={TabIcon}
+                 addPlayer={this.addPlayers.bind(this)} update={this.updatePlayer.bind(this)} initial={true}/>
           <Scene key='tab2' title='NPCs' component={NPCs} npcs={this.state.npcs} icon={TabIcon}
-                 updateShit={this.updateNPCs.bind(this)}/>
+                 addNPC={this.addNPCs.bind(this)} update={this.updateNPC.bind(this)}/>
           <Scene key='tab3' title='Mobs' component={Mobs} mobs={this.state.mobs} icon={TabIcon}
-                 updateShit={this.updateMobs.bind(this)}/>
+                 addMob={this.addMobs.bind(this)} update={this.updateMob.bind(this)}/>
         </Scene>
       </Router>
     );
   }
 
-  updatePlayers(players: CharacterModel[]) {
+  updatePlayer(char: CharacterModel) {
+
+  }
+
+  updateNPC(char: CharacterModel) {
+
+  }
+
+  updateMob(char: CharacterModel) {
+
+  }
+
+  addPlayers(players: CharacterModel[]) {
     this.setState({players});
   }
 
-  updateNPCs(npcs: CharacterModel[]) {
+  addNPCs(npcs: CharacterModel[]) {
     this.setState({npcs});
   }
 
-  updateMobs(mobs: CharacterModel[]) {
+  addMobs(mobs: CharacterModel[]) {
     this.setState({mobs});
   }
-
 }

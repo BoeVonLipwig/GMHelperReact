@@ -17,6 +17,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importDefault(require("react"));
+var react_2 = require("react");
 var react_native_1 = require("react-native");
 var react_native_router_flux_1 = require("react-native-router-flux");
 var Players_1 = require("./src/pages/Players");
@@ -52,19 +53,25 @@ var App = /** @class */ (function (_super) {
     App.prototype.render = function () {
         return (react_1.default.createElement(react_native_router_flux_1.Router, null,
             react_1.default.createElement(react_native_router_flux_1.Scene, { key: 'root', tabs: true, hideNavBar: true },
-                react_1.default.createElement(react_native_router_flux_1.Scene, { key: 'tab1', title: 'Players', component: Players_1.Players, players: this.state.players, icon: TabIcon, initial: true, updateShit: this.updatePlayers.bind(this) }),
-                react_1.default.createElement(react_native_router_flux_1.Scene, { key: 'tab2', title: 'NPCs', component: NPCs_1.NPCs, npcs: this.state.npcs, icon: TabIcon, updateShit: this.updateNPCs.bind(this) }),
-                react_1.default.createElement(react_native_router_flux_1.Scene, { key: 'tab3', title: 'Mobs', component: Mobs_1.Mobs, mobs: this.state.mobs, icon: TabIcon, updateShit: this.updateMobs.bind(this) }))));
+                react_1.default.createElement(react_native_router_flux_1.Scene, { key: 'tab1', title: 'Players', component: Players_1.Players, players: this.state.players, icon: TabIcon, addPlayer: this.addPlayers.bind(this), update: this.updatePlayer.bind(this), initial: true }),
+                react_1.default.createElement(react_native_router_flux_1.Scene, { key: 'tab2', title: 'NPCs', component: NPCs_1.NPCs, npcs: this.state.npcs, icon: TabIcon, addNPC: this.addNPCs.bind(this), update: this.updateNPC.bind(this) }),
+                react_1.default.createElement(react_native_router_flux_1.Scene, { key: 'tab3', title: 'Mobs', component: Mobs_1.Mobs, mobs: this.state.mobs, icon: TabIcon, addMob: this.addMobs.bind(this), update: this.updateMob.bind(this) }))));
     };
-    App.prototype.updatePlayers = function (players) {
+    App.prototype.updatePlayer = function (char) {
+    };
+    App.prototype.updateNPC = function (char) {
+    };
+    App.prototype.updateMob = function (char) {
+    };
+    App.prototype.addPlayers = function (players) {
         this.setState({ players: players });
     };
-    App.prototype.updateNPCs = function (npcs) {
+    App.prototype.addNPCs = function (npcs) {
         this.setState({ npcs: npcs });
     };
-    App.prototype.updateMobs = function (mobs) {
+    App.prototype.addMobs = function (mobs) {
         this.setState({ mobs: mobs });
     };
     return App;
-}(react_1.default.Component));
+}(react_2.Component));
 exports.default = App;

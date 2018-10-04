@@ -6,10 +6,11 @@ import {CharacterModel} from "../data/CharacterModel";
 
 type Props = {
   npcs: CharacterModel[],
-  updateNPCs: (npcs: CharacterModel[]) => {}
+  addNPCs: (npcs: CharacterModel[]) => {}
+  updateList: (char: CharacterModel, list: String) => {}
 }
 
-export class NPCs extends React.Component<Props> {
+export class NPCs extends Component<Props> {
 
   constructor(props: Props) {
     super(props);
