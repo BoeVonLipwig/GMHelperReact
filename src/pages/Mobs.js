@@ -105,6 +105,6 @@ exports.FabConfig = {
     download: {
         text: "Download",
         name: "download",
-        position: 1
+        position: 2
     }
 };

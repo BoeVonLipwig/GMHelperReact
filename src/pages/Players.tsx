@@ -56,6 +56,9 @@ export class Players extends Component<{}, StateType> {
     //firebaseTings
   }
 
+  componentDidMount() {
+  }
+
   fabButton() {
 
     const actions = [
@@ -84,9 +87,6 @@ export class Players extends Component<{}, StateType> {
     )
 
   }
-
-  componentDidMount() {
-  }
 }
 
 export const styles = StyleSheet.create({
@@ -114,6 +114,6 @@ export const FabConfig = {
   download: {
     text: "Download",
     name: "download",
-    position: 1
+    position: 2
   }
 };

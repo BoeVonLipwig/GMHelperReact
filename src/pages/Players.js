@@ -61,6 +61,8 @@ var Players = /** @class */ (function (_super) {
     Players.prototype.download = function () {
         //firebaseTings
     };
+    Players.prototype.componentDidMount = function () {
+    };
     Players.prototype.fabButton = function () {
         var _this = this;
         var actions = [
@@ -82,8 +84,6 @@ var Players = /** @class */ (function (_super) {
                     _this.download();
                 }
             } }));
-    };
-    Players.prototype.componentDidMount = function () {
     };
     return Players;
 }(react_2.Component));
@@ -110,6 +110,6 @@ exports.FabConfig = {
     download: {
         text: "Download",
         name: "download",
-        position: 1
+        position: 2
     }
 };
