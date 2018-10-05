@@ -20,6 +20,7 @@ var react_1 = __importDefault(require("react"));
 var react_2 = require("react");
 var react_native_1 = require("react-native");
 var react_native_floating_action_1 = require("react-native-floating-action");
+var react_native_router_flux_1 = require("react-native-router-flux");
 var Character = /** @class */ (function (_super) {
     __extends(Character, _super);
     function Character() {
@@ -27,6 +28,9 @@ var Character = /** @class */ (function (_super) {
     }
     Character.prototype.render = function () {
         return (react_1.default.createElement(react_native_1.View, { style: { flex: 1 } },
+            react_1.default.createElement(react_native_1.Text, null, this.props.character.name),
+            react_1.default.createElement(react_native_1.Text, null, this.props.character.name),
+            react_1.default.createElement(react_native_1.Text, null, this.props.character.name),
             react_1.default.createElement(react_native_1.Text, null, this.props.character.name),
             this.fabButton()));
     };
@@ -53,6 +57,11 @@ var Character = /** @class */ (function (_super) {
             } }));
     };
     Character.prototype.edit = function () {
+        react_native_router_flux_1.Actions.push('characterEdit', {
+            character: this.props.character,
+            updateCharacter: this.props.updateCharacter,
+            index: this.props.index
+        });
     };
     Character.prototype.upload = function () {
     };

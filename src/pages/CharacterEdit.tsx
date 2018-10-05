@@ -10,7 +10,7 @@ type Props = {
   index: number
 }
 
-export class Character extends Component<Props> {
+export class CharacterEdit extends Component<Props> {
   render() {
     return (
       <View>

@@ -24,6 +24,7 @@ var Players_1 = require("./src/pages/Players");
 var NPCs_1 = require("./src/pages/NPCs");
 var Mobs_1 = require("./src/pages/Mobs");
 var Character_1 = require("./src/pages/Character");
+var CharacterEdit_1 = require("./src/pages/CharacterEdit");
 // @ts-ignore
 var TabIcon = function (_a) {
     var title = _a.title;
@@ -41,7 +42,8 @@ var App = /** @class */ (function (_super) {
                     react_1.default.createElement(react_native_router_flux_1.Scene, { key: 'tab1', title: 'Players', component: Players_1.Players, icon: TabIcon, initial: true }),
                     react_1.default.createElement(react_native_router_flux_1.Scene, { key: 'tab2', title: 'NPCs', component: NPCs_1.NPCs, icon: TabIcon }),
                     react_1.default.createElement(react_native_router_flux_1.Scene, { key: 'tab3', title: 'Mobs', component: Mobs_1.Mobs, icon: TabIcon })),
-                react_1.default.createElement(react_native_router_flux_1.Scene, { key: 'character', component: Character_1.Character }))));
+                react_1.default.createElement(react_native_router_flux_1.Scene, { key: 'character', component: Character_1.Character }),
+                react_1.default.createElement(react_native_router_flux_1.Scene, { key: 'characterEdit', component: CharacterEdit_1.CharacterEdit }))));
     };
     return App;
 }(react_2.Component));

@@ -16,6 +16,7 @@ export class Players extends Component<{}, StateType> {
     this.state = {
       players: []
     };
+
   }
 
   private addChar() {
@@ -25,7 +26,6 @@ export class Players extends Component<{}, StateType> {
       class: "to edit",
       id: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
     };
-    console.log(char.id);
     this.setState({players: this.state.players.concat(char)})
   }
 
@@ -36,19 +36,28 @@ export class Players extends Component<{}, StateType> {
   }
 
   render() {
+    // let char: CharacterModel = {
+    //   name: "Aarok",
+    //   race: "Human",
+    //   class: "Warlock",
+    //   id: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+    // };
+    // this.setState({players: this.state.players.concat(char)})
     return (
-      <View style={{flex: 1}}>{this.state.players.map((player, i) =>
-        <TouchableOpacity
-          onPress={() => Actions.push('character', {
-            character: player,
-            updateChar: this.updateChar.bind(this),
-            index: i
-          })}
-          style={styles.listItem} key={i}>
-          <Text>{player.name + " the " + player.race + " " + player.class}</Text>
-        </TouchableOpacity>)
-      }{this.fabButton()}</View>
-
+      <View style={{flex: 1}}>
+        {this.state.players.map((player, i) =>
+          <TouchableOpacity
+            onPress={() => Actions.push('character', {
+              character: player,
+              updateChar: this.updateChar.bind(this),
+              index: i
+            })}
+            style={styles.listItem} key={i}>
+            <Text>{player.name + " the " + player.race + " " + player.class}</Text>
+          </TouchableOpacity>)
+        }
+        {this.fabButton()}
+      </View>
     );
   }
 

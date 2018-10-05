@@ -3,6 +3,7 @@ import {Component} from 'react';
 import {StyleSheet, Platform, Image, Text, View, ScrollView, TouchableOpacity} from 'react-native';
 import {FloatingAction} from "react-native-floating-action";
 import {CharacterModel} from "../data/CharacterModel";
+import {Actions} from "react-native-router-flux";
 
 type Props = {
   character: CharacterModel,
@@ -14,6 +15,9 @@ export class Character extends Component<Props> {
   render() {
     return (
       <View style={{flex: 1}}>
+        <Text>{this.props.character.name}</Text>
+        <Text>{this.props.character.name}</Text>
+        <Text>{this.props.character.name}</Text>
         <Text>{this.props.character.name}</Text>
         {this.fabButton()}
       </View>
@@ -32,7 +36,6 @@ export class Character extends Component<Props> {
         position: FabConfig.upload.position,
         name: FabConfig.upload.name
       }
-
     ];
 
     return (
@@ -50,7 +53,11 @@ export class Character extends Component<Props> {
   }
 
   private edit() {
-
+    Actions.push('characterEdit', {
+      character: this.props.character,
+      updateCharacter: this.props.updateCharacter,
+      index: this.props.index
+    });
   }
 
   private upload() {

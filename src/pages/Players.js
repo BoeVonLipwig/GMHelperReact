@@ -37,7 +37,6 @@ var Players = /** @class */ (function (_super) {
             class: "to edit",
             id: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
         };
-        console.log(char.id);
         this.setState({ players: this.state.players.concat(char) });
     };
     Players.prototype.updateChar = function (char, index) {
@@ -47,6 +46,13 @@ var Players = /** @class */ (function (_super) {
     };
     Players.prototype.render = function () {
         var _this = this;
+        // let char: CharacterModel = {
+        //   name: "Aarok",
+        //   race: "Human",
+        //   class: "Warlock",
+        //   id: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+        // };
+        // this.setState({players: this.state.players.concat(char)})
         return (react_1.default.createElement(react_native_1.View, { style: { flex: 1 } },
             this.state.players.map(function (player, i) {
                 return react_1.default.createElement(react_native_1.TouchableOpacity, { onPress: function () { return react_native_router_flux_1.Actions.push('character', {

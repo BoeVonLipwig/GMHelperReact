@@ -6,6 +6,7 @@ import {Players} from "./src/pages/Players";
 import {NPCs} from "./src/pages/NPCs";
 import {Mobs} from "./src/pages/Mobs";
 import {Character} from "./src/pages/Character";
+import {CharacterEdit} from "./src/pages/CharacterEdit";
 
 // @ts-ignore
 const TabIcon = ({title}) => {
@@ -26,6 +27,7 @@ export default class App extends Component<{}> {
             <Scene key='tab3' title='Mobs' component={Mobs} icon={TabIcon}/>
           </Scene>
           <Scene key='character' component={Character}/>
+          <Scene key='characterEdit' component={CharacterEdit}/>
         </Scene>
       </Router>
     );
