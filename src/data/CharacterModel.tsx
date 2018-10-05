@@ -13,7 +13,7 @@ export type CharacterModel = {
   name: string;
   race: string;
   class: string;
-  id: number;
+  id: string;
 }
 
 type stats = {

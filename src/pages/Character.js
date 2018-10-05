@@ -25,7 +25,6 @@ var Character = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     Character.prototype.render = function () {
-        console.log("dsa");
         return (react_1.default.createElement(react_native_1.View, null,
             react_1.default.createElement(react_native_1.Text, null, this.props.character.name)));
     };

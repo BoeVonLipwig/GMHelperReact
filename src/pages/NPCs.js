@@ -33,15 +33,29 @@ var NPCs = /** @class */ (function (_super) {
     NPCs.prototype.componentDidMount = function () {
     };
     NPCs.prototype.addChar = function () {
+        var char = {
+            name: "Click",
+            race: "npc",
+            class: "to edit",
+            id: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+        };
+        this.setState({ npcs: this.state.npcs.concat(char) });
     };
-    NPCs.prototype.updateChar = function (char) {
+    NPCs.prototype.updateChar = function (char, index) {
+        var newNpcs = this.state.npcs;
+        newNpcs[index] = char;
+        this.setState({ npcs: newNpcs });
     };
     NPCs.prototype.render = function () {
         var _this = this;
         return (react_1.default.createElement(react_native_1.View, { style: { flex: 1 } },
             this.state.npcs.map(function (npc, i) {
-                return react_1.default.createElement(react_native_1.TouchableOpacity, { onPress: function () { return react_native_router_flux_1.Actions.push('character', { character: npc, updateChar: _this.updateChar.bind(_this) }); }, style: exports.styles.listItem, key: i },
-                    react_1.default.createElement(react_native_1.Text, null, npc.name));
+                return react_1.default.createElement(react_native_1.TouchableOpacity, { onPress: function () { return react_native_router_flux_1.Actions.push('character', {
+                        character: npc,
+                        updateChar: _this.updateChar.bind(_this),
+                        index: i
+                    }); }, style: exports.styles.listItem, key: i },
+                    react_1.default.createElement(react_native_1.Text, null, npc.name + " the " + npc.race + " " + npc.class));
             }),
             this.fabButton()));
     };

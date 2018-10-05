@@ -6,12 +6,12 @@ import {CharacterModel} from "../data/CharacterModel";
 
 type Props = {
   character: CharacterModel,
-  updateCharacter: (char: CharacterModel) => {}
+  updateCharacter: (char: CharacterModel) => {},
+  index: number
 }
 
 export class Character extends Component<Props> {
   render() {
-    console.log("dsa");
     return (
       <View>
         <Text>{this.props.character.name}</Text>

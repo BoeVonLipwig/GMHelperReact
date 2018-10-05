@@ -18,27 +18,33 @@ export class Players extends Component<{}, StateType> {
     };
   }
 
-  componentDidMount() {
-    let char: CharacterModel = {name: "Aarok", race: "Human", class: "Warlock", id: 1};
-    let pl = this.state.players.concat(char);
-    this.setState({players: pl})
-  }
-
-
   private addChar() {
+    let char: CharacterModel = {
+      name: "Click",
+      race: "player",
+      class: "to edit",
+      id: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+    };
+    console.log(char.id);
+    this.setState({players: this.state.players.concat(char)})
   }
 
-  updateChar(char: CharacterModel) {
-
+  updateChar(char: CharacterModel, index: number) {
+    let newPlayers = this.state.players;
+    newPlayers[index] = char;
+    this.setState({players: newPlayers})
   }
 
   render() {
-    console.log("asd");
     return (
       <View style={{flex: 1}}>{this.state.players.map((player, i) =>
         <TouchableOpacity
-          onPress={() => Actions.push('character', {character: player, updateChar: this.updateChar.bind(this)})}
-                          style={styles.listItem} key={i}>
+          onPress={() => Actions.push('character', {
+            character: player,
+            updateChar: this.updateChar.bind(this),
+            index: i
+          })}
+          style={styles.listItem} key={i}>
           <Text>{player.name + " the " + player.race + " " + player.class}</Text>
         </TouchableOpacity>)
       }{this.fabButton()}</View>
@@ -47,7 +53,7 @@ export class Players extends Component<{}, StateType> {
   }
 
   private download() {
-
+    //firebaseTings
   }
 
   fabButton() {
@@ -77,6 +83,9 @@ export class Players extends Component<{}, StateType> {
       }/>
     )
 
+  }
+
+  componentDidMount() {
   }
 }
 

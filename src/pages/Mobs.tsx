@@ -21,20 +21,29 @@ export class Mobs extends Component<{}, StateType> {
   componentDidMount() {
   }
 
-
   private addChar() {
-
+    let char: CharacterModel = {
+      name: "Click",
+      race: "mob",
+      class: "to edit",
+      id: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+    };
+    this.setState({mobs: this.state.mobs.concat(char)})
   }
 
-  updateChar(char: CharacterModel){
-
+  updateChar(char: CharacterModel, index: number) {
+    let newMobs = this.state.mobs;
+    newMobs[index] = char;
+    this.setState({mobs: newMobs})
   }
 
   render() {
     return (
       <View style={{flex: 1}}>{this.state.mobs.map((mob, i) =>
-        <TouchableOpacity onPress={() => Actions.push('character', {character: mob, updateChar: this.updateChar.bind(this)})} style={styles.listItem} key={i}>
-          <Text>{mob.race}</Text>
+        <TouchableOpacity
+          onPress={() => Actions.push('character', {character: mob, updateChar: this.updateChar.bind(this), index: i})}
+          style={styles.listItem} key={i}>
+          <Text>{mob.name + " the " + mob.race + " " + mob.class}</Text>
         </TouchableOpacity>)
       }{this.fabButton()}</View>
 
@@ -42,7 +51,6 @@ export class Mobs extends Component<{}, StateType> {
   }
 
   private download() {
-
   }
 
   fabButton() {
@@ -63,6 +71,7 @@ export class Mobs extends Component<{}, StateType> {
     return (
       <FloatingAction actions={actions} onPressItem={
         (name) => {
+          console.log("button pressed");
           if (FabConfig.add.name.localeCompare(name + "") == 0) {
             this.addChar();
           } else {

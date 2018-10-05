@@ -23,18 +23,32 @@ export class NPCs extends Component<{}, StateType> {
   }
 
   private addChar() {
-
+    let char: CharacterModel = {
+      name: "Click",
+      race: "npc",
+      class: "to edit",
+      id: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+    };
+    this.setState({npcs: this.state.npcs.concat(char)})
   }
 
-  updateChar(char: CharacterModel){
-
+  updateChar(char: CharacterModel, index: number) {
+    let newNpcs = this.state.npcs;
+    newNpcs[index] = char;
+    this.setState({npcs: newNpcs})
   }
 
   render() {
     return (
       <View style={{flex: 1}}>{this.state.npcs.map((npc, i) =>
-        <TouchableOpacity onPress={() => Actions.push('character', {character: npc, updateChar: this.updateChar.bind(this)})} style={styles.listItem} key={i}>
-          <Text>{npc.name}</Text>
+        <TouchableOpacity
+          onPress={() => Actions.push('character', {
+            character: npc,
+            updateChar: this.updateChar.bind(this),
+            index: i
+          })}
+          style={styles.listItem} key={i}>
+          <Text>{npc.name + " the " + npc.race + " " + npc.class}</Text>
         </TouchableOpacity>)
       }{this.fabButton()}</View>
 

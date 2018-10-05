@@ -30,26 +30,36 @@ var Players = /** @class */ (function (_super) {
         };
         return _this;
     }
-    Players.prototype.componentDidMount = function () {
-        var char = { name: "Aarok", race: "Human", class: "Warlock", id: 1 };
-        var pl = this.state.players.concat(char);
-        this.setState({ players: pl });
-    };
     Players.prototype.addChar = function () {
+        var char = {
+            name: "Click",
+            race: "player",
+            class: "to edit",
+            id: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+        };
+        console.log(char.id);
+        this.setState({ players: this.state.players.concat(char) });
     };
-    Players.prototype.updateChar = function (char) {
+    Players.prototype.updateChar = function (char, index) {
+        var newPlayers = this.state.players;
+        newPlayers[index] = char;
+        this.setState({ players: newPlayers });
     };
     Players.prototype.render = function () {
         var _this = this;
-        console.log("asd");
         return (react_1.default.createElement(react_native_1.View, { style: { flex: 1 } },
             this.state.players.map(function (player, i) {
-                return react_1.default.createElement(react_native_1.TouchableOpacity, { onPress: function () { return react_native_router_flux_1.Actions.push('character', { character: player, updateChar: _this.updateChar.bind(_this) }); }, style: exports.styles.listItem, key: i },
+                return react_1.default.createElement(react_native_1.TouchableOpacity, { onPress: function () { return react_native_router_flux_1.Actions.push('character', {
+                        character: player,
+                        updateChar: _this.updateChar.bind(_this),
+                        index: i
+                    }); }, style: exports.styles.listItem, key: i },
                     react_1.default.createElement(react_native_1.Text, null, player.name + " the " + player.race + " " + player.class));
             }),
             this.fabButton()));
     };
     Players.prototype.download = function () {
+        //firebaseTings
     };
     Players.prototype.fabButton = function () {
         var _this = this;
@@ -72,6 +82,8 @@ var Players = /** @class */ (function (_super) {
                     _this.download();
                 }
             } }));
+    };
+    Players.prototype.componentDidMount = function () {
     };
     return Players;
 }(react_2.Component));
