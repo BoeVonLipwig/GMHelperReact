@@ -20,6 +20,7 @@ var react_1 = __importDefault(require("react"));
 var react_2 = require("react");
 var react_native_1 = require("react-native");
 var react_native_floating_action_1 = require("react-native-floating-action");
+var react_native_router_flux_1 = require("react-native-router-flux");
 var NPCs = /** @class */ (function (_super) {
     __extends(NPCs, _super);
     function NPCs(props) {
@@ -33,14 +34,14 @@ var NPCs = /** @class */ (function (_super) {
     };
     NPCs.prototype.addChar = function () {
     };
-    NPCs.prototype.gotoCharacter = function (npc, i) {
+    NPCs.prototype.updateChar = function (char) {
     };
     NPCs.prototype.render = function () {
         var _this = this;
         return (react_1.default.createElement(react_native_1.View, { style: { flex: 1 } },
-            this.state.npcs.map(function (npcs, i) {
-                return react_1.default.createElement(react_native_1.TouchableOpacity, { onPress: function () { return _this.gotoCharacter(npcs, i); }, style: exports.styles.listItem, key: i },
-                    react_1.default.createElement(react_native_1.Text, null, npcs.name));
+            this.state.npcs.map(function (npc, i) {
+                return react_1.default.createElement(react_native_1.TouchableOpacity, { onPress: function () { return react_native_router_flux_1.Actions.push('character', { character: npc, updateChar: _this.updateChar.bind(_this) }); }, style: exports.styles.listItem, key: i },
+                    react_1.default.createElement(react_native_1.Text, null, npc.name));
             }),
             this.fabButton()));
     };

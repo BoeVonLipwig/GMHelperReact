@@ -20,6 +20,7 @@ var react_1 = __importDefault(require("react"));
 var react_2 = require("react");
 var react_native_1 = require("react-native");
 var react_native_floating_action_1 = require("react-native-floating-action");
+var react_native_router_flux_1 = require("react-native-router-flux");
 var Mobs = /** @class */ (function (_super) {
     __extends(Mobs, _super);
     function Mobs(props) {
@@ -33,13 +34,13 @@ var Mobs = /** @class */ (function (_super) {
     };
     Mobs.prototype.addChar = function () {
     };
-    Mobs.prototype.gotoCharacter = function (mobs, i) {
+    Mobs.prototype.updateChar = function (char) {
     };
     Mobs.prototype.render = function () {
         var _this = this;
         return (react_1.default.createElement(react_native_1.View, { style: { flex: 1 } },
             this.state.mobs.map(function (mob, i) {
-                return react_1.default.createElement(react_native_1.TouchableOpacity, { onPress: function () { return _this.gotoCharacter(mob, i); }, style: exports.styles.listItem, key: i },
+                return react_1.default.createElement(react_native_1.TouchableOpacity, { onPress: function () { return react_native_router_flux_1.Actions.push('character', { character: mob, updateChar: _this.updateChar.bind(_this) }); }, style: exports.styles.listItem, key: i },
                     react_1.default.createElement(react_native_1.Text, null, mob.race));
             }),
             this.fabButton()));

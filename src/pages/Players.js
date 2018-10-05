@@ -37,11 +37,14 @@ var Players = /** @class */ (function (_super) {
     };
     Players.prototype.addChar = function () {
     };
+    Players.prototype.updateChar = function (char) {
+    };
     Players.prototype.render = function () {
+        var _this = this;
         console.log("asd");
         return (react_1.default.createElement(react_native_1.View, { style: { flex: 1 } },
             this.state.players.map(function (player, i) {
-                return react_1.default.createElement(react_native_1.TouchableOpacity, { onPress: function () { return react_native_router_flux_1.Actions.push('Character', { player: player }); }, style: exports.styles.listItem, key: i },
+                return react_1.default.createElement(react_native_1.TouchableOpacity, { onPress: function () { return react_native_router_flux_1.Actions.push('character', { character: player, updateChar: _this.updateChar.bind(_this) }); }, style: exports.styles.listItem, key: i },
                     react_1.default.createElement(react_native_1.Text, null, player.name + " the " + player.race + " " + player.class));
             }),
             this.fabButton()));

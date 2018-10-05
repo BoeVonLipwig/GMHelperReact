@@ -3,6 +3,7 @@ import {Component} from 'react';
 import {StyleSheet, Platform, Image, Text, View, ScrollView, TouchableOpacity} from 'react-native';
 import {FloatingAction} from "react-native-floating-action";
 import {CharacterModel} from "../data/CharacterModel";
+import {Actions} from "react-native-router-flux";
 
 type StateType = {
   mobs: CharacterModel[]
@@ -25,14 +26,14 @@ export class Mobs extends Component<{}, StateType> {
 
   }
 
-  private gotoCharacter(mobs: CharacterModel, i: any) {
+  updateChar(char: CharacterModel){
 
   }
 
   render() {
     return (
       <View style={{flex: 1}}>{this.state.mobs.map((mob, i) =>
-        <TouchableOpacity onPress={() => this.gotoCharacter(mob, i)} style={styles.listItem} key={i}>
+        <TouchableOpacity onPress={() => Actions.push('character', {character: mob, updateChar: this.updateChar.bind(this)})} style={styles.listItem} key={i}>
           <Text>{mob.race}</Text>
         </TouchableOpacity>)
       }{this.fabButton()}</View>

@@ -23,6 +23,7 @@ var react_native_router_flux_1 = require("react-native-router-flux");
 var Players_1 = require("./src/pages/Players");
 var NPCs_1 = require("./src/pages/NPCs");
 var Mobs_1 = require("./src/pages/Mobs");
+var Character_1 = require("./src/pages/Character");
 // @ts-ignore
 var TabIcon = function (_a) {
     var title = _a.title;
@@ -35,10 +36,12 @@ var App = /** @class */ (function (_super) {
     }
     App.prototype.render = function () {
         return (react_1.default.createElement(react_native_router_flux_1.Router, null,
-            react_1.default.createElement(react_native_router_flux_1.Scene, { key: 'root', tabs: true, hideNavBar: true },
-                react_1.default.createElement(react_native_router_flux_1.Scene, { key: 'tab1', title: 'Players', component: Players_1.Players, icon: TabIcon, initial: true }),
-                react_1.default.createElement(react_native_router_flux_1.Scene, { key: 'tab2', title: 'NPCs', component: NPCs_1.NPCs, icon: TabIcon }),
-                react_1.default.createElement(react_native_router_flux_1.Scene, { key: 'tab3', title: 'Mobs', component: Mobs_1.Mobs, icon: TabIcon }))));
+            react_1.default.createElement(react_native_router_flux_1.Scene, { key: 'root' },
+                react_1.default.createElement(react_native_router_flux_1.Scene, { key: 'tabs', tabs: true, hideNavBar: true },
+                    react_1.default.createElement(react_native_router_flux_1.Scene, { key: 'tab1', title: 'Players', component: Players_1.Players, icon: TabIcon, initial: true }),
+                    react_1.default.createElement(react_native_router_flux_1.Scene, { key: 'tab2', title: 'NPCs', component: NPCs_1.NPCs, icon: TabIcon }),
+                    react_1.default.createElement(react_native_router_flux_1.Scene, { key: 'tab3', title: 'Mobs', component: Mobs_1.Mobs, icon: TabIcon })),
+                react_1.default.createElement(react_native_router_flux_1.Scene, { key: 'character', component: Character_1.Character }))));
     };
     return App;
 }(react_2.Component));

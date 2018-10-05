@@ -6,7 +6,7 @@ import {CharacterModel} from "../data/CharacterModel";
 
 type Props = {
   character: CharacterModel,
-  updateList: (char: CharacterModel) => {}
+  updateCharacter: (char: CharacterModel) => {}
 }
 
 export class Character extends Component<Props> {

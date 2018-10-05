@@ -28,11 +28,17 @@ export class Players extends Component<{}, StateType> {
   private addChar() {
   }
 
+  updateChar(char: CharacterModel) {
+
+  }
+
   render() {
     console.log("asd");
     return (
       <View style={{flex: 1}}>{this.state.players.map((player, i) =>
-        <TouchableOpacity onPress={() => Actions.push('Character', {player})} style={styles.listItem} key={i}>
+        <TouchableOpacity
+          onPress={() => Actions.push('character', {character: player, updateChar: this.updateChar.bind(this)})}
+                          style={styles.listItem} key={i}>
           <Text>{player.name + " the " + player.race + " " + player.class}</Text>
         </TouchableOpacity>)
       }{this.fabButton()}</View>

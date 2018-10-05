@@ -3,6 +3,7 @@ import {Component} from 'react';
 import {StyleSheet, Platform, Image, Text, View, ScrollView, TouchableOpacity} from 'react-native';
 import {FloatingAction} from "react-native-floating-action";
 import {CharacterModel} from "../data/CharacterModel";
+import {Actions} from "react-native-router-flux";
 
 
 type StateType = {
@@ -25,15 +26,15 @@ export class NPCs extends Component<{}, StateType> {
 
   }
 
-  private gotoCharacter(npc: CharacterModel, i: any) {
+  updateChar(char: CharacterModel){
 
   }
 
   render() {
     return (
-      <View style={{flex: 1}}>{this.state.npcs.map((npcs, i) =>
-        <TouchableOpacity onPress={() => this.gotoCharacter(npcs, i)} style={styles.listItem} key={i}>
-          <Text>{npcs.name}</Text>
+      <View style={{flex: 1}}>{this.state.npcs.map((npc, i) =>
+        <TouchableOpacity onPress={() => Actions.push('character', {character: npc, updateChar: this.updateChar.bind(this)})} style={styles.listItem} key={i}>
+          <Text>{npc.name}</Text>
         </TouchableOpacity>)
       }{this.fabButton()}</View>
 
