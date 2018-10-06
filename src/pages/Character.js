@@ -29,10 +29,15 @@ var Character = /** @class */ (function (_super) {
     Character.prototype.render = function () {
         return (react_1.default.createElement(react_native_1.View, { style: { flex: 1 } },
             react_1.default.createElement(react_native_1.Text, null, this.props.character.name),
-            react_1.default.createElement(react_native_1.Text, null, this.props.character.name),
-            react_1.default.createElement(react_native_1.Text, null, this.props.character.name),
-            react_1.default.createElement(react_native_1.Text, null, this.props.character.name),
+            react_1.default.createElement(react_native_1.Text, null, this.props.character.race),
+            react_1.default.createElement(react_native_1.Text, null, this.props.character.class),
+            this.printStats(),
             this.fabButton()));
+    };
+    Character.prototype.printStats = function () {
+        return (react_1.default.createElement(react_native_1.View, null,
+            react_1.default.createElement(react_native_1.Text, null, "Stats"),
+            react_1.default.createElement(react_native_1.View, null)));
     };
     Character.prototype.fabButton = function () {
         var _this = this;

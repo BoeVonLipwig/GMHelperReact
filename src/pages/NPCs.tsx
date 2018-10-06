@@ -27,6 +27,14 @@ export class NPCs extends Component<{}, StateType> {
       name: "Click",
       race: "npc",
       class: "to edit",
+      stats: {
+        str: 0,
+        dex: 0,
+        con: 0,
+        int: 0,
+        is: 0,
+        cha: 0
+      },
       id: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
     };
     this.setState({npcs: this.state.npcs.concat(char)})

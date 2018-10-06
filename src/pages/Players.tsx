@@ -21,11 +21,20 @@ export class Players extends Component<{}, StateType> {
 
   private addChar() {
     let char: CharacterModel = {
-      name: "Click",
-      race: "player",
-      class: "to edit",
-      id: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
-    };
+        name: "Aarok",
+        race: "Human",
+        class: "Warlock",
+        stats: {
+          str: 13,
+          dex: 12,
+          con: 14,
+          int: 13,
+          is: 10,
+          cha: 18
+        },
+        id: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+      }
+    ;
     this.setState({players: this.state.players.concat(char)})
   }
 
@@ -36,13 +45,6 @@ export class Players extends Component<{}, StateType> {
   }
 
   render() {
-    // let char: CharacterModel = {
-    //   name: "Aarok",
-    //   race: "Human",
-    //   class: "Warlock",
-    //   id: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
-    // };
-    // this.setState({players: this.state.players.concat(char)})
     return (
       <View style={{flex: 1}}>
         {this.state.players.map((player, i) =>

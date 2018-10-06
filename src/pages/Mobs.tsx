@@ -26,6 +26,14 @@ export class Mobs extends Component<{}, StateType> {
       name: "Click",
       race: "mob",
       class: "to edit",
+      stats: {
+        str: 0,
+        dex: 0,
+        con: 0,
+        int: 0,
+        is: 0,
+        cha: 0
+      },
       id: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
     };
     this.setState({mobs: this.state.mobs.concat(char)})

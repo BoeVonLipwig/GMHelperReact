@@ -16,12 +16,21 @@ export class Character extends Component<Props> {
     return (
       <View style={{flex: 1}}>
         <Text>{this.props.character.name}</Text>
-        <Text>{this.props.character.name}</Text>
-        <Text>{this.props.character.name}</Text>
-        <Text>{this.props.character.name}</Text>
+        <Text>{this.props.character.race}</Text>
+        <Text>{this.props.character.class}</Text>
+        {this.printStats()}
         {this.fabButton()}
       </View>
     );
+  }
+
+  private printStats() {
+    return (
+      <View>
+        <Text>Stats</Text>
+        <View></View>
+      </View>
+    )
   }
 
   fabButton() {

@@ -2,7 +2,7 @@ export type CharacterModel = {
   // maxHitPoints: number;
   // curHitPoints: number;
   // armorClass: number;
-  // stats: stats;
+  stats: stats;
   // weapon: string;
   // weaponDmg: string;
   // spell1Name: string;
