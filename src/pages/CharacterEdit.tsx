@@ -1,6 +1,6 @@
 import React from 'react';
 import {Component} from 'react';
-import {StyleSheet, Platform, Image, Text, View, ScrollView, TouchableOpacity, TextInput} from 'react-native';
+import {StyleSheet,  Text, View, ScrollView} from 'react-native';
 import {FloatingAction} from "react-native-floating-action";
 import {CharacterModel} from "../data/CharacterModel";
 import {Actions} from "react-native-router-flux";
@@ -215,6 +215,7 @@ export class CharacterEdit extends Component<Props, State> {
     this.setState({update: this.state.update + 1})
   }
 
+  // noinspection JSMethodCanBeStatic
   private getNum(input: string) {
     let parsed: number = parseInt(input);
     if (isNaN(parsed) || parsed < 0) {

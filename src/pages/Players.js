@@ -90,6 +90,7 @@ var Players = /** @class */ (function (_super) {
     Players.prototype.update = function () {
         this.setState({ update: this.state.update + 1 });
     };
+    // noinspection JSMethodCanBeStatic
     Players.prototype.viewPlayer = function (player, i) {
         react_native_router_flux_1.Actions.push('character', {
             character: player,

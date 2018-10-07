@@ -3,6 +3,10 @@ export type CharacterModel = {
   curHitPoints: number;
   armorClass: number;
   stats: stats;
+  name: string;
+  race: string;
+  class: string;
+  id: string;
   // weapon: string;
   // weaponDmg: string;
   // spell1Name: string;
@@ -10,10 +14,6 @@ export type CharacterModel = {
   // spell2Name: string;
   // spell2Dmg: string;
   // notes: string;
-  name: string;
-  race: string;
-  class: string;
-  id: string;
 }
 
 type stats = {

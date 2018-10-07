@@ -1,6 +1,6 @@
 import React from 'react';
 import {Component} from 'react';
-import {StyleSheet, Platform, Image, Text, View, ScrollView, TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {FloatingAction} from "react-native-floating-action";
 import {CharacterModel} from "../data/CharacterModel";
 import {Actions} from "react-native-router-flux";

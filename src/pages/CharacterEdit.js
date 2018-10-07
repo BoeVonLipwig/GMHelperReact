@@ -148,6 +148,7 @@ var CharacterEdit = /** @class */ (function (_super) {
         }
         this.setState({ update: this.state.update + 1 });
     };
+    // noinspection JSMethodCanBeStatic
     CharacterEdit.prototype.getNum = function (input) {
         var parsed = parseInt(input);
         if (isNaN(parsed) || parsed < 0) {

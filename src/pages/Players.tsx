@@ -1,10 +1,10 @@
 import React from 'react';
 import {Component} from 'react';
-import {StyleSheet, Platform, Image, Text, View, ScrollView, TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {FloatingAction} from "react-native-floating-action";
 import {CharacterModel} from "../data/CharacterModel";
 import {Actions} from "react-native-router-flux";
-
+//todo: update for base
 type StateType = {
   players: CharacterModel[],
   update: number
@@ -98,6 +98,7 @@ export class Players extends Component<{}, StateType> {
     this.setState({update: this.state.update + 1})
   }
 
+  // noinspection JSMethodCanBeStatic
   private viewPlayer(player: CharacterModel, i: number) {
     Actions.push('character', {
       character: player,
