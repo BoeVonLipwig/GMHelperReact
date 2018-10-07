@@ -46,6 +46,7 @@
     "fbjs": "^0.8.17",
     "react": "^16.3.2",
     "react-native": "^0.55.3",
+    "react-native-elements": "^0.19.1",
     "react-native-firebase": "^4.3.6",
     "react-native-floating-action": "https://github.com/santomegonzalo/react-native-floating-action",
     "react-native-router-flux": "^4.0.1",

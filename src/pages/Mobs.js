@@ -37,6 +37,8 @@ var Mobs = /** @class */ (function (_super) {
             name: "Click",
             race: "mob",
             class: "to edit",
+            maxHitPoints: 0,
+            curHitPoints: 0,
             stats: {
                 str: 0,
                 dex: 0,
@@ -58,7 +60,12 @@ var Mobs = /** @class */ (function (_super) {
         var _this = this;
         return (react_1.default.createElement(react_native_1.View, { style: { flex: 1 } },
             this.state.mobs.map(function (mob, i) {
-                return react_1.default.createElement(react_native_1.TouchableOpacity, { onPress: function () { return react_native_router_flux_1.Actions.push('character', { character: mob, updateChar: _this.updateChar.bind(_this), index: i }); }, style: exports.styles.listItem, key: i },
+                return react_1.default.createElement(react_native_1.TouchableOpacity, { onPress: function () { return react_native_router_flux_1.Actions.push('character', {
+                        character: mob,
+                        updateChar: _this.updateChar.bind(_this),
+                        index: i,
+                        title: mob.name
+                    }); }, style: exports.styles.listItem, key: i },
                     react_1.default.createElement(react_native_1.Text, null, mob.name + " the " + mob.race + " " + mob.class));
             }),
             this.fabButton()));

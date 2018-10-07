@@ -26,6 +26,8 @@ export class Mobs extends Component<{}, StateType> {
       name: "Click",
       race: "mob",
       class: "to edit",
+      maxHitPoints: 0,
+      curHitPoints: 0,
       stats: {
         str: 0,
         dex: 0,
@@ -49,7 +51,12 @@ export class Mobs extends Component<{}, StateType> {
     return (
       <View style={{flex: 1}}>{this.state.mobs.map((mob, i) =>
         <TouchableOpacity
-          onPress={() => Actions.push('character', {character: mob, updateChar: this.updateChar.bind(this), index: i})}
+          onPress={() => Actions.push('character', {
+            character: mob,
+            updateChar: this.updateChar.bind(this),
+            index: i,
+            title: mob.name
+          })}
           style={styles.listItem} key={i}>
           <Text>{mob.name + " the " + mob.race + " " + mob.class}</Text>
         </TouchableOpacity>)

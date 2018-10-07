@@ -37,6 +37,8 @@ var NPCs = /** @class */ (function (_super) {
             name: "Click",
             race: "npc",
             class: "to edit",
+            maxHitPoints: 0,
+            curHitPoints: 0,
             stats: {
                 str: 0,
                 dex: 0,
@@ -61,7 +63,8 @@ var NPCs = /** @class */ (function (_super) {
                 return react_1.default.createElement(react_native_1.TouchableOpacity, { onPress: function () { return react_native_router_flux_1.Actions.push('character', {
                         character: npc,
                         updateChar: _this.updateChar.bind(_this),
-                        index: i
+                        index: i,
+                        title: npc.name
                     }); }, style: exports.styles.listItem, key: i },
                     react_1.default.createElement(react_native_1.Text, null, npc.name + " the " + npc.race + " " + npc.class));
             }),

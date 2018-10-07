@@ -35,6 +35,8 @@ var Players = /** @class */ (function (_super) {
             name: "Aarok",
             race: "Human",
             class: "Warlock",
+            maxHitPoints: 18,
+            curHitPoints: 12,
             stats: {
                 str: 13,
                 dex: 12,
@@ -59,7 +61,8 @@ var Players = /** @class */ (function (_super) {
                 return react_1.default.createElement(react_native_1.TouchableOpacity, { onPress: function () { return react_native_router_flux_1.Actions.push('character', {
                         character: player,
                         updateChar: _this.updateChar.bind(_this),
-                        index: i
+                        index: i,
+                        title: player.name
                     }); }, style: exports.styles.listItem, key: i },
                     react_1.default.createElement(react_native_1.Text, null, player.name + " the " + player.race + " " + player.class));
             }),

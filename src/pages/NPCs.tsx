@@ -27,6 +27,8 @@ export class NPCs extends Component<{}, StateType> {
       name: "Click",
       race: "npc",
       class: "to edit",
+      maxHitPoints: 0,
+      curHitPoints: 0,
       stats: {
         str: 0,
         dex: 0,
@@ -53,7 +55,8 @@ export class NPCs extends Component<{}, StateType> {
           onPress={() => Actions.push('character', {
             character: npc,
             updateChar: this.updateChar.bind(this),
-            index: i
+            index: i,
+            title: npc.name
           })}
           style={styles.listItem} key={i}>
           <Text>{npc.name + " the " + npc.race + " " + npc.class}</Text>

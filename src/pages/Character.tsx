@@ -11,13 +11,55 @@ type Props = {
   index: number
 }
 
-export class Character extends Component<Props> {
+type State = {
+  update: number
+}
+
+export class Character extends Component<Props, State> {
+
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      update: 0
+    }
+  }
+
   render() {
     return (
       <View style={{flex: 1}}>
-        <Text>{this.props.character.name}</Text>
-        <Text>{this.props.character.race}</Text>
-        <Text>{this.props.character.class}</Text>
+
+        <View>
+          <Text style={styles.textStyle}>
+            Race: {this.props.character.race}
+          </Text>
+          <Text style={styles.textStyle}>
+            Class: {this.props.character.class}
+          </Text>
+        </View>
+
+
+        <View style={{flexDirection: 'row', padding: 10}}>
+          <TouchableOpacity
+            style={styles.buttonStyleLower}
+            onPress={() => this.charHealth(-1)}>
+            <Text> - </Text>
+          </TouchableOpacity>
+
+          <Text style={{
+            fontSize: 20,
+            paddingRight: 10,
+            paddingLeft: 10,
+          }}>
+            {this.props.character.curHitPoints}/{this.props.character.maxHitPoints}
+          </Text>
+
+          <TouchableOpacity
+            style={styles.buttonStyleAdd}
+            onPress={() => this.charHealth(-1)}>
+            <Text> + </Text>
+          </TouchableOpacity>
+        </View>
+
         {this.printStats()}
         {this.fabButton()}
       </View>
@@ -72,23 +114,44 @@ export class Character extends Component<Props> {
   private upload() {
 
   }
+
+  private charHealth(int: number) {
+    let hp = this.props.character.curHitPoints + int;
+    if (hp < 0) hp = 0;
+    else if (hp >= this.props.character.maxHitPoints) hp = this.props.character.maxHitPoints;
+    console.log(this.props.character.curHitPoints);
+    this.props.character.curHitPoints = hp;
+    console.log(this.props.character.curHitPoints);
+    this.setState({update: this.state.update + 1})
+  }
 }
 
 export const styles = StyleSheet.create({
-    listItem: {
-      borderRadius: 0,
-      borderWidth: 0.5,
-      borderColor: '#d6d7da',
-
-      backgroundColor: "#d6d6d6",
-      width: "90%",
-      height: 40,
-      alignItems: "center",
-      justifyContent: 'center',
-      alignSelf: "center",
-    }
+  buttonStyleLower: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    width: 25,
+    height: 25,
+    borderColor: "transparent",
+    borderWidth: 0,
+    borderRadius: 5,
+    backgroundColor: 'rgb(255,0,0)'
+  }, buttonStyleAdd: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    width: 25,
+    height: 25,
+    borderColor: "transparent",
+    borderWidth: 0,
+    borderRadius: 5,
+    backgroundColor: 'rgb(0,0,255)'
+  }, textStyle: {
+    fontSize: 20,
+    padding: 10
   }
-);
+});
 
 export const FabConfig = {
   edit: {

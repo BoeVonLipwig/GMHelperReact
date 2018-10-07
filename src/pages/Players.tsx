@@ -24,6 +24,8 @@ export class Players extends Component<{}, StateType> {
         name: "Aarok",
         race: "Human",
         class: "Warlock",
+        maxHitPoints: 18,
+        curHitPoints: 12,
         stats: {
           str: 13,
           dex: 12,
@@ -52,7 +54,8 @@ export class Players extends Component<{}, StateType> {
             onPress={() => Actions.push('character', {
               character: player,
               updateChar: this.updateChar.bind(this),
-              index: i
+              index: i,
+              title: player.name
             })}
             style={styles.listItem} key={i}>
             <Text>{player.name + " the " + player.race + " " + player.class}</Text>

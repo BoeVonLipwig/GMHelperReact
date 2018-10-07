@@ -23,14 +23,36 @@ var react_native_floating_action_1 = require("react-native-floating-action");
 var react_native_router_flux_1 = require("react-native-router-flux");
 var Character = /** @class */ (function (_super) {
     __extends(Character, _super);
-    function Character() {
-        return _super !== null && _super.apply(this, arguments) || this;
+    function Character(props) {
+        var _this = _super.call(this, props) || this;
+        _this.state = {
+            update: 0
+        };
+        return _this;
     }
     Character.prototype.render = function () {
+        var _this = this;
         return (react_1.default.createElement(react_native_1.View, { style: { flex: 1 } },
-            react_1.default.createElement(react_native_1.Text, null, this.props.character.name),
-            react_1.default.createElement(react_native_1.Text, null, this.props.character.race),
-            react_1.default.createElement(react_native_1.Text, null, this.props.character.class),
+            react_1.default.createElement(react_native_1.View, null,
+                react_1.default.createElement(react_native_1.Text, { style: exports.styles.textStyle },
+                    "Race: ",
+                    this.props.character.race),
+                react_1.default.createElement(react_native_1.Text, { style: exports.styles.textStyle },
+                    "Class: ",
+                    this.props.character.class)),
+            react_1.default.createElement(react_native_1.View, { style: { flexDirection: 'row', padding: 10 } },
+                react_1.default.createElement(react_native_1.TouchableOpacity, { style: exports.styles.buttonStyleLower, onPress: function () { return _this.charHealth(-1); } },
+                    react_1.default.createElement(react_native_1.Text, null, " - ")),
+                react_1.default.createElement(react_native_1.Text, { style: {
+                        fontSize: 20,
+                        paddingRight: 10,
+                        paddingLeft: 10,
+                    } },
+                    this.props.character.curHitPoints,
+                    "/",
+                    this.props.character.maxHitPoints),
+                react_1.default.createElement(react_native_1.TouchableOpacity, { style: exports.styles.buttonStyleAdd, onPress: function () { return _this.charHealth(-1); } },
+                    react_1.default.createElement(react_native_1.Text, null, " + "))),
             this.printStats(),
             this.fabButton()));
     };
@@ -70,20 +92,44 @@ var Character = /** @class */ (function (_super) {
     };
     Character.prototype.upload = function () {
     };
+    Character.prototype.charHealth = function (int) {
+        var hp = this.props.character.curHitPoints + int;
+        if (hp < 0)
+            hp = 0;
+        else if (hp >= this.props.character.maxHitPoints)
+            hp = this.props.character.maxHitPoints;
+        console.log(this.props.character.curHitPoints);
+        this.props.character.curHitPoints = hp;
+        console.log(this.props.character.curHitPoints);
+        this.setState({ update: this.state.update + 1 });
+    };
     return Character;
 }(react_2.Component));
 exports.Character = Character;
 exports.styles = react_native_1.StyleSheet.create({
-    listItem: {
-        borderRadius: 0,
-        borderWidth: 0.5,
-        borderColor: '#d6d7da',
-        backgroundColor: "#d6d6d6",
-        width: "90%",
-        height: 40,
+    buttonStyleLower: {
+        flexDirection: "row",
         alignItems: "center",
-        justifyContent: 'center',
-        alignSelf: "center",
+        justifyContent: "center",
+        width: 25,
+        height: 25,
+        borderColor: "transparent",
+        borderWidth: 0,
+        borderRadius: 5,
+        backgroundColor: 'rgb(255,0,0)'
+    }, buttonStyleAdd: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center",
+        width: 25,
+        height: 25,
+        borderColor: "transparent",
+        borderWidth: 0,
+        borderRadius: 5,
+        backgroundColor: 'rgb(0,0,255)'
+    }, textStyle: {
+        fontSize: 20,
+        padding: 10
     }
 });
 exports.FabConfig = {
