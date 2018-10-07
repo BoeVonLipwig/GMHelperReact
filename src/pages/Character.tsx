@@ -166,9 +166,7 @@ export class Character extends Component<Props, State> {
   }
 
   private updateChar(char:CharacterModel) {
-    this.props.character.maxHitPoints = char.maxHitPoints;
     this.setState({update: this.state.update + 1})
-
   }
 }
 

@@ -32,7 +32,7 @@ var CharacterEdit = /** @class */ (function (_super) {
         return _this;
     }
     CharacterEdit.prototype.render = function () {
-        return (react_1.default.createElement(react_native_1.View, { style: { flex: 1 } },
+        return (react_1.default.createElement(react_native_1.ScrollView, { style: { flex: 1 } },
             this.info(),
             this.printStats(),
             this.fabButton()));
@@ -67,19 +67,19 @@ var CharacterEdit = /** @class */ (function (_super) {
                     react_1.default.createElement(react_native_elements_1.FormInput, { defaultValue: stats.str + "", onChangeText: function (text) { return _this.setStat(text, "str"); } })),
                 react_1.default.createElement(react_native_1.View, { style: { flexDirection: 'row' } },
                     react_1.default.createElement(react_native_1.Text, { style: exports.styles.statsStyle }, "Dex:"),
-                    react_1.default.createElement(react_native_elements_1.FormInput, { value: stats.dex + "", onChangeText: function (text) { return _this.setStat(text, "dex"); } })),
+                    react_1.default.createElement(react_native_elements_1.FormInput, { defaultValue: stats.dex + "", onChangeText: function (text) { return _this.setStat(text, "dex"); } })),
                 react_1.default.createElement(react_native_1.View, { style: { flexDirection: 'row' } },
                     react_1.default.createElement(react_native_1.Text, { style: exports.styles.statsStyle }, "Con:"),
-                    react_1.default.createElement(react_native_elements_1.FormInput, { value: stats.con + "", onChangeText: function (text) { return _this.setStat(text, "con"); } })),
+                    react_1.default.createElement(react_native_elements_1.FormInput, { defaultValue: stats.con + "", onChangeText: function (text) { return _this.setStat(text, "con"); } })),
                 react_1.default.createElement(react_native_1.View, { style: { flexDirection: 'row' } },
                     react_1.default.createElement(react_native_1.Text, { style: exports.styles.statsStyle }, "Int:"),
-                    react_1.default.createElement(react_native_elements_1.FormInput, { value: stats.int + "", onChangeText: function (text) { return _this.setStat(text, "int"); } })),
+                    react_1.default.createElement(react_native_elements_1.FormInput, { defaultValue: stats.int + "", onChangeText: function (text) { return _this.setStat(text, "int"); } })),
                 react_1.default.createElement(react_native_1.View, { style: { flexDirection: 'row' } },
                     react_1.default.createElement(react_native_1.Text, { style: exports.styles.statsStyle }, "Wis:"),
-                    react_1.default.createElement(react_native_elements_1.FormInput, { value: stats.wis + " ", onChangeText: function (text) { return _this.setStat(text, "wis"); } })),
+                    react_1.default.createElement(react_native_elements_1.FormInput, { defaultValue: stats.wis + " ", onChangeText: function (text) { return _this.setStat(text, "wis"); } })),
                 react_1.default.createElement(react_native_1.View, { style: { flexDirection: 'row' } },
                     react_1.default.createElement(react_native_1.Text, { style: exports.styles.statsStyle }, "Chr:"),
-                    react_1.default.createElement(react_native_elements_1.FormInput, { value: stats.cha + "", onChangeText: function (text) { return _this.setStat(text, "cha"); } })))));
+                    react_1.default.createElement(react_native_elements_1.FormInput, { defaultValue: stats.cha + "", onChangeText: function (text) { return _this.setStat(text, "cha"); } })))));
     };
     CharacterEdit.prototype.fabButton = function () {
         var _this = this;

@@ -27,11 +27,11 @@ export class CharacterEdit extends Component<Props, State> {
 
   render() {
     return (
-      <View style={{flex: 1}}>
+      <ScrollView style={{flex: 1}}>
         {this.info()}
         {this.printStats()}
         {this.fabButton()}
-      </View>
+      </ScrollView>
     );
   }
 
@@ -101,7 +101,7 @@ export class CharacterEdit extends Component<Props, State> {
               Dex:
             </Text>
             <FormInput
-              value={stats.dex + ""}
+              defaultValue={stats.dex + ""}
               onChangeText={(text) => this.setStat(text, "dex")}/>
           </View>
           <View style={{flexDirection: 'row'}}>
@@ -109,7 +109,7 @@ export class CharacterEdit extends Component<Props, State> {
               Con:
             </Text>
             <FormInput
-              value={stats.con + ""}
+              defaultValue={stats.con + ""}
               onChangeText={(text) => this.setStat(text, "con")}/>
           </View>
           <View style={{flexDirection: 'row'}}>
@@ -117,7 +117,7 @@ export class CharacterEdit extends Component<Props, State> {
               Int:
             </Text>
             <FormInput
-              value={stats.int + ""}
+              defaultValue={stats.int + ""}
               onChangeText={(text) => this.setStat(text, "int")}/>
           </View>
           <View style={{flexDirection: 'row'}}>
@@ -125,7 +125,7 @@ export class CharacterEdit extends Component<Props, State> {
               Wis:
             </Text>
             <FormInput
-              value={stats.wis + " "}
+              defaultValue={stats.wis + " "}
               onChangeText={(text) => this.setStat(text, "wis")}/>
           </View>
           <View style={{flexDirection: 'row'}}>
@@ -133,7 +133,7 @@ export class CharacterEdit extends Component<Props, State> {
               Chr:
             </Text>
             <FormInput
-              value={stats.cha + ""}
+              defaultValue={stats.cha + ""}
               onChangeText={(text) => this.setStat(text, "cha")}/>
           </View>
         </View>
