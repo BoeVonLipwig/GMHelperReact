@@ -7,7 +7,6 @@ import {Actions} from "react-native-router-flux";
 
 type Props = {
   character: CharacterModel,
-  updateCharacter: (char: CharacterModel) => {},
   index: number
 }
 
@@ -25,6 +24,7 @@ export class Character extends Component<Props, State> {
   }
 
   render() {
+
     return (
       <View style={{flex: 1}}>
         {this.info()}
@@ -155,13 +155,19 @@ export class Character extends Component<Props, State> {
   private edit() {
     Actions.push('characterEdit', {
       character: this.props.character,
-      updateCharacter: this.props.updateCharacter,
       index: this.props.index,
+      updateChar: this.updateChar.bind(this),
       title: this.props.character.name
     });
   }
 
   private upload() {
+
+  }
+
+  private updateChar(char:CharacterModel) {
+    this.props.character.maxHitPoints = char.maxHitPoints;
+    this.setState({update: this.state.update + 1})
 
   }
 }

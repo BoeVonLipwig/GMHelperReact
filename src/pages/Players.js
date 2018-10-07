@@ -26,7 +26,8 @@ var Players = /** @class */ (function (_super) {
     function Players(props) {
         var _this = _super.call(this, props) || this;
         _this.state = {
-            players: []
+            players: [],
+            update: 0
         };
         return _this;
     }
@@ -50,21 +51,11 @@ var Players = /** @class */ (function (_super) {
         };
         this.setState({ players: this.state.players.concat(char) });
     };
-    Players.prototype.updateChar = function (char, index) {
-        var newPlayers = this.state.players;
-        newPlayers[index] = char;
-        this.setState({ players: newPlayers });
-    };
     Players.prototype.render = function () {
         var _this = this;
         return (react_1.default.createElement(react_native_1.View, { style: { flex: 1 } },
             this.state.players.map(function (player, i) {
-                return react_1.default.createElement(react_native_1.TouchableOpacity, { onPress: function () { return react_native_router_flux_1.Actions.push('character', {
-                        character: player,
-                        updateChar: _this.updateChar.bind(_this),
-                        index: i,
-                        title: player.name
-                    }); }, style: exports.styles.listItem, key: i },
+                return react_1.default.createElement(react_native_1.TouchableOpacity, { onPress: function () { return _this.viewPlayer(player, i); }, style: exports.styles.listItem, key: i },
                     react_1.default.createElement(react_native_1.Text, null, player.name + " the " + player.race + " " + player.class));
             }),
             this.fabButton()));
@@ -95,6 +86,16 @@ var Players = /** @class */ (function (_super) {
                     _this.download();
                 }
             } }));
+    };
+    Players.prototype.update = function () {
+        this.setState({ update: this.state.update + 1 });
+    };
+    Players.prototype.viewPlayer = function (player, i) {
+        react_native_router_flux_1.Actions.push('character', {
+            character: player,
+            index: i,
+            title: player.name
+        });
     };
     return Players;
 }(react_2.Component));

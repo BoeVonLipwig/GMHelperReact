@@ -4,11 +4,12 @@ import {StyleSheet, Platform, Image, Text, View, ScrollView, TouchableOpacity, T
 import {FloatingAction} from "react-native-floating-action";
 import {CharacterModel} from "../data/CharacterModel";
 import {Actions} from "react-native-router-flux";
+import {FormInput} from "react-native-elements";
 
 type Props = {
   character: CharacterModel,
-  updateCharacter: (char: CharacterModel) => {},
-  index: number
+  index: number,
+  updateChar: (char: CharacterModel ) => {}
 }
 
 type State = {
@@ -41,35 +42,40 @@ export class CharacterEdit extends Component<Props, State> {
           <Text style={styles.textStyle}>
             Name:
           </Text>
-          <TextInput style={styles.textStyle}>{this.props.character.name}</TextInput>
+          <FormInput defaultValue={this.props.character.name}
+                     onChangeText={(text: string) => this.setValue(text, "name")}/>
         </View>
 
         <View style={{flexDirection: 'row'}}>
           <Text style={styles.textStyle}>
             Race:
           </Text>
-          <TextInput style={styles.textStyle}>{this.props.character.race}</TextInput>
+          <FormInput defaultValue={this.props.character.race}
+                     onChangeText={(text: string) => this.setValue(text, "race")}/>
         </View>
 
         <View style={{flexDirection: 'row'}}>
           <Text style={styles.textStyle}>
             Class:
           </Text>
-          <TextInput style={styles.textStyle}>{this.props.character.class}</TextInput>
+          <FormInput defaultValue={this.props.character.class}
+                     onChangeText={(text: string) => this.setValue(text, "class")}/>
         </View>
 
         <View style={{flexDirection: 'row'}}>
           <Text style={styles.textStyle}>
             AC:
           </Text>
-          <TextInput style={styles.textStyle}>{this.props.character.armorClass}</TextInput>
+          <FormInput defaultValue={this.props.character.armorClass + ""}
+                     onChangeText={(text: string) => this.setValue(text, "ac")}/>
         </View>
 
         <View style={{flexDirection: 'row'}}>
           <Text style={styles.textStyle}>
             Max Hit Points:
           </Text>
-          <TextInput style={styles.textStyle}> {this.props.character.maxHitPoints}</TextInput>
+          <FormInput defaultValue={this.props.character.maxHitPoints + ""}
+                     onChangeText={(text: string) => this.setValue(text, "maxhp")}/>
         </View>
 
       </View>
@@ -86,55 +92,49 @@ export class CharacterEdit extends Component<Props, State> {
             <Text style={styles.statsStyle}>
               Str:
             </Text>
-            <TextInput
-              style={styles.statsStyle}
-              value={stats.str + ""}
-              onChangeText={() => this.props.character.stats.str}/>
+            <FormInput
+              defaultValue={stats.str + ""}
+              onChangeText={(text) => this.setStat(text, "str")}/>
           </View>
           <View style={{flexDirection: 'row'}}>
             <Text style={styles.statsStyle}>
               Dex:
             </Text>
-            <TextInput
-              style={styles.statsStyle}
+            <FormInput
               value={stats.dex + ""}
-              onChangeText={() => this.props.character.stats.dex}/>
+              onChangeText={(text) => this.setStat(text, "dex")}/>
           </View>
           <View style={{flexDirection: 'row'}}>
             <Text style={styles.statsStyle}>
               Con:
             </Text>
-            <TextInput
-              style={styles.statsStyle}
+            <FormInput
               value={stats.con + ""}
-              onChangeText={() => this.props.character.stats.con}/>
+              onChangeText={(text) => this.setStat(text, "con")}/>
           </View>
           <View style={{flexDirection: 'row'}}>
             <Text style={styles.statsStyle}>
               Int:
             </Text>
-            <TextInput
-              style={styles.statsStyle}
+            <FormInput
               value={stats.int + ""}
-              onChangeText={() => this.props.character.stats.int}/>
+              onChangeText={(text) => this.setStat(text, "int")}/>
           </View>
           <View style={{flexDirection: 'row'}}>
             < Text style={styles.statsStyle}>
               Wis:
             </Text>
-            <TextInput
-              style={styles.statsStyle}
+            <FormInput
               value={stats.wis + " "}
-              onChangeText={() => this.props.character.stats.wis}/>
+              onChangeText={(text) => this.setStat(text, "wis")}/>
           </View>
           <View style={{flexDirection: 'row'}}>
             <Text style={styles.statsStyle}>
               Chr:
             </Text>
-            <TextInput
-              style={styles.statsStyle}
+            <FormInput
               value={stats.cha + ""}
-              onChangeText={() => this.props.character.stats.cha}/>
+              onChangeText={(text) => this.setStat(text, "cha")}/>
           </View>
         </View>
       </View>
@@ -145,41 +145,89 @@ export class CharacterEdit extends Component<Props, State> {
 
     const actions = [
       {
-        text: FabConfig.edit.text,
-        position: FabConfig.edit.position,
-        name: FabConfig.edit.name
-      }, {
         text: FabConfig.upload.text,
         position: FabConfig.upload.position,
         name: FabConfig.upload.name
+      }, {
+        text: FabConfig.save.text,
+        position: FabConfig.save.position,
+        name: FabConfig.save.name
       }
     ];
 
     return (
       <FloatingAction actions={actions} onPressItem={
         (name) => {
-          if (FabConfig.edit.name.localeCompare(name + "") == 0) {
-            this.edit();
-          } else {
+          if (name === "upload")
             this.upload();
-          }
+          else this.save();
         }
       }/>
     )
 
   }
 
-  private edit() {
-    Actions.push('characterEdit', {
-      character: this.props.character,
-      updateCharacter: this.props.updateCharacter,
-      index: this.props.index,
-      title: this.props.character.name
-    });
+  private save() {
+    this.props.updateChar(this.props.character);
+    Actions.pop();
   }
 
   private upload() {
 
+  }
+
+  private setValue(text: string, type: string) {
+    switch (type.toLowerCase()) {
+      case "name":
+        this.props.character.name = text;
+        break;
+      case "race":
+        this.props.character.race = text;
+        break;
+      case "class":
+        this.props.character.class = text;
+        break;
+      case "ac":
+        this.props.character.armorClass = this.getNum(text);
+        break;
+      case "maxhp":
+        this.props.character.maxHitPoints = this.getNum(text);
+        break;
+    }
+    this.setState({update: this.state.update + 1})
+  }
+
+  private setStat(text: string, type: string) {
+    let num = this.getNum(text);
+    switch (type.toLowerCase()) {
+      case "str":
+        this.props.character.stats.str = num;
+        break;
+      case "dex":
+        this.props.character.stats.dex = num;
+        break;
+      case "con":
+        this.props.character.stats.con = num;
+        break;
+      case "int":
+        this.props.character.stats.int = num;
+        break;
+      case "wis":
+        this.props.character.stats.wis = num;
+        break;
+      case "cha":
+        this.props.character.stats.cha = num;
+        break;
+    }
+    this.setState({update: this.state.update + 1})
+  }
+
+  private getNum(input: string) {
+    let parsed: number = parseInt(input);
+    if (isNaN(parsed) || parsed < 0) {
+      parsed = 0;
+    }
+    return parsed
   }
 }
 
@@ -214,14 +262,13 @@ export const styles = StyleSheet.create({
 });
 
 export const FabConfig = {
-  edit: {
-    text: "Edit",
-    name: "edit",
-    position: 1
-  },
   upload: {
     text: "Upload",
     name: "upload",
     position: 1
+  }, save: {
+    text: "Save",
+    name: "save",
+    position: 2
   }
 };

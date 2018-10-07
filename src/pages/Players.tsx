@@ -6,7 +6,8 @@ import {CharacterModel} from "../data/CharacterModel";
 import {Actions} from "react-native-router-flux";
 
 type StateType = {
-  players: CharacterModel[]
+  players: CharacterModel[],
+  update: number
 }
 
 export class Players extends Component<{}, StateType> {
@@ -14,7 +15,8 @@ export class Players extends Component<{}, StateType> {
   constructor(props: any) {
     super(props);
     this.state = {
-      players: []
+      players: [],
+      update: 0
     };
 
   }
@@ -41,23 +43,12 @@ export class Players extends Component<{}, StateType> {
     this.setState({players: this.state.players.concat(char)})
   }
 
-  updateChar(char: CharacterModel, index: number) {
-    let newPlayers = this.state.players;
-    newPlayers[index] = char;
-    this.setState({players: newPlayers})
-  }
-
   render() {
     return (
       <View style={{flex: 1}}>
         {this.state.players.map((player, i) =>
           <TouchableOpacity
-            onPress={() => Actions.push('character', {
-              character: player,
-              updateChar: this.updateChar.bind(this),
-              index: i,
-              title: player.name
-            })}
+            onPress={() => this.viewPlayer(player, i)}
             style={styles.listItem} key={i}>
             <Text>{player.name + " the " + player.race + " " + player.class}</Text>
           </TouchableOpacity>)
@@ -101,6 +92,18 @@ export class Players extends Component<{}, StateType> {
       }/>
     )
 
+  }
+
+  private update(){
+    this.setState({update: this.state.update + 1})
+  }
+
+  private viewPlayer(player: CharacterModel, i: number) {
+    Actions.push('character', {
+      character: player,
+      index: i,
+      title: player.name
+    })
   }
 }
 

@@ -127,12 +127,16 @@ var Character = /** @class */ (function (_super) {
     Character.prototype.edit = function () {
         react_native_router_flux_1.Actions.push('characterEdit', {
             character: this.props.character,
-            updateCharacter: this.props.updateCharacter,
             index: this.props.index,
+            updateChar: this.updateChar.bind(this),
             title: this.props.character.name
         });
     };
     Character.prototype.upload = function () {
+    };
+    Character.prototype.updateChar = function (char) {
+        this.props.character.maxHitPoints = char.maxHitPoints;
+        this.setState({ update: this.state.update + 1 });
     };
     return Character;
 }(react_2.Component));
