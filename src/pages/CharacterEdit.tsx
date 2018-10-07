@@ -38,13 +38,6 @@ export class CharacterEdit extends Component<Props, State> {
   private info() {
     return (
       <View>
-        <View style={{flexDirection: 'row'}}>
-          <Text style={styles.textStyle}>
-            Name:
-          </Text>
-          <FormInput defaultValue={this.props.character.name}
-                     onChangeText={(text: string) => this.setValue(text, "name")}/>
-        </View>
 
         <View style={{flexDirection: 'row'}}>
           <Text style={styles.textStyle}>

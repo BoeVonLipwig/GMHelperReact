@@ -41,9 +41,6 @@ var CharacterEdit = /** @class */ (function (_super) {
         var _this = this;
         return (react_1.default.createElement(react_native_1.View, null,
             react_1.default.createElement(react_native_1.View, { style: { flexDirection: 'row' } },
-                react_1.default.createElement(react_native_1.Text, { style: exports.styles.textStyle }, "Name:"),
-                react_1.default.createElement(react_native_elements_1.FormInput, { defaultValue: this.props.character.name, onChangeText: function (text) { return _this.setValue(text, "name"); } })),
-            react_1.default.createElement(react_native_1.View, { style: { flexDirection: 'row' } },
                 react_1.default.createElement(react_native_1.Text, { style: exports.styles.textStyle }, "Race:"),
                 react_1.default.createElement(react_native_elements_1.FormInput, { defaultValue: this.props.character.race, onChangeText: function (text) { return _this.setValue(text, "race"); } })),
             react_1.default.createElement(react_native_1.View, { style: { flexDirection: 'row' } },
