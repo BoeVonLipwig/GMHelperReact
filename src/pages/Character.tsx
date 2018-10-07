@@ -27,50 +27,99 @@ export class Character extends Component<Props, State> {
   render() {
     return (
       <View style={{flex: 1}}>
-
-        <View>
-          <Text style={styles.textStyle}>
-            Race: {this.props.character.race}
-          </Text>
-          <Text style={styles.textStyle}>
-            Class: {this.props.character.class}
-          </Text>
-        </View>
-
-
-        <View style={{flexDirection: 'row', padding: 10}}>
-          <TouchableOpacity
-            style={styles.buttonStyleLower}
-            onPress={() => this.charHealth(-1)}>
-            <Text> - </Text>
-          </TouchableOpacity>
-
-          <Text style={{
-            fontSize: 20,
-            paddingRight: 10,
-            paddingLeft: 10,
-          }}>
-            {this.props.character.curHitPoints}/{this.props.character.maxHitPoints}
-          </Text>
-
-          <TouchableOpacity
-            style={styles.buttonStyleAdd}
-            onPress={() => this.charHealth(-1)}>
-            <Text> + </Text>
-          </TouchableOpacity>
-        </View>
-
+        {this.info()}
+        {this.displayHealth()}
         {this.printStats()}
         {this.fabButton()}
       </View>
     );
   }
 
-  private printStats() {
+  private info() {
     return (
       <View>
-        <Text>Stats</Text>
-        <View></View>
+        <Text style={styles.textStyle}>
+          Race: {this.props.character.race}
+        </Text>
+        <Text style={styles.textStyle}>
+          Class: {this.props.character.class}
+        </Text>
+        <Text style={styles.textStyle}>
+          AC: {this.props.character.armorClass}
+        </Text>
+      </View>
+    );
+  }
+
+  private displayHealth() {
+    return (
+      <View style={{flexDirection: 'row', paddingLeft: 10}}>
+
+        <Text style={{
+          fontSize: 20,
+          paddingRight: 10,
+        }}>
+          Hit points:
+        </Text>
+
+        <TouchableOpacity
+          style={styles.buttonStyleLower}
+          onPress={() => this.charHealth(-1)}>
+          <Text> - </Text>
+        </TouchableOpacity>
+
+        <Text style={{
+          fontSize: 20,
+          paddingRight: 10,
+          paddingLeft: 10
+        }}>
+          {this.props.character.curHitPoints}/{this.props.character.maxHitPoints}
+        </Text>
+
+        <TouchableOpacity
+          style={styles.buttonStyleAdd}
+          onPress={() => this.charHealth(1)}>
+          <Text> + </Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
+
+  private charHealth(int: number) {
+    let hp = this.props.character.curHitPoints + int;
+    if (hp < 0) hp = 0;
+    else if (hp >= this.props.character.maxHitPoints) hp = this.props.character.maxHitPoints;
+    this.props.character.curHitPoints = hp;
+    this.setState({update: this.state.update + 1})
+  }
+
+  private printStats() {
+    let stats = this.props.character.stats;
+    return (
+      <View
+        style={{paddingLeft: 10}}
+      >
+        <Text style={{fontSize: 20, paddingTop: 10}}>Stats:</Text>
+        <View>
+          <Text style={styles.statsStyle}>
+            Str: {stats.str}
+          </Text>
+          <Text style={styles.statsStyle}>
+            Dex: {stats.dex}
+          </Text>
+          <Text style={styles.statsStyle}>
+            Con: {stats.con}
+          </Text>
+          <Text style={styles.statsStyle}>
+            Int: {stats.int}
+          </Text>
+          <Text style={styles.statsStyle}>
+            Wis: {stats.wis}
+          </Text>
+          <Text style={styles.statsStyle}>
+            Chr: {stats.cha}
+          </Text>
+        </View>
       </View>
     )
   }
@@ -107,22 +156,13 @@ export class Character extends Component<Props, State> {
     Actions.push('characterEdit', {
       character: this.props.character,
       updateCharacter: this.props.updateCharacter,
-      index: this.props.index
+      index: this.props.index,
+      title: this.props.character.name
     });
   }
 
   private upload() {
 
-  }
-
-  private charHealth(int: number) {
-    let hp = this.props.character.curHitPoints + int;
-    if (hp < 0) hp = 0;
-    else if (hp >= this.props.character.maxHitPoints) hp = this.props.character.maxHitPoints;
-    console.log(this.props.character.curHitPoints);
-    this.props.character.curHitPoints = hp;
-    console.log(this.props.character.curHitPoints);
-    this.setState({update: this.state.update + 1})
   }
 }
 
@@ -131,7 +171,7 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    width: 25,
+    width: 35,
     height: 25,
     borderColor: "transparent",
     borderWidth: 0,
@@ -141,7 +181,7 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    width: 25,
+    width: 35,
     height: 25,
     borderColor: "transparent",
     borderWidth: 0,
@@ -150,6 +190,9 @@ export const styles = StyleSheet.create({
   }, textStyle: {
     fontSize: 20,
     padding: 10
+  }, statsStyle: {
+    fontSize: 15,
+    paddingLeft: 18
   }
 });
 

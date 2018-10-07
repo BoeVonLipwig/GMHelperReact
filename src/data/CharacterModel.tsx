@@ -1,7 +1,7 @@
 export type CharacterModel = {
   maxHitPoints: number;
   curHitPoints: number;
-  // armorClass: number;
+  armorClass: number;
   stats: stats;
   // weapon: string;
   // weaponDmg: string;
@@ -21,7 +21,7 @@ type stats = {
   dex: number;
   con: number;
   int: number;
-  is: number;
+  wis: number;
   cha: number;
 
 }

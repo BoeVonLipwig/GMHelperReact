@@ -39,12 +39,13 @@ var Mobs = /** @class */ (function (_super) {
             class: "to edit",
             maxHitPoints: 0,
             curHitPoints: 0,
+            armorClass: 0,
             stats: {
                 str: 0,
                 dex: 0,
                 con: 0,
                 int: 0,
-                is: 0,
+                wis: 0,
                 cha: 0
             },
             id: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)

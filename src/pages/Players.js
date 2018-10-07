@@ -37,12 +37,13 @@ var Players = /** @class */ (function (_super) {
             class: "Warlock",
             maxHitPoints: 18,
             curHitPoints: 12,
+            armorClass: 16,
             stats: {
                 str: 13,
                 dex: 12,
                 con: 14,
                 int: 13,
-                is: 10,
+                wis: 10,
                 cha: 18
             },
             id: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)

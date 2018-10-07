@@ -31,35 +31,76 @@ var Character = /** @class */ (function (_super) {
         return _this;
     }
     Character.prototype.render = function () {
-        var _this = this;
         return (react_1.default.createElement(react_native_1.View, { style: { flex: 1 } },
-            react_1.default.createElement(react_native_1.View, null,
-                react_1.default.createElement(react_native_1.Text, { style: exports.styles.textStyle },
-                    "Race: ",
-                    this.props.character.race),
-                react_1.default.createElement(react_native_1.Text, { style: exports.styles.textStyle },
-                    "Class: ",
-                    this.props.character.class)),
-            react_1.default.createElement(react_native_1.View, { style: { flexDirection: 'row', padding: 10 } },
-                react_1.default.createElement(react_native_1.TouchableOpacity, { style: exports.styles.buttonStyleLower, onPress: function () { return _this.charHealth(-1); } },
-                    react_1.default.createElement(react_native_1.Text, null, " - ")),
-                react_1.default.createElement(react_native_1.Text, { style: {
-                        fontSize: 20,
-                        paddingRight: 10,
-                        paddingLeft: 10,
-                    } },
-                    this.props.character.curHitPoints,
-                    "/",
-                    this.props.character.maxHitPoints),
-                react_1.default.createElement(react_native_1.TouchableOpacity, { style: exports.styles.buttonStyleAdd, onPress: function () { return _this.charHealth(-1); } },
-                    react_1.default.createElement(react_native_1.Text, null, " + "))),
+            this.info(),
+            this.displayHealth(),
             this.printStats(),
             this.fabButton()));
     };
-    Character.prototype.printStats = function () {
+    Character.prototype.info = function () {
         return (react_1.default.createElement(react_native_1.View, null,
-            react_1.default.createElement(react_native_1.Text, null, "Stats"),
-            react_1.default.createElement(react_native_1.View, null)));
+            react_1.default.createElement(react_native_1.Text, { style: exports.styles.textStyle },
+                "Race: ",
+                this.props.character.race),
+            react_1.default.createElement(react_native_1.Text, { style: exports.styles.textStyle },
+                "Class: ",
+                this.props.character.class),
+            react_1.default.createElement(react_native_1.Text, { style: exports.styles.textStyle },
+                "AC: ",
+                this.props.character.armorClass)));
+    };
+    Character.prototype.displayHealth = function () {
+        var _this = this;
+        return (react_1.default.createElement(react_native_1.View, { style: { flexDirection: 'row', paddingLeft: 10 } },
+            react_1.default.createElement(react_native_1.Text, { style: {
+                    fontSize: 20,
+                    paddingRight: 10,
+                } }, "Hit points:"),
+            react_1.default.createElement(react_native_1.TouchableOpacity, { style: exports.styles.buttonStyleLower, onPress: function () { return _this.charHealth(-1); } },
+                react_1.default.createElement(react_native_1.Text, null, " - ")),
+            react_1.default.createElement(react_native_1.Text, { style: {
+                    fontSize: 20,
+                    paddingRight: 10,
+                    paddingLeft: 10
+                } },
+                this.props.character.curHitPoints,
+                "/",
+                this.props.character.maxHitPoints),
+            react_1.default.createElement(react_native_1.TouchableOpacity, { style: exports.styles.buttonStyleAdd, onPress: function () { return _this.charHealth(1); } },
+                react_1.default.createElement(react_native_1.Text, null, " + "))));
+    };
+    Character.prototype.charHealth = function (int) {
+        var hp = this.props.character.curHitPoints + int;
+        if (hp < 0)
+            hp = 0;
+        else if (hp >= this.props.character.maxHitPoints)
+            hp = this.props.character.maxHitPoints;
+        this.props.character.curHitPoints = hp;
+        this.setState({ update: this.state.update + 1 });
+    };
+    Character.prototype.printStats = function () {
+        var stats = this.props.character.stats;
+        return (react_1.default.createElement(react_native_1.View, { style: { paddingLeft: 10 } },
+            react_1.default.createElement(react_native_1.Text, { style: { fontSize: 20, paddingTop: 10 } }, "Stats:"),
+            react_1.default.createElement(react_native_1.View, null,
+                react_1.default.createElement(react_native_1.Text, { style: exports.styles.statsStyle },
+                    "Str: ",
+                    stats.str),
+                react_1.default.createElement(react_native_1.Text, { style: exports.styles.statsStyle },
+                    "Dex: ",
+                    stats.dex),
+                react_1.default.createElement(react_native_1.Text, { style: exports.styles.statsStyle },
+                    "Con: ",
+                    stats.con),
+                react_1.default.createElement(react_native_1.Text, { style: exports.styles.statsStyle },
+                    "Int: ",
+                    stats.int),
+                react_1.default.createElement(react_native_1.Text, { style: exports.styles.statsStyle },
+                    "Wis: ",
+                    stats.wis),
+                react_1.default.createElement(react_native_1.Text, { style: exports.styles.statsStyle },
+                    "Chr: ",
+                    stats.cha))));
     };
     Character.prototype.fabButton = function () {
         var _this = this;
@@ -87,21 +128,11 @@ var Character = /** @class */ (function (_super) {
         react_native_router_flux_1.Actions.push('characterEdit', {
             character: this.props.character,
             updateCharacter: this.props.updateCharacter,
-            index: this.props.index
+            index: this.props.index,
+            title: this.props.character.name
         });
     };
     Character.prototype.upload = function () {
-    };
-    Character.prototype.charHealth = function (int) {
-        var hp = this.props.character.curHitPoints + int;
-        if (hp < 0)
-            hp = 0;
-        else if (hp >= this.props.character.maxHitPoints)
-            hp = this.props.character.maxHitPoints;
-        console.log(this.props.character.curHitPoints);
-        this.props.character.curHitPoints = hp;
-        console.log(this.props.character.curHitPoints);
-        this.setState({ update: this.state.update + 1 });
     };
     return Character;
 }(react_2.Component));
@@ -111,7 +142,7 @@ exports.styles = react_native_1.StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "center",
-        width: 25,
+        width: 35,
         height: 25,
         borderColor: "transparent",
         borderWidth: 0,
@@ -121,7 +152,7 @@ exports.styles = react_native_1.StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "center",
-        width: 25,
+        width: 35,
         height: 25,
         borderColor: "transparent",
         borderWidth: 0,
@@ -130,6 +161,9 @@ exports.styles = react_native_1.StyleSheet.create({
     }, textStyle: {
         fontSize: 20,
         padding: 10
+    }, statsStyle: {
+        fontSize: 15,
+        paddingLeft: 18
     }
 });
 exports.FabConfig = {
