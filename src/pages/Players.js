@@ -31,14 +31,30 @@ var Players = /** @class */ (function (_super) {
     };
     Players.prototype.render = function () {
         var _this = this;
+        console.log(this.state.players);
         return (<View style={{ flex: 1 }}>
                 {this.state.players.map(function (player, i) {
             return <TouchableOpacity onPress={function () { return _this.viewPlayer(player, i); }} style={styles.listItem} key={i}>
                         <Text>{player.name + " the " + player.race + " " + player.class}</Text>
+                        <TouchableOpacity style={{
+                flexDirection: "row",
+                backgroundColor: "rgb(255,0,0)",
+                height: "100%",
+                width: 50,
+                alignItems: "center",
+                justifyContent: "center"
+            }} key={i} onPress={function () { return _this.deleteChar(i); }}>
+                            <Text style={{ fontSize: 10 }}>{"Del"}</Text>
+                        </TouchableOpacity>
                     </TouchableOpacity>;
         })}
                 {this.fabButton()}
             </View>);
+    };
+    Players.prototype.deleteChar = function (i) {
+        var newList = this.state.players;
+        newList.splice(i, 1);
+        this.setState({ players: newList });
     };
     Players.prototype.addChar = function () {
         var char = {
@@ -62,7 +78,6 @@ var Players = /** @class */ (function (_super) {
     };
     Players.prototype.download = function () {
         var _this = this;
-        console.log(this.state.players);
         var firebasePromiseLocal = FirebaseController.downloadAllChars("players").then(function (query) {
             var chars = FirebaseController.getChars(query);
             for (var i = 0; i < chars.length; i++) {
@@ -139,11 +154,12 @@ export var styles = StyleSheet.create({
         borderRadius: 0,
         borderWidth: 0.5,
         borderColor: '#d6d7da',
+        justifyContent: 'space-between',
+        alignItems: "center",
+        flexDirection: "row",
         backgroundColor: "#d6d6d6",
         width: "90%",
         height: 40,
-        alignItems: "center",
-        justifyContent: 'center',
         alignSelf: "center",
     }
 });

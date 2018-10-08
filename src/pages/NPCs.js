@@ -35,6 +35,16 @@ var NPCs = /** @class */ (function (_super) {
                 {this.state.npcs.map(function (npc, i) {
             return <TouchableOpacity onPress={function () { return _this.viewNpc(npc, i); }} style={styles.listItem} key={i}>
                         <Text>{npc.name + " the " + npc.race + " " + npc.class}</Text>
+                        <TouchableOpacity style={{
+                flexDirection: "row",
+                backgroundColor: "rgb(255,0,0)",
+                height: "100%",
+                width: 50,
+                alignItems: "center",
+                justifyContent: "center"
+            }} key={i} onPress={function () { return _this.deleteChar(i); }}>
+                            <Text style={{ fontSize: 10 }}>{"Del"}</Text>
+                        </TouchableOpacity>
                     </TouchableOpacity>;
         })}
                 {this.fabButton()}
@@ -59,6 +69,11 @@ var NPCs = /** @class */ (function (_super) {
             id: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
         };
         this.setState({ npcs: this.state.npcs.concat(char) });
+    };
+    NPCs.prototype.deleteChar = function (i) {
+        var newList = this.state.npcs;
+        newList.splice(i, 1);
+        this.setState({ npcs: newList });
     };
     NPCs.prototype.download = function () {
         var _this = this;
@@ -138,12 +153,13 @@ export var styles = StyleSheet.create({
         borderRadius: 0,
         borderWidth: 0.5,
         borderColor: '#d6d7da',
+        justifyContent: 'space-between',
+        alignItems: "center",
+        flexDirection: "row",
         backgroundColor: "#d6d6d6",
         width: "90%",
         height: 40,
-        alignItems: "center",
-        justifyContent: 'center',
-        alignSelf: "center",
+        alignSelf: "center"
     }
 });
 export var FabConfig = {

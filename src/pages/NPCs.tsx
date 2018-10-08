@@ -32,6 +32,20 @@ export class NPCs extends Component<{}, StateType> {
                         onPress={() => this.viewNpc(npc, i)}
                         style={styles.listItem} key={i}>
                         <Text>{npc.name + " the " + npc.race + " " + npc.class}</Text>
+                        <TouchableOpacity
+                            style={{
+                                flexDirection: "row",
+                                backgroundColor: "rgb(255,0,0)",
+                                height: "100%",
+                                width: 50,
+                                alignItems: "center",
+                                justifyContent: "center"
+                            }}
+                            key={i}
+                            onPress={() => this.deleteChar(i)}
+                        >
+                            <Text style={{fontSize: 10}}>{"Del"}</Text>
+                        </TouchableOpacity>
                     </TouchableOpacity>)
                 }
                 {this.fabButton()}
@@ -59,6 +73,12 @@ export class NPCs extends Component<{}, StateType> {
             id: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
         };
         this.setState({npcs: this.state.npcs.concat(char)})
+    }
+
+    private deleteChar(i: number) {
+        let newList = this.state.npcs;
+        newList.splice(i, 1);
+        this.setState({npcs: newList});
     }
 
     private download() {
@@ -143,17 +163,18 @@ export class NPCs extends Component<{}, StateType> {
 
 
 export const styles = StyleSheet.create({
+
         listItem: {
             borderRadius: 0,
             borderWidth: 0.5,
             borderColor: '#d6d7da',
-
+            justifyContent: 'space-between',
+            alignItems: "center",
+            flexDirection: "row",
             backgroundColor: "#d6d6d6",
             width: "90%",
             height: 40,
-            alignItems: "center",
-            justifyContent: 'center',
-            alignSelf: "center",
+            alignSelf: "center"
         }
     }
 );

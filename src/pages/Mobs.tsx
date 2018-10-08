@@ -31,8 +31,23 @@ export class Mobs extends Component<{}, StateType> {
                 {this.state.mobs.map((mob, i) =>
                     <TouchableOpacity
                         onPress={() => this.viewMob(mob, i)}
-                        style={styles.listItem} key={i}>
+                        style={styles.listItem}
+                        key={i}>
                         <Text>{mob.name + " the " + mob.race + " " + mob.class}</Text>
+                        <TouchableOpacity
+                            style={{
+                                flexDirection: "row",
+                                backgroundColor: "rgb(255,0,0)",
+                                height: "100%",
+                                width: 50,
+                                alignItems: "center",
+                                justifyContent: "center"
+                            }}
+                            key={i}
+                            onPress={() => this.deleteChar(i)}
+                        >
+                            <Text style={{fontSize: 10}}>{"Del"}</Text>
+                        </TouchableOpacity>
                     </TouchableOpacity>)
                 }
                 {this.fabButton()}
@@ -60,6 +75,12 @@ export class Mobs extends Component<{}, StateType> {
             id: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
         };
         this.setState({mobs: this.state.mobs.concat(char)})
+    }
+
+    private deleteChar(i: number) {
+        let newList = this.state.mobs;
+        newList.splice(i, 1);
+        this.setState({mobs: newList});
     }
 
     private download() {
@@ -148,12 +169,12 @@ export const styles = StyleSheet.create({
             borderRadius: 0,
             borderWidth: 0.5,
             borderColor: '#d6d7da',
-
+            justifyContent: 'space-between',
+            alignItems: "center",
+            flexDirection: "row",
             backgroundColor: "#d6d6d6",
             width: "90%",
             height: 40,
-            alignItems: "center",
-            justifyContent: 'center',
             alignSelf: "center",
         }
     }

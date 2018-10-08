@@ -25,6 +25,7 @@ export class Players extends Component<{}, StateType> {
     }
 
     render() {
+        console.log(this.state.players);
         return (
             <View style={{flex: 1}}>
                 {this.state.players.map((player, i) =>
@@ -32,6 +33,20 @@ export class Players extends Component<{}, StateType> {
                         onPress={() => this.viewPlayer(player, i)}
                         style={styles.listItem} key={i}>
                         <Text>{player.name + " the " + player.race + " " + player.class}</Text>
+                        <TouchableOpacity
+                            style={{
+                                flexDirection: "row",
+                                backgroundColor: "rgb(255,0,0)",
+                                height: "100%",
+                                width: 50,
+                                alignItems: "center",
+                                justifyContent: "center"
+                            }}
+                            key={i}
+                            onPress={() => this.deleteChar(i)}
+                        >
+                            <Text style={{fontSize: 10}}>{"Del"}</Text>
+                        </TouchableOpacity>
                     </TouchableOpacity>)
                 }
                 {this.fabButton()}
@@ -39,30 +54,36 @@ export class Players extends Component<{}, StateType> {
         );
     }
 
+
+    private deleteChar(i: number) {
+        let newList = this.state.players;
+        newList.splice(i, 1);
+        this.setState({players: newList});
+    }
+
+
     private addChar() {
         let char: CharacterModel = {
-                name: "Click",
-                race: "Player",
-                class: "to edit",
-                maxHitPoints: 0,
-                curHitPoints: 0,
-                armorClass: 0,
-                stats: {
-                    str: 0,
-                    dex: 0,
-                    con: 0,
-                    int: 0,
-                    wis: 0,
-                    cha: 0
-                },
-                id: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
-            }
-        ;
+            name: "Click",
+            race: "Player",
+            class: "to edit",
+            maxHitPoints: 0,
+            curHitPoints: 0,
+            armorClass: 0,
+            stats: {
+                str: 0,
+                dex: 0,
+                con: 0,
+                int: 0,
+                wis: 0,
+                cha: 0
+            },
+            id: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+        };
         this.setState({players: this.state.players.concat(char)});
     }
 
     private download() {
-        console.log(this.state.players);
         let firebasePromiseLocal = FirebaseController.downloadAllChars("players").then(query => {
             const chars = FirebaseController.getChars(query)
             for (let i = 0; i < chars.length; i++) {
@@ -146,12 +167,12 @@ export const styles = StyleSheet.create({
             borderRadius: 0,
             borderWidth: 0.5,
             borderColor: '#d6d7da',
-
+            justifyContent: 'space-between',
+            alignItems: "center",
+            flexDirection: "row",
             backgroundColor: "#d6d6d6",
             width: "90%",
             height: 40,
-            alignItems: "center",
-            justifyContent: 'center',
             alignSelf: "center",
         }
     }
