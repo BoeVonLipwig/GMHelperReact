@@ -17,12 +17,11 @@ export class Players extends Component<{}, StateType> {
         super(props);
         this.state = {
             players: [],
-            update: 0,
+            update: 0
         };
     }
 
     componentDidMount() {
-
     }
 
     render() {
@@ -42,19 +41,19 @@ export class Players extends Component<{}, StateType> {
 
     private addChar() {
         let char: CharacterModel = {
-                name: "Aarok",
-                race: "Human",
-                class: "Warlock",
-                maxHitPoints: 18,
-                curHitPoints: 12,
-                armorClass: 16,
+                name: "Click",
+                race: "Player",
+                class: "to edit",
+                maxHitPoints: 0,
+                curHitPoints: 0,
+                armorClass: 0,
                 stats: {
-                    str: 13,
-                    dex: 12,
-                    con: 14,
-                    int: 13,
-                    wis: 10,
-                    cha: 18
+                    str: 0,
+                    dex: 0,
+                    con: 0,
+                    int: 0,
+                    wis: 0,
+                    cha: 0
                 },
                 id: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
             }
@@ -83,6 +82,23 @@ export class Players extends Component<{}, StateType> {
         }).catch(() => {
             console.log(firebasePromiseLocal);
         });
+    }
+
+    private setChar(char: CharacterModel) {
+        let x = -1;
+        for (let i = 0; i < this.state.players.length; i++) {
+            if (this.state.players[i].id === char.id) {
+                x = i;
+                break;
+            }
+        }
+        if (x > 0) {
+            let newPlayers = this.state.players;
+            newPlayers[x] = char;
+            this.setState({players: newPlayers});
+        } else {
+            this.setState({players: this.state.players.concat(char)});
+        }
     }
 
     // noinspection JSMethodCanBeStatic
@@ -122,23 +138,6 @@ export class Players extends Component<{}, StateType> {
             }/>
         )
 
-    }
-
-    private setChar(char: CharacterModel) {
-        let x = -1;
-        for (let i = 0; i < this.state.players.length; i++) {
-            if (this.state.players[i].id === char.id) {
-                x = i;
-                break;
-            }
-        }
-        if (x > 0) {
-            let newPlayers = this.state.players;
-            newPlayers[x] = char;
-            this.setState({players: newPlayers});
-        } else {
-            this.setState({players: this.state.players.concat(char)});
-        }
     }
 }
 

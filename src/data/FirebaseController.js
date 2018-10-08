@@ -69,8 +69,6 @@ var FirebaseController = /** @class */ (function () {
             var char = JSON.parse(JSON.stringify(documentSnapshot.data()));
             chars.push(char);
         });
-        console.log(chars[0]);
-        console.log("asdasdasd");
         return chars;
     };
     FirebaseController.downloadAllChars = function (type) {

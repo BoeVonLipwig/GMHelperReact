@@ -9,8 +9,7 @@ import {FirebaseController} from "../data/FirebaseController";
 
 type StateType = {
     mobs: CharacterModel[]
-    update: number,
-    ids: string[]
+    update: number
 }
 
 export class Mobs extends Component<{}, StateType> {
@@ -19,8 +18,7 @@ export class Mobs extends Component<{}, StateType> {
         super(props);
         this.state = {
             mobs: [],
-            update: 0,
-            ids: []
+            update: 0
         }
     }
 
@@ -29,13 +27,16 @@ export class Mobs extends Component<{}, StateType> {
 
     render() {
         return (
-            <View style={{flex: 1}}>{this.state.mobs.map((mob, i) =>
-                <TouchableOpacity
-                    onPress={() => this.viewMob(mob, i)}
-                    style={styles.listItem} key={i}>
-                    <Text>{mob.name + " the " + mob.race + " " + mob.class}</Text>
-                </TouchableOpacity>)
-            }{this.fabButton()}</View>
+            <View style={{flex: 1}}>
+                {this.state.mobs.map((mob, i) =>
+                    <TouchableOpacity
+                        onPress={() => this.viewMob(mob, i)}
+                        style={styles.listItem} key={i}>
+                        <Text>{mob.name + " the " + mob.race + " " + mob.class}</Text>
+                    </TouchableOpacity>)
+                }
+                {this.fabButton()}
+            </View>
 
         );
     }
@@ -58,7 +59,7 @@ export class Mobs extends Component<{}, StateType> {
             },
             id: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
         };
-        this.setState({mobs: this.state.mobs.concat(char), ids: this.state.ids.concat(char.id)})
+        this.setState({mobs: this.state.mobs.concat(char)})
     }
 
     private download() {
@@ -110,7 +111,7 @@ export class Mobs extends Component<{}, StateType> {
         })
     }
 
-    fabButton() {
+    private fabButton() {
 
         const actions = [
             {

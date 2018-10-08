@@ -8,8 +8,7 @@ import {FirebaseController} from "../data/FirebaseController";
 
 type StateType = {
     npcs: CharacterModel[]
-    update: number,
-    ids: string[]
+    update: number
 }
 
 export class NPCs extends Component<{}, StateType> {
@@ -18,8 +17,7 @@ export class NPCs extends Component<{}, StateType> {
         super(props);
         this.state = {
             npcs: [],
-            update: 0,
-            ids: []
+            update: 0
         }
     }
 
@@ -28,13 +26,16 @@ export class NPCs extends Component<{}, StateType> {
 
     render() {
         return (
-            <View style={{flex: 1}}>{this.state.npcs.map((npc, i) =>
-                <TouchableOpacity
-                    onPress={() => this.viewNpc(npc, i)}
-                    style={styles.listItem} key={i}>
-                    <Text>{npc.name + " the " + npc.race + " " + npc.class}</Text>
-                </TouchableOpacity>)
-            }{this.fabButton()}</View>
+            <View style={{flex: 1}}>
+                {this.state.npcs.map((npc, i) =>
+                    <TouchableOpacity
+                        onPress={() => this.viewNpc(npc, i)}
+                        style={styles.listItem} key={i}>
+                        <Text>{npc.name + " the " + npc.race + " " + npc.class}</Text>
+                    </TouchableOpacity>)
+                }
+                {this.fabButton()}
+            </View>
 
         );
     }
@@ -83,16 +84,6 @@ export class NPCs extends Component<{}, StateType> {
 
     }
 
-    // noinspection JSMethodCanBeStatic
-    private viewNpc(npc: CharacterModel, i: number) {
-        Actions.push('character', {
-            character: npc,
-            index: i,
-            type: "npcs",
-            title: npc.name
-        })
-    }
-
     private setChar(char: CharacterModel) {
         let x = -1;
         for (let i = 0; i < this.state.npcs.length; i++) {
@@ -108,6 +99,16 @@ export class NPCs extends Component<{}, StateType> {
         } else {
             this.setState({npcs: this.state.npcs.concat(char)});
         }
+    }
+
+    // noinspection JSMethodCanBeStatic
+    private viewNpc(npc: CharacterModel, i: number) {
+        Actions.push('character', {
+            character: npc,
+            index: i,
+            type: "npcs",
+            title: npc.name
+        })
     }
 
     fabButton() {

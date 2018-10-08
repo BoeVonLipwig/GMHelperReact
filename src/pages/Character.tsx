@@ -125,7 +125,7 @@ export class Character extends Component<Props, State> {
         )
     }
 
-    fabButton() {
+    private fabButton() {
 
         const actions = [
             {
@@ -163,6 +163,7 @@ export class Character extends Component<Props, State> {
     }
 
     private upload() {
+        // noinspection JSIgnoredPromiseFromCall
         FirebaseController.send(this.props.character, this.props.type)
     }
 

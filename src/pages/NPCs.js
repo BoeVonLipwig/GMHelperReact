@@ -23,8 +23,7 @@ var NPCs = /** @class */ (function (_super) {
         var _this = _super.call(this, props) || this;
         _this.state = {
             npcs: [],
-            update: 0,
-            ids: []
+            update: 0
         };
         return _this;
     }
@@ -32,11 +31,14 @@ var NPCs = /** @class */ (function (_super) {
     };
     NPCs.prototype.render = function () {
         var _this = this;
-        return (<View style={{ flex: 1 }}>{this.state.npcs.map(function (npc, i) {
+        return (<View style={{ flex: 1 }}>
+                {this.state.npcs.map(function (npc, i) {
             return <TouchableOpacity onPress={function () { return _this.viewNpc(npc, i); }} style={styles.listItem} key={i}>
-                    <Text>{npc.name + " the " + npc.race + " " + npc.class}</Text>
-                </TouchableOpacity>;
-        })}{this.fabButton()}</View>);
+                        <Text>{npc.name + " the " + npc.race + " " + npc.class}</Text>
+                    </TouchableOpacity>;
+        })}
+                {this.fabButton()}
+            </View>);
     };
     NPCs.prototype.addChar = function () {
         var char = {
@@ -80,15 +82,6 @@ var NPCs = /** @class */ (function (_super) {
             console.log(firebasePromiseLocal);
         });
     };
-    // noinspection JSMethodCanBeStatic
-    NPCs.prototype.viewNpc = function (npc, i) {
-        Actions.push('character', {
-            character: npc,
-            index: i,
-            type: "npcs",
-            title: npc.name
-        });
-    };
     NPCs.prototype.setChar = function (char) {
         var x = -1;
         for (var i = 0; i < this.state.npcs.length; i++) {
@@ -105,6 +98,15 @@ var NPCs = /** @class */ (function (_super) {
         else {
             this.setState({ npcs: this.state.npcs.concat(char) });
         }
+    };
+    // noinspection JSMethodCanBeStatic
+    NPCs.prototype.viewNpc = function (npc, i) {
+        Actions.push('character', {
+            character: npc,
+            index: i,
+            type: "npcs",
+            title: npc.name
+        });
     };
     NPCs.prototype.fabButton = function () {
         var _this = this;

@@ -23,7 +23,7 @@ var Players = /** @class */ (function (_super) {
         var _this = _super.call(this, props) || this;
         _this.state = {
             players: [],
-            update: 0,
+            update: 0
         };
         return _this;
     }
@@ -42,19 +42,19 @@ var Players = /** @class */ (function (_super) {
     };
     Players.prototype.addChar = function () {
         var char = {
-            name: "Aarok",
-            race: "Human",
-            class: "Warlock",
-            maxHitPoints: 18,
-            curHitPoints: 12,
-            armorClass: 16,
+            name: "Click",
+            race: "Player",
+            class: "to edit",
+            maxHitPoints: 0,
+            curHitPoints: 0,
+            armorClass: 0,
             stats: {
-                str: 13,
-                dex: 12,
-                con: 14,
-                int: 13,
-                wis: 10,
-                cha: 18
+                str: 0,
+                dex: 0,
+                con: 0,
+                int: 0,
+                wis: 0,
+                cha: 0
             },
             id: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
         };
@@ -82,6 +82,23 @@ var Players = /** @class */ (function (_super) {
         }).catch(function () {
             console.log(firebasePromiseLocal);
         });
+    };
+    Players.prototype.setChar = function (char) {
+        var x = -1;
+        for (var i = 0; i < this.state.players.length; i++) {
+            if (this.state.players[i].id === char.id) {
+                x = i;
+                break;
+            }
+        }
+        if (x > 0) {
+            var newPlayers = this.state.players;
+            newPlayers[x] = char;
+            this.setState({ players: newPlayers });
+        }
+        else {
+            this.setState({ players: this.state.players.concat(char) });
+        }
     };
     // noinspection JSMethodCanBeStatic
     Players.prototype.viewPlayer = function (player, i) {
@@ -113,23 +130,6 @@ var Players = /** @class */ (function (_super) {
                 _this.download();
             }
         }}/>);
-    };
-    Players.prototype.setChar = function (char) {
-        var x = -1;
-        for (var i = 0; i < this.state.players.length; i++) {
-            if (this.state.players[i].id === char.id) {
-                x = i;
-                break;
-            }
-        }
-        if (x > 0) {
-            var newPlayers = this.state.players;
-            newPlayers[x] = char;
-            this.setState({ players: newPlayers });
-        }
-        else {
-            this.setState({ players: this.state.players.concat(char) });
-        }
     };
     return Players;
 }(Component));

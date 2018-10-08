@@ -11,6 +11,7 @@ require("firebase/firestore");
 export class FirebaseController {
 
     // @ts-ignore
+    // noinspection TypeScriptUMDGlobal
     static firestore: firebase.firestore.Firestore;
 
     static init() {
@@ -46,8 +47,6 @@ export class FirebaseController {
             let char = JSON.parse(JSON.stringify(documentSnapshot.data()));
             chars.push(char);
         });
-        console.log(chars[0]);
-        console.log("asdasdasd");
         return chars;
     }
 

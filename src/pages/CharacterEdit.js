@@ -28,104 +28,103 @@ var CharacterEdit = /** @class */ (function (_super) {
     }
     CharacterEdit.prototype.render = function () {
         return (<ScrollView style={{ flex: 1 }}>
-        {this.info()}
-        {this.printStats()}
-        {this.fabButton()}
-      </ScrollView>);
+                {this.info()}
+                {this.printStats()}
+                {this.fabButton()}
+            </ScrollView>);
     };
     CharacterEdit.prototype.info = function () {
         var _this = this;
         return (<View>
 
-        <View style={{ flexDirection: 'row' }}>
-          <Text style={styles.textStyle}>
-            Race:
-          </Text>
-          <FormInput defaultValue={this.props.character.race} onChangeText={function (text) { return _this.setValue(text, "race"); }}/>
-        </View>
+                <View style={{ flexDirection: 'row' }}>
+                    <Text style={styles.textStyle}>
+                        Race:
+                    </Text>
+                    <FormInput defaultValue={this.props.character.race} onChangeText={function (text) { return _this.setValue(text, "race"); }}/>
+                </View>
 
-        <View style={{ flexDirection: 'row' }}>
-          <Text style={styles.textStyle}>
-            Class:
-          </Text>
-          <FormInput defaultValue={this.props.character.class} onChangeText={function (text) { return _this.setValue(text, "class"); }}/>
-        </View>
+                <View style={{ flexDirection: 'row' }}>
+                    <Text style={styles.textStyle}>
+                        Class:
+                    </Text>
+                    <FormInput defaultValue={this.props.character.class} onChangeText={function (text) { return _this.setValue(text, "class"); }}/>
+                </View>
 
-        <View style={{ flexDirection: 'row' }}>
-          <Text style={styles.textStyle}>
-            AC:
-          </Text>
-          <FormInput defaultValue={this.props.character.armorClass + ""} onChangeText={function (text) { return _this.setValue(text, "ac"); }}/>
-        </View>
+                <View style={{ flexDirection: 'row' }}>
+                    <Text style={styles.textStyle}>
+                        AC:
+                    </Text>
+                    <FormInput defaultValue={this.props.character.armorClass + ""} onChangeText={function (text) { return _this.setValue(text, "ac"); }}/>
+                </View>
 
-        <View style={{ flexDirection: 'row' }}>
-          <Text style={styles.textStyle}>
-            Max Hit Points:
-          </Text>
-          <FormInput defaultValue={this.props.character.maxHitPoints + ""} onChangeText={function (text) { return _this.setValue(text, "maxhp"); }}/>
-        </View>
+                <View style={{ flexDirection: 'row' }}>
+                    <Text style={styles.textStyle}>
+                        Max Hit Points:
+                    </Text>
+                    <FormInput defaultValue={this.props.character.maxHitPoints + ""} onChangeText={function (text) { return _this.setValue(text, "maxhp"); }}/>
+                </View>
 
-      </View>);
+            </View>);
     };
     CharacterEdit.prototype.printStats = function () {
         var _this = this;
         var stats = this.props.character.stats;
         return (<View style={{ paddingLeft: 10 }}>
-        <Text style={{ fontSize: 20, paddingTop: 10 }}>Stats:</Text>
-        <View>
-          <View style={{ flexDirection: 'row' }}>
-            <Text style={styles.statsStyle}>
-              Str:
-            </Text>
-            <FormInput defaultValue={stats.str + ""} onChangeText={function (text) { return _this.setStat(text, "str"); }}/>
-          </View>
-          <View style={{ flexDirection: 'row' }}>
-            <Text style={styles.statsStyle}>
-              Dex:
-            </Text>
-            <FormInput defaultValue={stats.dex + ""} onChangeText={function (text) { return _this.setStat(text, "dex"); }}/>
-          </View>
-          <View style={{ flexDirection: 'row' }}>
-            <Text style={styles.statsStyle}>
-              Con:
-            </Text>
-            <FormInput defaultValue={stats.con + ""} onChangeText={function (text) { return _this.setStat(text, "con"); }}/>
-          </View>
-          <View style={{ flexDirection: 'row' }}>
-            <Text style={styles.statsStyle}>
-              Int:
-            </Text>
-            <FormInput defaultValue={stats.int + ""} onChangeText={function (text) { return _this.setStat(text, "int"); }}/>
-          </View>
-          <View style={{ flexDirection: 'row' }}>
-            <Text style={styles.statsStyle}>
-              Wis:
-            </Text>
-            <FormInput defaultValue={stats.wis + " "} onChangeText={function (text) { return _this.setStat(text, "wis"); }}/>
-          </View>
-          <View style={{ flexDirection: 'row' }}>
-            <Text style={styles.statsStyle}>
-              Chr:
-            </Text>
-            <FormInput defaultValue={stats.cha + ""} onChangeText={function (text) { return _this.setStat(text, "cha"); }}/>
-          </View>
-        </View>
-      </View>);
+                <Text style={{ fontSize: 20, paddingTop: 10 }}>Stats:</Text>
+                <View>
+                    <View style={{ flexDirection: 'row' }}>
+                        <Text style={styles.statsStyle}>
+                            Str:
+                        </Text>
+                        <FormInput defaultValue={stats.str + ""} onChangeText={function (text) { return _this.setStat(text, "str"); }}/>
+                    </View>
+                    <View style={{ flexDirection: 'row' }}>
+                        <Text style={styles.statsStyle}>
+                            Dex:
+                        </Text>
+                        <FormInput defaultValue={stats.dex + ""} onChangeText={function (text) { return _this.setStat(text, "dex"); }}/>
+                    </View>
+                    <View style={{ flexDirection: 'row' }}>
+                        <Text style={styles.statsStyle}>
+                            Con:
+                        </Text>
+                        <FormInput defaultValue={stats.con + ""} onChangeText={function (text) { return _this.setStat(text, "con"); }}/>
+                    </View>
+                    <View style={{ flexDirection: 'row' }}>
+                        <Text style={styles.statsStyle}>
+                            Int:
+                        </Text>
+                        <FormInput defaultValue={stats.int + ""} onChangeText={function (text) { return _this.setStat(text, "int"); }}/>
+                    </View>
+                    <View style={{ flexDirection: 'row' }}>
+                        <Text style={styles.statsStyle}>
+                            Wis:
+                        </Text>
+                        <FormInput defaultValue={stats.wis + " "} onChangeText={function (text) { return _this.setStat(text, "wis"); }}/>
+                    </View>
+                    <View style={{ flexDirection: 'row' }}>
+                        <Text style={styles.statsStyle}>
+                            Chr:
+                        </Text>
+                        <FormInput defaultValue={stats.cha + ""} onChangeText={function (text) { return _this.setStat(text, "cha"); }}/>
+                    </View>
+                </View>
+            </View>);
     };
     CharacterEdit.prototype.fabButton = function () {
         var _this = this;
-        var actions = [
-            {
+        var actions = [{
                 text: FabConfig.save.text,
                 position: FabConfig.save.position,
                 name: FabConfig.save.name
-            }
-        ];
+            }];
         return (<FloatingAction actions={actions} onPressItem={function () {
             _this.save();
         }}/>);
     };
     CharacterEdit.prototype.save = function () {
+        //triggers a state update in the char page
         this.props.updateChar();
         Actions.pop();
     };
@@ -217,6 +216,6 @@ export var FabConfig = {
     save: {
         text: "Save",
         name: "save",
-        position: 2
+        position: 1
     }
 };

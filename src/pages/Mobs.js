@@ -23,8 +23,7 @@ var Mobs = /** @class */ (function (_super) {
         var _this = _super.call(this, props) || this;
         _this.state = {
             mobs: [],
-            update: 0,
-            ids: []
+            update: 0
         };
         return _this;
     }
@@ -32,11 +31,14 @@ var Mobs = /** @class */ (function (_super) {
     };
     Mobs.prototype.render = function () {
         var _this = this;
-        return (<View style={{ flex: 1 }}>{this.state.mobs.map(function (mob, i) {
+        return (<View style={{ flex: 1 }}>
+                {this.state.mobs.map(function (mob, i) {
             return <TouchableOpacity onPress={function () { return _this.viewMob(mob, i); }} style={styles.listItem} key={i}>
-                    <Text>{mob.name + " the " + mob.race + " " + mob.class}</Text>
-                </TouchableOpacity>;
-        })}{this.fabButton()}</View>);
+                        <Text>{mob.name + " the " + mob.race + " " + mob.class}</Text>
+                    </TouchableOpacity>;
+        })}
+                {this.fabButton()}
+            </View>);
     };
     Mobs.prototype.addChar = function () {
         var char = {
@@ -56,7 +58,7 @@ var Mobs = /** @class */ (function (_super) {
             },
             id: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
         };
-        this.setState({ mobs: this.state.mobs.concat(char), ids: this.state.ids.concat(char.id) });
+        this.setState({ mobs: this.state.mobs.concat(char) });
     };
     Mobs.prototype.download = function () {
         var _this = this;

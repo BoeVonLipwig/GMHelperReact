@@ -141,6 +141,7 @@ var Character = /** @class */ (function (_super) {
         });
     };
     Character.prototype.upload = function () {
+        // noinspection JSIgnoredPromiseFromCall
         FirebaseController.send(this.props.character, this.props.type);
     };
     Character.prototype.updateChar = function () {
