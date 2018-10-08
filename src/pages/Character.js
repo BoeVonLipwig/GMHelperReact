@@ -143,7 +143,7 @@ var Character = /** @class */ (function (_super) {
     Character.prototype.upload = function () {
         FirebaseController.send(this.props.character, this.props.type);
     };
-    Character.prototype.updateChar = function (char) {
+    Character.prototype.updateChar = function () {
         this.setState({ update: this.state.update + 1 });
     };
     return Character;

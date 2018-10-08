@@ -9,7 +9,7 @@ import {FormInput} from "react-native-elements";
 type Props = {
   character: CharacterModel,
   index: number,
-  updateChar: (char: CharacterModel) => {}
+  updateChar: () => {}
 }
 
 type State = {
@@ -155,7 +155,7 @@ export class CharacterEdit extends Component<Props, State> {
   }
 
   private save() {
-    this.props.updateChar(this.props.character);
+    this.props.updateChar();
     Actions.pop();
   }
 

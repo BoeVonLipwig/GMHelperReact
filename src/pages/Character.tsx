@@ -26,7 +26,6 @@ export class Character extends Component<Props, State> {
     }
 
     render() {
-
         return (
             <View style={{flex: 1}}>
                 {this.info()}
@@ -167,7 +166,7 @@ export class Character extends Component<Props, State> {
         FirebaseController.send(this.props.character, this.props.type)
     }
 
-    private updateChar(char: CharacterModel) {
+    private updateChar() {
         this.setState({update: this.state.update + 1})
     }
 }

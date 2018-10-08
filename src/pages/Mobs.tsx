@@ -5,8 +5,11 @@ import {FloatingAction} from "react-native-floating-action";
 import {CharacterModel} from "../data/CharacterModel";
 import {Actions} from "react-native-router-flux";
 
+
 type StateType = {
     mobs: CharacterModel[]
+    update: number,
+    ids: string[]
 }
 
 export class Mobs extends Component<{}, StateType> {
@@ -14,11 +17,26 @@ export class Mobs extends Component<{}, StateType> {
     constructor(props: any) {
         super(props);
         this.state = {
-            mobs: []
+            mobs: [],
+            update: 0,
+            ids: []
         }
     }
 
     componentDidMount() {
+    }
+
+    render() {
+        return (
+            <View style={{flex: 1}}>{this.state.mobs.map((mob, i) =>
+                <TouchableOpacity
+                    onPress={() => this.viewMob(mob, i)}
+                    style={styles.listItem} key={i}>
+                    <Text>{mob.name + " the " + mob.race + " " + mob.class}</Text>
+                </TouchableOpacity>)
+            }{this.fabButton()}</View>
+
+        );
     }
 
     private addChar() {
@@ -39,35 +57,20 @@ export class Mobs extends Component<{}, StateType> {
             },
             id: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
         };
-        this.setState({mobs: this.state.mobs.concat(char)})
-    }
-
-    updateChar(char: CharacterModel, index: number) {
-        let newMobs = this.state.mobs;
-        newMobs[index] = char;
-        this.setState({mobs: newMobs})
-    }
-
-    render() {
-        return (
-            <View style={{flex: 1}}>{this.state.mobs.map((mob, i) =>
-                <TouchableOpacity
-                    onPress={() => Actions.push('character', {
-                        character: mob,
-                        updateChar: this.updateChar.bind(this),
-                        index: i,
-                        type: "mobs",
-                        title: mob.name
-                    })}
-                    style={styles.listItem} key={i}>
-                    <Text>{mob.name + " the " + mob.race + " " + mob.class}</Text>
-                </TouchableOpacity>)
-            }{this.fabButton()}</View>
-
-        );
+        this.setState({mobs: this.state.mobs.concat(char), ids: this.state.ids.concat(char.id)})
     }
 
     private download() {
+    }
+
+    // noinspection JSMethodCanBeStatic
+    private viewMob(mob: CharacterModel, i: number) {
+        Actions.push('character', {
+            character: mob,
+            index: i,
+            type: "mobs",
+            title: mob.name
+        })
     }
 
     fabButton() {

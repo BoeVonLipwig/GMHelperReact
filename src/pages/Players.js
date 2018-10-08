@@ -24,10 +24,22 @@ var Players = /** @class */ (function (_super) {
         _this.state = {
             players: [],
             update: 0,
-            ids: []
         };
         return _this;
     }
+    Players.prototype.componentDidMount = function () {
+    };
+    Players.prototype.render = function () {
+        var _this = this;
+        return (<View style={{ flex: 1 }}>
+                {this.state.players.map(function (player, i) {
+            return <TouchableOpacity onPress={function () { return _this.viewPlayer(player, i); }} style={styles.listItem} key={i}>
+                        <Text>{player.name + " the " + player.race + " " + player.class}</Text>
+                    </TouchableOpacity>;
+        })}
+                {this.fabButton()}
+            </View>);
+    };
     Players.prototype.addChar = function () {
         var char = {
             name: "Aarok",
@@ -48,26 +60,37 @@ var Players = /** @class */ (function (_super) {
         };
         this.setState({ players: this.state.players.concat(char) });
     };
-    Players.prototype.render = function () {
-        var _this = this;
-        return (<View style={{ flex: 1 }}>
-                {this.state.players.map(function (player, i) {
-            return <TouchableOpacity onPress={function () { return _this.viewPlayer(player, i); }} style={styles.listItem} key={i}>
-                        <Text>{player.name + " the " + player.race + " " + player.class}</Text>
-                    </TouchableOpacity>;
-        })}
-                {this.fabButton()}
-            </View>);
-    };
     Players.prototype.download = function () {
-        var firebasePromiseLocal = FirebaseController.downloadAllChars("players");
-        firebasePromiseLocal.then(function (query) {
-            console.log(query);
+        var _this = this;
+        var firebasePromiseLocal = FirebaseController.downloadAllChars("players").then(function (query) {
+            var chars = FirebaseController.getChars(query);
+            for (var i = 0; i < chars.length; i++) {
+                var curChar = chars[i];
+                var char = {
+                    name: curChar.name,
+                    race: curChar.race,
+                    class: curChar.class,
+                    maxHitPoints: curChar.maxHitPoints,
+                    curHitPoints: curChar.curHitPoints,
+                    armorClass: curChar.armorClass,
+                    stats: curChar.stats,
+                    id: curChar.id
+                };
+                _this.setChar(char);
+            }
+            console.log("done");
         }).catch(function () {
-            console.log("help");
+            console.log(firebasePromiseLocal);
         });
     };
-    Players.prototype.componentDidMount = function () {
+    // noinspection JSMethodCanBeStatic
+    Players.prototype.viewPlayer = function (player, i) {
+        Actions.push('character', {
+            character: player,
+            index: i,
+            type: "players",
+            title: player.name
+        });
     };
     Players.prototype.fabButton = function () {
         var _this = this;
@@ -91,17 +114,22 @@ var Players = /** @class */ (function (_super) {
             }
         }}/>);
     };
-    Players.prototype.update = function () {
-        this.setState({ update: this.state.update + 1 });
-    };
-    // noinspection JSMethodCanBeStatic
-    Players.prototype.viewPlayer = function (player, i) {
-        Actions.push('character', {
-            character: player,
-            index: i,
-            type: "players",
-            title: player.name
-        });
+    Players.prototype.setChar = function (char) {
+        var x = -1;
+        for (var i = 0; i < this.state.players.length; i++) {
+            if (this.state.players[i].id === char.id) {
+                x = i;
+                break;
+            }
+        }
+        if (x > 0) {
+            var newPlayers = this.state.players;
+            newPlayers[x] = char;
+            this.setState({ players: newPlayers });
+        }
+        else {
+            this.setState({ players: this.state.players.concat(char) });
+        }
     };
     return Players;
 }(Component));

@@ -5,9 +5,10 @@ import {FloatingAction} from "react-native-floating-action";
 import {CharacterModel} from "../data/CharacterModel";
 import {Actions} from "react-native-router-flux";
 
-
 type StateType = {
     npcs: CharacterModel[]
+    update: number,
+    ids: string[]
 }
 
 export class NPCs extends Component<{}, StateType> {
@@ -15,11 +16,26 @@ export class NPCs extends Component<{}, StateType> {
     constructor(props: any) {
         super(props);
         this.state = {
-            npcs: []
+            npcs: [],
+            update: 0,
+            ids: []
         }
     }
 
     componentDidMount() {
+    }
+
+    render() {
+        return (
+            <View style={{flex: 1}}>{this.state.npcs.map((npc, i) =>
+                <TouchableOpacity
+                    onPress={() => this.viewNpc(npc, i)}
+                    style={styles.listItem} key={i}>
+                    <Text>{npc.name + " the " + npc.race + " " + npc.class}</Text>
+                </TouchableOpacity>)
+            }{this.fabButton()}</View>
+
+        );
     }
 
     private addChar() {
@@ -43,33 +59,18 @@ export class NPCs extends Component<{}, StateType> {
         this.setState({npcs: this.state.npcs.concat(char)})
     }
 
-    updateChar(char: CharacterModel, index: number) {
-        let newNpcs = this.state.npcs;
-        newNpcs[index] = char;
-        this.setState({npcs: newNpcs})
-    }
-
-    render() {
-        return (
-            <View style={{flex: 1}}>{this.state.npcs.map((npc, i) =>
-                <TouchableOpacity
-                    onPress={() => Actions.push('character', {
-                        character: npc,
-                        updateChar: this.updateChar.bind(this),
-                        index: i,
-                        type: "npcs",
-                        title: npc.name
-                    })}
-                    style={styles.listItem} key={i}>
-                    <Text>{npc.name + " the " + npc.race + " " + npc.class}</Text>
-                </TouchableOpacity>)
-            }{this.fabButton()}</View>
-
-        );
-    }
-
     private download() {
 
+    }
+
+    // noinspection JSMethodCanBeStatic
+    private viewNpc(npc: CharacterModel, i: number) {
+        Actions.push('character', {
+            character: npc,
+            index: i,
+            type: "npcs",
+            title: npc.name
+        })
     }
 
     fabButton() {

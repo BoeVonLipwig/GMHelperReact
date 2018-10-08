@@ -21,11 +21,21 @@ var Mobs = /** @class */ (function (_super) {
     function Mobs(props) {
         var _this = _super.call(this, props) || this;
         _this.state = {
-            mobs: []
+            mobs: [],
+            update: 0,
+            ids: []
         };
         return _this;
     }
     Mobs.prototype.componentDidMount = function () {
+    };
+    Mobs.prototype.render = function () {
+        var _this = this;
+        return (<View style={{ flex: 1 }}>{this.state.mobs.map(function (mob, i) {
+            return <TouchableOpacity onPress={function () { return _this.viewMob(mob, i); }} style={styles.listItem} key={i}>
+                    <Text>{mob.name + " the " + mob.race + " " + mob.class}</Text>
+                </TouchableOpacity>;
+        })}{this.fabButton()}</View>);
     };
     Mobs.prototype.addChar = function () {
         var char = {
@@ -45,28 +55,18 @@ var Mobs = /** @class */ (function (_super) {
             },
             id: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
         };
-        this.setState({ mobs: this.state.mobs.concat(char) });
-    };
-    Mobs.prototype.updateChar = function (char, index) {
-        var newMobs = this.state.mobs;
-        newMobs[index] = char;
-        this.setState({ mobs: newMobs });
-    };
-    Mobs.prototype.render = function () {
-        var _this = this;
-        return (<View style={{ flex: 1 }}>{this.state.mobs.map(function (mob, i) {
-            return <TouchableOpacity onPress={function () { return Actions.push('character', {
-                character: mob,
-                updateChar: _this.updateChar.bind(_this),
-                index: i,
-                type: "mobs",
-                title: mob.name
-            }); }} style={styles.listItem} key={i}>
-                    <Text>{mob.name + " the " + mob.race + " " + mob.class}</Text>
-                </TouchableOpacity>;
-        })}{this.fabButton()}</View>);
+        this.setState({ mobs: this.state.mobs.concat(char), ids: this.state.ids.concat(char.id) });
     };
     Mobs.prototype.download = function () {
+    };
+    // noinspection JSMethodCanBeStatic
+    Mobs.prototype.viewMob = function (mob, i) {
+        Actions.push('character', {
+            character: mob,
+            index: i,
+            type: "mobs",
+            title: mob.name
+        });
     };
     Mobs.prototype.fabButton = function () {
         var _this = this;

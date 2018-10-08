@@ -63,6 +63,16 @@ var FirebaseController = /** @class */ (function () {
             class: char.class
         });
     };
+    FirebaseController.getChars = function (querySnapshot) {
+        var chars = [];
+        querySnapshot.forEach(function (documentSnapshot) {
+            var char = JSON.parse(JSON.stringify(documentSnapshot.data()));
+            chars.push(char);
+        });
+        console.log(chars[0]);
+        console.log("asdasdasd");
+        return chars;
+    };
     FirebaseController.downloadAllChars = function (type) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {

@@ -126,7 +126,7 @@ var CharacterEdit = /** @class */ (function (_super) {
         }}/>);
     };
     CharacterEdit.prototype.save = function () {
-        this.props.updateChar(this.props.character);
+        this.props.updateChar();
         Actions.pop();
     };
     CharacterEdit.prototype.setValue = function (text, type) {

@@ -1,4 +1,8 @@
 import {CharacterModel} from "./CharacterModel";
+// @ts-ignore
+import QuerySnapshot = firebase.firestore.QuerySnapshot;
+// @ts-ignore
+import DocumentSnapshot = firebase.firestore.DocumentSnapshot;
 
 const firebase = require("firebase");
 require("firebase/firestore");
@@ -33,9 +37,20 @@ export class FirebaseController {
             name: char.name,
             race: char.race,
             class: char.class
+
         });
     }
 
+    static getChars(querySnapshot: QuerySnapshot): CharacterModel[] {
+        const chars: CharacterModel[] = [];
+        querySnapshot.forEach(function (documentSnapshot: DocumentSnapshot) {
+            let char = JSON.parse(JSON.stringify(documentSnapshot.data()));
+            chars.push(char);
+        });
+        console.log(chars[0]);
+        console.log("asdasdasd");
+        return chars;
+    }
 
     static async downloadAllChars(type: string) {
         return FirebaseController.firestore.collection(type).get();
