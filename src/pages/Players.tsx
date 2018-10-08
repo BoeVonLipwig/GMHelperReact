@@ -63,6 +63,7 @@ export class Players extends Component<{}, StateType> {
     }
 
     private download() {
+        console.log(this.state.players);
         let firebasePromiseLocal = FirebaseController.downloadAllChars("players").then(query => {
             const chars = FirebaseController.getChars(query)
             for (let i = 0; i < chars.length; i++) {
@@ -79,7 +80,6 @@ export class Players extends Component<{}, StateType> {
                 };
                 this.setChar(char);
             }
-            console.log("done")
         }).catch(() => {
             console.log(firebasePromiseLocal);
         });

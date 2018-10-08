@@ -62,6 +62,7 @@ var Players = /** @class */ (function (_super) {
     };
     Players.prototype.download = function () {
         var _this = this;
+        console.log(this.state.players);
         var firebasePromiseLocal = FirebaseController.downloadAllChars("players").then(function (query) {
             var chars = FirebaseController.getChars(query);
             for (var i = 0; i < chars.length; i++) {
@@ -78,7 +79,6 @@ var Players = /** @class */ (function (_super) {
                 };
                 _this.setChar(char);
             }
-            console.log("done");
         }).catch(function () {
             console.log(firebasePromiseLocal);
         });

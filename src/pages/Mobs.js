@@ -16,6 +16,7 @@ import { Component } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { FloatingAction } from "react-native-floating-action";
 import { Actions } from "react-native-router-flux";
+import { FirebaseController } from "../data/FirebaseController";
 var Mobs = /** @class */ (function (_super) {
     __extends(Mobs, _super);
     function Mobs(props) {
@@ -58,6 +59,43 @@ var Mobs = /** @class */ (function (_super) {
         this.setState({ mobs: this.state.mobs.concat(char), ids: this.state.ids.concat(char.id) });
     };
     Mobs.prototype.download = function () {
+        var _this = this;
+        var firebasePromiseLocal = FirebaseController.downloadAllChars("players").then(function (query) {
+            var chars = FirebaseController.getChars(query);
+            for (var i = 0; i < chars.length; i++) {
+                var curChar = chars[i];
+                var char = {
+                    name: curChar.name,
+                    race: curChar.race,
+                    class: curChar.class,
+                    maxHitPoints: curChar.maxHitPoints,
+                    curHitPoints: curChar.curHitPoints,
+                    armorClass: curChar.armorClass,
+                    stats: curChar.stats,
+                    id: curChar.id
+                };
+                _this.setChar(char);
+            }
+        }).catch(function () {
+            console.log(firebasePromiseLocal);
+        });
+    };
+    Mobs.prototype.setChar = function (char) {
+        var x = -1;
+        for (var i = 0; i < this.state.mobs.length; i++) {
+            if (this.state.mobs[i].id === char.id) {
+                x = i;
+                break;
+            }
+        }
+        if (x > 0) {
+            var newMobs = this.state.mobs;
+            newMobs[x] = char;
+            this.setState({ mobs: newMobs });
+        }
+        else {
+            this.setState({ mobs: this.state.mobs.concat(char) });
+        }
     };
     // noinspection JSMethodCanBeStatic
     Mobs.prototype.viewMob = function (mob, i) {

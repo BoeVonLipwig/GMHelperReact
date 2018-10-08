@@ -37,7 +37,6 @@ export class FirebaseController {
             name: char.name,
             race: char.race,
             class: char.class
-
         });
     }
 

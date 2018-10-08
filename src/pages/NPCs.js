@@ -16,6 +16,7 @@ import { Component } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { FloatingAction } from "react-native-floating-action";
 import { Actions } from "react-native-router-flux";
+import { FirebaseController } from "../data/FirebaseController";
 var NPCs = /** @class */ (function (_super) {
     __extends(NPCs, _super);
     function NPCs(props) {
@@ -58,6 +59,26 @@ var NPCs = /** @class */ (function (_super) {
         this.setState({ npcs: this.state.npcs.concat(char) });
     };
     NPCs.prototype.download = function () {
+        var _this = this;
+        var firebasePromiseLocal = FirebaseController.downloadAllChars("npcs").then(function (query) {
+            var chars = FirebaseController.getChars(query);
+            for (var i = 0; i < chars.length; i++) {
+                var curChar = chars[i];
+                var char = {
+                    name: curChar.name,
+                    race: curChar.race,
+                    class: curChar.class,
+                    maxHitPoints: curChar.maxHitPoints,
+                    curHitPoints: curChar.curHitPoints,
+                    armorClass: curChar.armorClass,
+                    stats: curChar.stats,
+                    id: curChar.id
+                };
+                _this.setChar(char);
+            }
+        }).catch(function () {
+            console.log(firebasePromiseLocal);
+        });
     };
     // noinspection JSMethodCanBeStatic
     NPCs.prototype.viewNpc = function (npc, i) {
@@ -67,6 +88,23 @@ var NPCs = /** @class */ (function (_super) {
             type: "npcs",
             title: npc.name
         });
+    };
+    NPCs.prototype.setChar = function (char) {
+        var x = -1;
+        for (var i = 0; i < this.state.npcs.length; i++) {
+            if (this.state.npcs[i].id === char.id) {
+                x = i;
+                break;
+            }
+        }
+        if (x > 0) {
+            var newNPCs = this.state.npcs;
+            newNPCs[x] = char;
+            this.setState({ npcs: newNPCs });
+        }
+        else {
+            this.setState({ npcs: this.state.npcs.concat(char) });
+        }
     };
     NPCs.prototype.fabButton = function () {
         var _this = this;

@@ -4,6 +4,7 @@ import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {FloatingAction} from "react-native-floating-action";
 import {CharacterModel} from "../data/CharacterModel";
 import {Actions} from "react-native-router-flux";
+import {FirebaseController} from "../data/FirebaseController";
 
 type StateType = {
     npcs: CharacterModel[]
@@ -60,6 +61,25 @@ export class NPCs extends Component<{}, StateType> {
     }
 
     private download() {
+        let firebasePromiseLocal = FirebaseController.downloadAllChars("npcs").then(query => {
+            const chars = FirebaseController.getChars(query)
+            for (let i = 0; i < chars.length; i++) {
+                let curChar = chars[i];
+                let char: CharacterModel = {
+                    name: curChar.name,
+                    race: curChar.race,
+                    class: curChar.class,
+                    maxHitPoints: curChar.maxHitPoints,
+                    curHitPoints: curChar.curHitPoints,
+                    armorClass: curChar.armorClass,
+                    stats: curChar.stats,
+                    id: curChar.id
+                };
+                this.setChar(char);
+            }
+        }).catch(() => {
+            console.log(firebasePromiseLocal);
+        });
 
     }
 
@@ -71,6 +91,23 @@ export class NPCs extends Component<{}, StateType> {
             type: "npcs",
             title: npc.name
         })
+    }
+
+    private setChar(char: CharacterModel) {
+        let x = -1;
+        for (let i = 0; i < this.state.npcs.length; i++) {
+            if (this.state.npcs[i].id === char.id) {
+                x = i;
+                break;
+            }
+        }
+        if (x > 0) {
+            let newNPCs = this.state.npcs;
+            newNPCs[x] = char;
+            this.setState({npcs: newNPCs});
+        } else {
+            this.setState({npcs: this.state.npcs.concat(char)});
+        }
     }
 
     fabButton() {

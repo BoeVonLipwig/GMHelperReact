@@ -4,6 +4,7 @@ import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {FloatingAction} from "react-native-floating-action";
 import {CharacterModel} from "../data/CharacterModel";
 import {Actions} from "react-native-router-flux";
+import {FirebaseController} from "../data/FirebaseController";
 
 
 type StateType = {
@@ -61,6 +62,42 @@ export class Mobs extends Component<{}, StateType> {
     }
 
     private download() {
+        let firebasePromiseLocal = FirebaseController.downloadAllChars("players").then(query => {
+            const chars = FirebaseController.getChars(query)
+            for (let i = 0; i < chars.length; i++) {
+                let curChar = chars[i];
+                let char: CharacterModel = {
+                    name: curChar.name,
+                    race: curChar.race,
+                    class: curChar.class,
+                    maxHitPoints: curChar.maxHitPoints,
+                    curHitPoints: curChar.curHitPoints,
+                    armorClass: curChar.armorClass,
+                    stats: curChar.stats,
+                    id: curChar.id
+                };
+                this.setChar(char);
+            }
+        }).catch(() => {
+            console.log(firebasePromiseLocal);
+        });
+    }
+
+    private setChar(char: CharacterModel) {
+        let x = -1;
+        for (let i = 0; i < this.state.mobs.length; i++) {
+            if (this.state.mobs[i].id === char.id) {
+                x = i;
+                break;
+            }
+        }
+        if (x > 0) {
+            let newMobs = this.state.mobs;
+            newMobs[x] = char;
+            this.setState({mobs: newMobs});
+        } else {
+            this.setState({mobs: this.state.mobs.concat(char)});
+        }
     }
 
     // noinspection JSMethodCanBeStatic
