@@ -1,27 +1,27 @@
 {
   "project_info": {
-    "project_number": "588210084717",
-    "firebase_url": "https://reactbs-d85dd.firebaseio.com",
-    "project_id": "reactbs-d85dd",
-    "storage_bucket": "reactbs-d85dd.appspot.com"
+    "project_number": "184042537896",
+    "firebase_url": "https://reactbs-dcb4c.firebaseio.com",
+    "project_id": "reactbs-dcb4c",
+    "storage_bucket": "reactbs-dcb4c.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:588210084717:android:c7b049c55d9f9615",
+        "mobilesdk_app_id": "1:184042537896:android:c1c191c2b93ea432",
         "android_client_info": {
-          "package_name": "com.gmhelper.gmhelper"
+          "package_name": "com.wizardscompanion"
         }
       },
       "oauth_client": [
         {
-          "client_id": "588210084717-t29a48nq3r8nqo2g6pc41j8hqsio4pla.apps.googleusercontent.com",
+          "client_id": "184042537896-hposkssfh6upqlq75decnc5n59csd4qm.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBl-qyEuMEn5lK8O3eUw4SURzRTxc0dPTY"
+          "current_key": "AIzaSyAugs9v_F_VQQPZv2GR6LY_igg2KMbZNCI"
         }
       ],
       "services": {

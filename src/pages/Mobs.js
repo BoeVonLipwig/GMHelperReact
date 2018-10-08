@@ -1,4 +1,3 @@
-"use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -12,15 +11,11 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var react_1 = __importDefault(require("react"));
-var react_2 = require("react");
-var react_native_1 = require("react-native");
-var react_native_floating_action_1 = require("react-native-floating-action");
-var react_native_router_flux_1 = require("react-native-router-flux");
+import React from 'react';
+import { Component } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { FloatingAction } from "react-native-floating-action";
+import { Actions } from "react-native-router-flux";
 var Mobs = /** @class */ (function (_super) {
     __extends(Mobs, _super);
     function Mobs(props) {
@@ -59,17 +54,17 @@ var Mobs = /** @class */ (function (_super) {
     };
     Mobs.prototype.render = function () {
         var _this = this;
-        return (react_1.default.createElement(react_native_1.View, { style: { flex: 1 } },
-            this.state.mobs.map(function (mob, i) {
-                return react_1.default.createElement(react_native_1.TouchableOpacity, { onPress: function () { return react_native_router_flux_1.Actions.push('character', {
-                        character: mob,
-                        updateChar: _this.updateChar.bind(_this),
-                        index: i,
-                        title: mob.name
-                    }); }, style: exports.styles.listItem, key: i },
-                    react_1.default.createElement(react_native_1.Text, null, mob.name + " the " + mob.race + " " + mob.class));
-            }),
-            this.fabButton()));
+        return (<View style={{ flex: 1 }}>{this.state.mobs.map(function (mob, i) {
+            return <TouchableOpacity onPress={function () { return Actions.push('character', {
+                character: mob,
+                updateChar: _this.updateChar.bind(_this),
+                index: i,
+                type: "mobs",
+                title: mob.name
+            }); }} style={styles.listItem} key={i}>
+                    <Text>{mob.name + " the " + mob.race + " " + mob.class}</Text>
+                </TouchableOpacity>;
+        })}{this.fabButton()}</View>);
     };
     Mobs.prototype.download = function () {
     };
@@ -77,29 +72,29 @@ var Mobs = /** @class */ (function (_super) {
         var _this = this;
         var actions = [
             {
-                text: exports.FabConfig.add.text,
-                position: exports.FabConfig.add.position,
-                name: exports.FabConfig.add.name
+                text: FabConfig.add.text,
+                position: FabConfig.add.position,
+                name: FabConfig.add.name
             }, {
-                text: exports.FabConfig.download.text,
-                position: exports.FabConfig.download.position,
-                name: exports.FabConfig.download.name
+                text: FabConfig.download.text,
+                position: FabConfig.download.position,
+                name: FabConfig.download.name
             }
         ];
-        return (react_1.default.createElement(react_native_floating_action_1.FloatingAction, { actions: actions, onPressItem: function (name) {
-                console.log("button pressed");
-                if (exports.FabConfig.add.name.localeCompare(name + "") == 0) {
-                    _this.addChar();
-                }
-                else {
-                    _this.download();
-                }
-            } }));
+        return (<FloatingAction actions={actions} onPressItem={function (name) {
+            console.log("button pressed");
+            if (FabConfig.add.name.localeCompare(name + "") == 0) {
+                _this.addChar();
+            }
+            else {
+                _this.download();
+            }
+        }}/>);
     };
     return Mobs;
-}(react_2.Component));
-exports.Mobs = Mobs;
-exports.styles = react_native_1.StyleSheet.create({
+}(Component));
+export { Mobs };
+export var styles = StyleSheet.create({
     listItem: {
         borderRadius: 0,
         borderWidth: 0.5,
@@ -112,7 +107,7 @@ exports.styles = react_native_1.StyleSheet.create({
         alignSelf: "center",
     }
 });
-exports.FabConfig = {
+export var FabConfig = {
     add: {
         text: "Add",
         name: "add",

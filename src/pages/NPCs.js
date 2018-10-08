@@ -1,4 +1,3 @@
-"use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -12,15 +11,11 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var react_1 = __importDefault(require("react"));
-var react_2 = require("react");
-var react_native_1 = require("react-native");
-var react_native_floating_action_1 = require("react-native-floating-action");
-var react_native_router_flux_1 = require("react-native-router-flux");
+import React from 'react';
+import { Component } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { FloatingAction } from "react-native-floating-action";
+import { Actions } from "react-native-router-flux";
 var NPCs = /** @class */ (function (_super) {
     __extends(NPCs, _super);
     function NPCs(props) {
@@ -59,17 +54,17 @@ var NPCs = /** @class */ (function (_super) {
     };
     NPCs.prototype.render = function () {
         var _this = this;
-        return (react_1.default.createElement(react_native_1.View, { style: { flex: 1 } },
-            this.state.npcs.map(function (npc, i) {
-                return react_1.default.createElement(react_native_1.TouchableOpacity, { onPress: function () { return react_native_router_flux_1.Actions.push('character', {
-                        character: npc,
-                        updateChar: _this.updateChar.bind(_this),
-                        index: i,
-                        title: npc.name
-                    }); }, style: exports.styles.listItem, key: i },
-                    react_1.default.createElement(react_native_1.Text, null, npc.name + " the " + npc.race + " " + npc.class));
-            }),
-            this.fabButton()));
+        return (<View style={{ flex: 1 }}>{this.state.npcs.map(function (npc, i) {
+            return <TouchableOpacity onPress={function () { return Actions.push('character', {
+                character: npc,
+                updateChar: _this.updateChar.bind(_this),
+                index: i,
+                type: "npcs",
+                title: npc.name
+            }); }} style={styles.listItem} key={i}>
+                    <Text>{npc.name + " the " + npc.race + " " + npc.class}</Text>
+                </TouchableOpacity>;
+        })}{this.fabButton()}</View>);
     };
     NPCs.prototype.download = function () {
     };
@@ -77,28 +72,28 @@ var NPCs = /** @class */ (function (_super) {
         var _this = this;
         var actions = [
             {
-                text: exports.FabConfig.add.text,
-                position: exports.FabConfig.add.position,
-                name: exports.FabConfig.add.name
+                text: FabConfig.add.text,
+                position: FabConfig.add.position,
+                name: FabConfig.add.name
             }, {
-                text: exports.FabConfig.download.text,
-                position: exports.FabConfig.download.position,
-                name: exports.FabConfig.download.name
+                text: FabConfig.download.text,
+                position: FabConfig.download.position,
+                name: FabConfig.download.name
             }
         ];
-        return (react_1.default.createElement(react_native_floating_action_1.FloatingAction, { actions: actions, onPressItem: function (name) {
-                if (exports.FabConfig.add.name.localeCompare(name + "") == 0) {
-                    _this.addChar();
-                }
-                else {
-                    _this.download();
-                }
-            } }));
+        return (<FloatingAction actions={actions} onPressItem={function (name) {
+            if (FabConfig.add.name.localeCompare(name + "") == 0) {
+                _this.addChar();
+            }
+            else {
+                _this.download();
+            }
+        }}/>);
     };
     return NPCs;
-}(react_2.Component));
-exports.NPCs = NPCs;
-exports.styles = react_native_1.StyleSheet.create({
+}(Component));
+export { NPCs };
+export var styles = StyleSheet.create({
     listItem: {
         borderRadius: 0,
         borderWidth: 0.5,
@@ -111,7 +106,7 @@ exports.styles = react_native_1.StyleSheet.create({
         alignSelf: "center",
     }
 });
-exports.FabConfig = {
+export var FabConfig = {
     add: {
         text: "Add",
         name: "add",

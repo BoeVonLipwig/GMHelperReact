@@ -1,6 +1,6 @@
 import React from 'react';
 import {Component} from 'react';
-import {StyleSheet,  Text, View, ScrollView} from 'react-native';
+import {StyleSheet, Text, View, ScrollView} from 'react-native';
 import {FloatingAction} from "react-native-floating-action";
 import {CharacterModel} from "../data/CharacterModel";
 import {Actions} from "react-native-router-flux";
@@ -9,7 +9,7 @@ import {FormInput} from "react-native-elements";
 type Props = {
   character: CharacterModel,
   index: number,
-  updateChar: (char: CharacterModel ) => {}
+  updateChar: (char: CharacterModel) => {}
 }
 
 type State = {
@@ -138,10 +138,6 @@ export class CharacterEdit extends Component<Props, State> {
 
     const actions = [
       {
-        text: FabConfig.upload.text,
-        position: FabConfig.upload.position,
-        name: FabConfig.upload.name
-      }, {
         text: FabConfig.save.text,
         position: FabConfig.save.position,
         name: FabConfig.save.name
@@ -150,10 +146,8 @@ export class CharacterEdit extends Component<Props, State> {
 
     return (
       <FloatingAction actions={actions} onPressItem={
-        (name) => {
-          if (name === "upload")
-            this.upload();
-          else this.save();
+        () => {
+          this.save();
         }
       }/>
     )
@@ -163,10 +157,6 @@ export class CharacterEdit extends Component<Props, State> {
   private save() {
     this.props.updateChar(this.props.character);
     Actions.pop();
-  }
-
-  private upload() {
-
   }
 
   private setValue(text: string, type: string) {
@@ -256,11 +246,7 @@ export const styles = StyleSheet.create({
 });
 
 export const FabConfig = {
-  upload: {
-    text: "Upload",
-    name: "upload",
-    position: 1
-  }, save: {
+  save: {
     text: "Save",
     name: "save",
     position: 2

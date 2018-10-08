@@ -1,4 +1,3 @@
-"use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -12,15 +11,12 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var react_1 = __importDefault(require("react"));
-var react_2 = require("react");
-var react_native_1 = require("react-native");
-var react_native_floating_action_1 = require("react-native-floating-action");
-var react_native_router_flux_1 = require("react-native-router-flux");
+import React from 'react';
+import { Component } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { FloatingAction } from "react-native-floating-action";
+import { Actions } from "react-native-router-flux";
+import { FirebaseController } from "../data/FirebaseController";
 var Character = /** @class */ (function (_super) {
     __extends(Character, _super);
     function Character(props) {
@@ -31,43 +27,53 @@ var Character = /** @class */ (function (_super) {
         return _this;
     }
     Character.prototype.render = function () {
-        return (react_1.default.createElement(react_native_1.View, { style: { flex: 1 } },
-            this.info(),
-            this.displayHealth(),
-            this.printStats(),
-            this.fabButton()));
+        return (<View style={{ flex: 1 }}>
+                {this.info()}
+                {this.displayHealth()}
+                {this.printStats()}
+                {this.fabButton()}
+            </View>);
     };
     Character.prototype.info = function () {
-        return (react_1.default.createElement(react_native_1.View, null,
-            react_1.default.createElement(react_native_1.Text, { style: exports.styles.textStyle },
-                "Race: ",
-                this.props.character.race),
-            react_1.default.createElement(react_native_1.Text, { style: exports.styles.textStyle },
-                "Class: ",
-                this.props.character.class),
-            react_1.default.createElement(react_native_1.Text, { style: exports.styles.textStyle },
-                "AC: ",
-                this.props.character.armorClass)));
+        return (<View>
+                <Text style={styles.textStyle}>
+                    Race: {this.props.character.race}
+                </Text>
+                <Text style={styles.textStyle}>
+                    Class: {this.props.character.class}
+                </Text>
+                <Text style={styles.textStyle}>
+                    AC: {this.props.character.armorClass}
+                </Text>
+            </View>);
     };
     Character.prototype.displayHealth = function () {
         var _this = this;
-        return (react_1.default.createElement(react_native_1.View, { style: { flexDirection: 'row', paddingLeft: 10 } },
-            react_1.default.createElement(react_native_1.Text, { style: {
-                    fontSize: 20,
-                    paddingRight: 10,
-                } }, "Hit points:"),
-            react_1.default.createElement(react_native_1.TouchableOpacity, { style: exports.styles.buttonStyleLower, onPress: function () { return _this.charHealth(-1); } },
-                react_1.default.createElement(react_native_1.Text, null, " - ")),
-            react_1.default.createElement(react_native_1.Text, { style: {
-                    fontSize: 20,
-                    paddingRight: 10,
-                    paddingLeft: 10
-                } },
-                this.props.character.curHitPoints,
-                "/",
-                this.props.character.maxHitPoints),
-            react_1.default.createElement(react_native_1.TouchableOpacity, { style: exports.styles.buttonStyleAdd, onPress: function () { return _this.charHealth(1); } },
-                react_1.default.createElement(react_native_1.Text, null, " + "))));
+        return (<View style={{ flexDirection: 'row', paddingLeft: 10 }}>
+
+                <Text style={{
+            fontSize: 20,
+            paddingRight: 10,
+        }}>
+                    Hit points:
+                </Text>
+
+                <TouchableOpacity style={styles.buttonStyleLower} onPress={function () { return _this.charHealth(-1); }}>
+                    <Text> - </Text>
+                </TouchableOpacity>
+
+                <Text style={{
+            fontSize: 20,
+            paddingRight: 10,
+            paddingLeft: 10
+        }}>
+                    {this.props.character.curHitPoints}/{this.props.character.maxHitPoints}
+                </Text>
+
+                <TouchableOpacity style={styles.buttonStyleAdd} onPress={function () { return _this.charHealth(1); }}>
+                    <Text> + </Text>
+                </TouchableOpacity>
+            </View>);
     };
     Character.prototype.charHealth = function (int) {
         var hp = this.props.character.curHitPoints + int;
@@ -80,52 +86,54 @@ var Character = /** @class */ (function (_super) {
     };
     Character.prototype.printStats = function () {
         var stats = this.props.character.stats;
-        return (react_1.default.createElement(react_native_1.View, { style: { paddingLeft: 10 } },
-            react_1.default.createElement(react_native_1.Text, { style: { fontSize: 20, paddingTop: 10 } }, "Stats:"),
-            react_1.default.createElement(react_native_1.View, null,
-                react_1.default.createElement(react_native_1.Text, { style: exports.styles.statsStyle },
-                    "Str: ",
-                    stats.str),
-                react_1.default.createElement(react_native_1.Text, { style: exports.styles.statsStyle },
-                    "Dex: ",
-                    stats.dex),
-                react_1.default.createElement(react_native_1.Text, { style: exports.styles.statsStyle },
-                    "Con: ",
-                    stats.con),
-                react_1.default.createElement(react_native_1.Text, { style: exports.styles.statsStyle },
-                    "Int: ",
-                    stats.int),
-                react_1.default.createElement(react_native_1.Text, { style: exports.styles.statsStyle },
-                    "Wis: ",
-                    stats.wis),
-                react_1.default.createElement(react_native_1.Text, { style: exports.styles.statsStyle },
-                    "Chr: ",
-                    stats.cha))));
+        return (<View style={{ paddingLeft: 10 }}>
+                <Text style={{ fontSize: 20, paddingTop: 10 }}>Stats:</Text>
+                <View>
+                    <Text style={styles.statsStyle}>
+                        Str: {stats.str}
+                    </Text>
+                    <Text style={styles.statsStyle}>
+                        Dex: {stats.dex}
+                    </Text>
+                    <Text style={styles.statsStyle}>
+                        Con: {stats.con}
+                    </Text>
+                    <Text style={styles.statsStyle}>
+                        Int: {stats.int}
+                    </Text>
+                    <Text style={styles.statsStyle}>
+                        Wis: {stats.wis}
+                    </Text>
+                    <Text style={styles.statsStyle}>
+                        Chr: {stats.cha}
+                    </Text>
+                </View>
+            </View>);
     };
     Character.prototype.fabButton = function () {
         var _this = this;
         var actions = [
             {
-                text: exports.FabConfig.edit.text,
-                position: exports.FabConfig.edit.position,
-                name: exports.FabConfig.edit.name
+                text: FabConfig.edit.text,
+                position: FabConfig.edit.position,
+                name: FabConfig.edit.name
             }, {
-                text: exports.FabConfig.upload.text,
-                position: exports.FabConfig.upload.position,
-                name: exports.FabConfig.upload.name
+                text: FabConfig.upload.text,
+                position: FabConfig.upload.position,
+                name: FabConfig.upload.name
             }
         ];
-        return (react_1.default.createElement(react_native_floating_action_1.FloatingAction, { actions: actions, onPressItem: function (name) {
-                if (exports.FabConfig.edit.name.localeCompare(name + "") == 0) {
-                    _this.edit();
-                }
-                else {
-                    _this.upload();
-                }
-            } }));
+        return (<FloatingAction actions={actions} onPressItem={function (name) {
+            if (FabConfig.edit.name.localeCompare(name + "") == 0) {
+                _this.edit();
+            }
+            else {
+                _this.upload();
+            }
+        }}/>);
     };
     Character.prototype.edit = function () {
-        react_native_router_flux_1.Actions.push('characterEdit', {
+        Actions.push('characterEdit', {
             character: this.props.character,
             index: this.props.index,
             updateChar: this.updateChar.bind(this),
@@ -133,14 +141,15 @@ var Character = /** @class */ (function (_super) {
         });
     };
     Character.prototype.upload = function () {
+        FirebaseController.send(this.props.character, this.props.type);
     };
     Character.prototype.updateChar = function (char) {
         this.setState({ update: this.state.update + 1 });
     };
     return Character;
-}(react_2.Component));
-exports.Character = Character;
-exports.styles = react_native_1.StyleSheet.create({
+}(Component));
+export { Character };
+export var styles = StyleSheet.create({
     buttonStyleLower: {
         flexDirection: "row",
         alignItems: "center",
@@ -169,7 +178,7 @@ exports.styles = react_native_1.StyleSheet.create({
         paddingLeft: 18
     }
 });
-exports.FabConfig = {
+export var FabConfig = {
     edit: {
         text: "Edit",
         name: "edit",
@@ -178,6 +187,6 @@ exports.FabConfig = {
     upload: {
         text: "Upload",
         name: "upload",
-        position: 1
+        position: 2
     }
 };

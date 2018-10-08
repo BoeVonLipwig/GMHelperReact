@@ -1,4 +1,3 @@
-"use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -12,22 +11,20 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var react_1 = __importDefault(require("react"));
-var react_2 = require("react");
-var react_native_1 = require("react-native");
-var react_native_floating_action_1 = require("react-native-floating-action");
-var react_native_router_flux_1 = require("react-native-router-flux");
+import React from 'react';
+import { Component } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { FloatingAction } from "react-native-floating-action";
+import { Actions } from "react-native-router-flux";
+import { FirebaseController } from "../data/FirebaseController";
 var Players = /** @class */ (function (_super) {
     __extends(Players, _super);
     function Players(props) {
         var _this = _super.call(this, props) || this;
         _this.state = {
             players: [],
-            update: 0
+            update: 0,
+            ids: []
         };
         return _this;
     }
@@ -53,15 +50,22 @@ var Players = /** @class */ (function (_super) {
     };
     Players.prototype.render = function () {
         var _this = this;
-        return (react_1.default.createElement(react_native_1.View, { style: { flex: 1 } },
-            this.state.players.map(function (player, i) {
-                return react_1.default.createElement(react_native_1.TouchableOpacity, { onPress: function () { return _this.viewPlayer(player, i); }, style: exports.styles.listItem, key: i },
-                    react_1.default.createElement(react_native_1.Text, null, player.name + " the " + player.race + " " + player.class));
-            }),
-            this.fabButton()));
+        return (<View style={{ flex: 1 }}>
+                {this.state.players.map(function (player, i) {
+            return <TouchableOpacity onPress={function () { return _this.viewPlayer(player, i); }} style={styles.listItem} key={i}>
+                        <Text>{player.name + " the " + player.race + " " + player.class}</Text>
+                    </TouchableOpacity>;
+        })}
+                {this.fabButton()}
+            </View>);
     };
     Players.prototype.download = function () {
-        //firebaseTings
+        var firebasePromiseLocal = FirebaseController.downloadAllChars("players");
+        firebasePromiseLocal.then(function (query) {
+            console.log(query);
+        }).catch(function () {
+            console.log("help");
+        });
     };
     Players.prototype.componentDidMount = function () {
     };
@@ -69,39 +73,40 @@ var Players = /** @class */ (function (_super) {
         var _this = this;
         var actions = [
             {
-                text: exports.FabConfig.add.text,
-                position: exports.FabConfig.add.position,
-                name: exports.FabConfig.add.name
+                text: FabConfig.add.text,
+                position: FabConfig.add.position,
+                name: FabConfig.add.name
             }, {
-                text: exports.FabConfig.download.text,
-                position: exports.FabConfig.download.position,
-                name: exports.FabConfig.download.name
+                text: FabConfig.download.text,
+                position: FabConfig.download.position,
+                name: FabConfig.download.name
             }
         ];
-        return (react_1.default.createElement(react_native_floating_action_1.FloatingAction, { actions: actions, onPressItem: function (name) {
-                if (exports.FabConfig.add.name.localeCompare(name + "") == 0) {
-                    _this.addChar();
-                }
-                else {
-                    _this.download();
-                }
-            } }));
+        return (<FloatingAction actions={actions} onPressItem={function (name) {
+            if (FabConfig.add.name.localeCompare(name + "") == 0) {
+                _this.addChar();
+            }
+            else {
+                _this.download();
+            }
+        }}/>);
     };
     Players.prototype.update = function () {
         this.setState({ update: this.state.update + 1 });
     };
     // noinspection JSMethodCanBeStatic
     Players.prototype.viewPlayer = function (player, i) {
-        react_native_router_flux_1.Actions.push('character', {
+        Actions.push('character', {
             character: player,
             index: i,
+            type: "players",
             title: player.name
         });
     };
     return Players;
-}(react_2.Component));
-exports.Players = Players;
-exports.styles = react_native_1.StyleSheet.create({
+}(Component));
+export { Players };
+export var styles = StyleSheet.create({
     listItem: {
         borderRadius: 0,
         borderWidth: 0.5,
@@ -114,7 +119,7 @@ exports.styles = react_native_1.StyleSheet.create({
         alignSelf: "center",
     }
 });
-exports.FabConfig = {
+export var FabConfig = {
     add: {
         text: "Add",
         name: "add",

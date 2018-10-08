@@ -1,4 +1,3 @@
-"use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -12,16 +11,12 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var react_1 = __importDefault(require("react"));
-var react_2 = require("react");
-var react_native_1 = require("react-native");
-var react_native_floating_action_1 = require("react-native-floating-action");
-var react_native_router_flux_1 = require("react-native-router-flux");
-var react_native_elements_1 = require("react-native-elements");
+import React from 'react';
+import { Component } from 'react';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { FloatingAction } from "react-native-floating-action";
+import { Actions } from "react-native-router-flux";
+import { FormInput } from "react-native-elements";
 var CharacterEdit = /** @class */ (function (_super) {
     __extends(CharacterEdit, _super);
     function CharacterEdit(props) {
@@ -32,77 +27,107 @@ var CharacterEdit = /** @class */ (function (_super) {
         return _this;
     }
     CharacterEdit.prototype.render = function () {
-        return (react_1.default.createElement(react_native_1.ScrollView, { style: { flex: 1 } },
-            this.info(),
-            this.printStats(),
-            this.fabButton()));
+        return (<ScrollView style={{ flex: 1 }}>
+        {this.info()}
+        {this.printStats()}
+        {this.fabButton()}
+      </ScrollView>);
     };
     CharacterEdit.prototype.info = function () {
         var _this = this;
-        return (react_1.default.createElement(react_native_1.View, null,
-            react_1.default.createElement(react_native_1.View, { style: { flexDirection: 'row' } },
-                react_1.default.createElement(react_native_1.Text, { style: exports.styles.textStyle }, "Race:"),
-                react_1.default.createElement(react_native_elements_1.FormInput, { defaultValue: this.props.character.race, onChangeText: function (text) { return _this.setValue(text, "race"); } })),
-            react_1.default.createElement(react_native_1.View, { style: { flexDirection: 'row' } },
-                react_1.default.createElement(react_native_1.Text, { style: exports.styles.textStyle }, "Class:"),
-                react_1.default.createElement(react_native_elements_1.FormInput, { defaultValue: this.props.character.class, onChangeText: function (text) { return _this.setValue(text, "class"); } })),
-            react_1.default.createElement(react_native_1.View, { style: { flexDirection: 'row' } },
-                react_1.default.createElement(react_native_1.Text, { style: exports.styles.textStyle }, "AC:"),
-                react_1.default.createElement(react_native_elements_1.FormInput, { defaultValue: this.props.character.armorClass + "", onChangeText: function (text) { return _this.setValue(text, "ac"); } })),
-            react_1.default.createElement(react_native_1.View, { style: { flexDirection: 'row' } },
-                react_1.default.createElement(react_native_1.Text, { style: exports.styles.textStyle }, "Max Hit Points:"),
-                react_1.default.createElement(react_native_elements_1.FormInput, { defaultValue: this.props.character.maxHitPoints + "", onChangeText: function (text) { return _this.setValue(text, "maxhp"); } }))));
+        return (<View>
+
+        <View style={{ flexDirection: 'row' }}>
+          <Text style={styles.textStyle}>
+            Race:
+          </Text>
+          <FormInput defaultValue={this.props.character.race} onChangeText={function (text) { return _this.setValue(text, "race"); }}/>
+        </View>
+
+        <View style={{ flexDirection: 'row' }}>
+          <Text style={styles.textStyle}>
+            Class:
+          </Text>
+          <FormInput defaultValue={this.props.character.class} onChangeText={function (text) { return _this.setValue(text, "class"); }}/>
+        </View>
+
+        <View style={{ flexDirection: 'row' }}>
+          <Text style={styles.textStyle}>
+            AC:
+          </Text>
+          <FormInput defaultValue={this.props.character.armorClass + ""} onChangeText={function (text) { return _this.setValue(text, "ac"); }}/>
+        </View>
+
+        <View style={{ flexDirection: 'row' }}>
+          <Text style={styles.textStyle}>
+            Max Hit Points:
+          </Text>
+          <FormInput defaultValue={this.props.character.maxHitPoints + ""} onChangeText={function (text) { return _this.setValue(text, "maxhp"); }}/>
+        </View>
+
+      </View>);
     };
     CharacterEdit.prototype.printStats = function () {
         var _this = this;
         var stats = this.props.character.stats;
-        return (react_1.default.createElement(react_native_1.View, { style: { paddingLeft: 10 } },
-            react_1.default.createElement(react_native_1.Text, { style: { fontSize: 20, paddingTop: 10 } }, "Stats:"),
-            react_1.default.createElement(react_native_1.View, null,
-                react_1.default.createElement(react_native_1.View, { style: { flexDirection: 'row' } },
-                    react_1.default.createElement(react_native_1.Text, { style: exports.styles.statsStyle }, "Str:"),
-                    react_1.default.createElement(react_native_elements_1.FormInput, { defaultValue: stats.str + "", onChangeText: function (text) { return _this.setStat(text, "str"); } })),
-                react_1.default.createElement(react_native_1.View, { style: { flexDirection: 'row' } },
-                    react_1.default.createElement(react_native_1.Text, { style: exports.styles.statsStyle }, "Dex:"),
-                    react_1.default.createElement(react_native_elements_1.FormInput, { defaultValue: stats.dex + "", onChangeText: function (text) { return _this.setStat(text, "dex"); } })),
-                react_1.default.createElement(react_native_1.View, { style: { flexDirection: 'row' } },
-                    react_1.default.createElement(react_native_1.Text, { style: exports.styles.statsStyle }, "Con:"),
-                    react_1.default.createElement(react_native_elements_1.FormInput, { defaultValue: stats.con + "", onChangeText: function (text) { return _this.setStat(text, "con"); } })),
-                react_1.default.createElement(react_native_1.View, { style: { flexDirection: 'row' } },
-                    react_1.default.createElement(react_native_1.Text, { style: exports.styles.statsStyle }, "Int:"),
-                    react_1.default.createElement(react_native_elements_1.FormInput, { defaultValue: stats.int + "", onChangeText: function (text) { return _this.setStat(text, "int"); } })),
-                react_1.default.createElement(react_native_1.View, { style: { flexDirection: 'row' } },
-                    react_1.default.createElement(react_native_1.Text, { style: exports.styles.statsStyle }, "Wis:"),
-                    react_1.default.createElement(react_native_elements_1.FormInput, { defaultValue: stats.wis + " ", onChangeText: function (text) { return _this.setStat(text, "wis"); } })),
-                react_1.default.createElement(react_native_1.View, { style: { flexDirection: 'row' } },
-                    react_1.default.createElement(react_native_1.Text, { style: exports.styles.statsStyle }, "Chr:"),
-                    react_1.default.createElement(react_native_elements_1.FormInput, { defaultValue: stats.cha + "", onChangeText: function (text) { return _this.setStat(text, "cha"); } })))));
+        return (<View style={{ paddingLeft: 10 }}>
+        <Text style={{ fontSize: 20, paddingTop: 10 }}>Stats:</Text>
+        <View>
+          <View style={{ flexDirection: 'row' }}>
+            <Text style={styles.statsStyle}>
+              Str:
+            </Text>
+            <FormInput defaultValue={stats.str + ""} onChangeText={function (text) { return _this.setStat(text, "str"); }}/>
+          </View>
+          <View style={{ flexDirection: 'row' }}>
+            <Text style={styles.statsStyle}>
+              Dex:
+            </Text>
+            <FormInput defaultValue={stats.dex + ""} onChangeText={function (text) { return _this.setStat(text, "dex"); }}/>
+          </View>
+          <View style={{ flexDirection: 'row' }}>
+            <Text style={styles.statsStyle}>
+              Con:
+            </Text>
+            <FormInput defaultValue={stats.con + ""} onChangeText={function (text) { return _this.setStat(text, "con"); }}/>
+          </View>
+          <View style={{ flexDirection: 'row' }}>
+            <Text style={styles.statsStyle}>
+              Int:
+            </Text>
+            <FormInput defaultValue={stats.int + ""} onChangeText={function (text) { return _this.setStat(text, "int"); }}/>
+          </View>
+          <View style={{ flexDirection: 'row' }}>
+            <Text style={styles.statsStyle}>
+              Wis:
+            </Text>
+            <FormInput defaultValue={stats.wis + " "} onChangeText={function (text) { return _this.setStat(text, "wis"); }}/>
+          </View>
+          <View style={{ flexDirection: 'row' }}>
+            <Text style={styles.statsStyle}>
+              Chr:
+            </Text>
+            <FormInput defaultValue={stats.cha + ""} onChangeText={function (text) { return _this.setStat(text, "cha"); }}/>
+          </View>
+        </View>
+      </View>);
     };
     CharacterEdit.prototype.fabButton = function () {
         var _this = this;
         var actions = [
             {
-                text: exports.FabConfig.upload.text,
-                position: exports.FabConfig.upload.position,
-                name: exports.FabConfig.upload.name
-            }, {
-                text: exports.FabConfig.save.text,
-                position: exports.FabConfig.save.position,
-                name: exports.FabConfig.save.name
+                text: FabConfig.save.text,
+                position: FabConfig.save.position,
+                name: FabConfig.save.name
             }
         ];
-        return (react_1.default.createElement(react_native_floating_action_1.FloatingAction, { actions: actions, onPressItem: function (name) {
-                if (name === "upload")
-                    _this.upload();
-                else
-                    _this.save();
-            } }));
+        return (<FloatingAction actions={actions} onPressItem={function () {
+            _this.save();
+        }}/>);
     };
     CharacterEdit.prototype.save = function () {
         this.props.updateChar(this.props.character);
-        react_native_router_flux_1.Actions.pop();
-    };
-    CharacterEdit.prototype.upload = function () {
+        Actions.pop();
     };
     CharacterEdit.prototype.setValue = function (text, type) {
         switch (type.toLowerCase()) {
@@ -157,9 +182,9 @@ var CharacterEdit = /** @class */ (function (_super) {
         return parsed;
     };
     return CharacterEdit;
-}(react_2.Component));
-exports.CharacterEdit = CharacterEdit;
-exports.styles = react_native_1.StyleSheet.create({
+}(Component));
+export { CharacterEdit };
+export var styles = StyleSheet.create({
     buttonStyleLower: {
         flexDirection: "row",
         alignItems: "center",
@@ -188,12 +213,8 @@ exports.styles = react_native_1.StyleSheet.create({
         paddingLeft: 18
     }
 });
-exports.FabConfig = {
-    upload: {
-        text: "Upload",
-        name: "upload",
-        position: 1
-    }, save: {
+export var FabConfig = {
+    save: {
         text: "Save",
         name: "save",
         position: 2
