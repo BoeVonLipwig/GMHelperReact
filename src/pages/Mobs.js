@@ -69,6 +69,7 @@ var Mobs = /** @class */ (function (_super) {
             id: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
         };
         this.setState({ mobs: this.state.mobs.concat(char) });
+        FirebaseController.send(char, "mobs");
     };
     Mobs.prototype.deleteChar = function (i) {
         var newList = this.state.mobs;

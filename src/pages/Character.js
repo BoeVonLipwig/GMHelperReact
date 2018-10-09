@@ -136,6 +136,7 @@ var Character = /** @class */ (function (_super) {
         Actions.push('characterEdit', {
             character: this.props.character,
             index: this.props.index,
+            type: this.props.type,
             updateChar: this.updateChar.bind(this),
             title: this.props.character.name
         });
@@ -186,7 +187,7 @@ export var FabConfig = {
         position: 1
     },
     upload: {
-        text: "Upload",
+        text: "Upload HP",
         name: "upload",
         position: 2
     }

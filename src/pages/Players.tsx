@@ -81,11 +81,12 @@ export class Players extends Component<{}, StateType> {
             id: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
         };
         this.setState({players: this.state.players.concat(char)});
+        FirebaseController.send(char, "players");
     }
 
     private download() {
         let firebasePromiseLocal = FirebaseController.downloadAllChars("players").then(query => {
-            const chars = FirebaseController.getChars(query)
+            const chars = FirebaseController.getChars(query);
             for (let i = 0; i < chars.length; i++) {
                 let curChar = chars[i];
                 let char: CharacterModel = {

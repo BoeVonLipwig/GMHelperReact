@@ -157,6 +157,7 @@ export class Character extends Component<Props, State> {
         Actions.push('characterEdit', {
             character: this.props.character,
             index: this.props.index,
+            type: this.props.type,
             updateChar: this.updateChar.bind(this),
             title: this.props.character.name
         });
@@ -209,7 +210,7 @@ export const FabConfig = {
         position: 1
     },
     upload: {
-        text: "Upload",
+        text: "Upload HP",
         name: "upload",
         position: 2
     }

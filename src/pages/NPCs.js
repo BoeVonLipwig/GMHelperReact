@@ -69,6 +69,7 @@ var NPCs = /** @class */ (function (_super) {
             id: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
         };
         this.setState({ npcs: this.state.npcs.concat(char) });
+        FirebaseController.send(char, "npcs");
     };
     NPCs.prototype.deleteChar = function (i) {
         var newList = this.state.npcs;

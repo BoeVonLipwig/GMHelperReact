@@ -5,9 +5,11 @@ import {FloatingAction} from "react-native-floating-action";
 import {CharacterModel} from "../data/CharacterModel";
 import {Actions} from "react-native-router-flux";
 import {FormInput} from "react-native-elements";
+import {FirebaseController} from "../data/FirebaseController";
 
 type Props = {
     character: CharacterModel,
+    type: string,
     index: number,
     updateChar: () => {}
 }
@@ -149,6 +151,7 @@ export class CharacterEdit extends Component<Props, State> {
     }
 
     private save() {
+        FirebaseController.send(this.props.character, this.props.type);
         //triggers a state update in the char page
         this.props.updateChar();
         Actions.pop();
@@ -172,7 +175,7 @@ export class CharacterEdit extends Component<Props, State> {
                 this.props.character.maxHitPoints = this.getNum(text);
                 break;
         }
-        this.setState({update: this.state.update + 1})
+        this.setState({update: this.state.update + 1});
     }
 
     private setStat(text: string, type: string) {
@@ -197,7 +200,7 @@ export class CharacterEdit extends Component<Props, State> {
                 this.props.character.stats.cha = num;
                 break;
         }
-        this.setState({update: this.state.update + 1})
+        this.setState({update: this.state.update + 1});
     }
 
     // noinspection JSMethodCanBeStatic
@@ -242,7 +245,7 @@ export const styles = StyleSheet.create({
 
 export const FabConfig = {
     save: {
-        text: "Save",
+        text: "Save & Upload",
         name: "save",
         position: 1
     }

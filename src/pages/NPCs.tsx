@@ -72,7 +72,8 @@ export class NPCs extends Component<{}, StateType> {
             },
             id: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
         };
-        this.setState({npcs: this.state.npcs.concat(char)})
+        this.setState({npcs: this.state.npcs.concat(char)});
+        FirebaseController.send(char, "npcs");
     }
 
     private deleteChar(i: number) {
@@ -83,7 +84,7 @@ export class NPCs extends Component<{}, StateType> {
 
     private download() {
         let firebasePromiseLocal = FirebaseController.downloadAllChars("npcs").then(query => {
-            const chars = FirebaseController.getChars(query)
+            const chars = FirebaseController.getChars(query);
             for (let i = 0; i < chars.length; i++) {
                 let curChar = chars[i];
                 let char: CharacterModel = {

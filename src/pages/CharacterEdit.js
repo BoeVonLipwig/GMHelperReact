@@ -17,6 +17,7 @@ import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { FloatingAction } from "react-native-floating-action";
 import { Actions } from "react-native-router-flux";
 import { FormInput } from "react-native-elements";
+import { FirebaseController } from "../data/FirebaseController";
 var CharacterEdit = /** @class */ (function (_super) {
     __extends(CharacterEdit, _super);
     function CharacterEdit(props) {
@@ -124,6 +125,7 @@ var CharacterEdit = /** @class */ (function (_super) {
         }}/>);
     };
     CharacterEdit.prototype.save = function () {
+        FirebaseController.send(this.props.character, this.props.type);
         //triggers a state update in the char page
         this.props.updateChar();
         Actions.pop();
@@ -214,7 +216,7 @@ export var styles = StyleSheet.create({
 });
 export var FabConfig = {
     save: {
-        text: "Save",
+        text: "Save & Upload",
         name: "save",
         position: 1
     }
