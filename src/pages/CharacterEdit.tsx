@@ -43,6 +43,14 @@ export class CharacterEdit extends Component<Props, State> {
 
                 <View style={{flexDirection: 'row'}}>
                     <Text style={styles.textStyle}>
+                        Name:
+                    </Text>
+                    <FormInput defaultValue={this.props.character.name}
+                               onChangeText={(text: string) => this.setValue(text, "name")}/>
+                </View>
+
+                <View style={{flexDirection: 'row'}}>
+                    <Text style={styles.textStyle}>
                         Race:
                     </Text>
                     <FormInput defaultValue={this.props.character.race}
@@ -61,7 +69,7 @@ export class CharacterEdit extends Component<Props, State> {
                     <Text style={styles.textStyle}>
                         AC:
                     </Text>
-                    <FormInput defaultValue={this.props.character.armorClass + ""}
+                    <FormInput defaultValue={this.props.character.armorClass + ""} keyboardType={'numeric'}
                                onChangeText={(text: string) => this.setValue(text, "ac")}/>
                 </View>
 
@@ -69,7 +77,7 @@ export class CharacterEdit extends Component<Props, State> {
                     <Text style={styles.textStyle}>
                         Max Hit Points:
                     </Text>
-                    <FormInput defaultValue={this.props.character.maxHitPoints + ""}
+                    <FormInput defaultValue={this.props.character.maxHitPoints + ""} keyboardType={'numeric'}
                                onChangeText={(text: string) => this.setValue(text, "maxhp")}/>
                 </View>
 
@@ -88,7 +96,7 @@ export class CharacterEdit extends Component<Props, State> {
                             Str:
                         </Text>
                         <FormInput
-                            defaultValue={stats.str + ""}
+                            defaultValue={stats.str + ""} keyboardType={'numeric'}
                             onChangeText={(text) => this.setStat(text, "str")}/>
                     </View>
                     <View style={{flexDirection: 'row'}}>
@@ -96,7 +104,7 @@ export class CharacterEdit extends Component<Props, State> {
                             Dex:
                         </Text>
                         <FormInput
-                            defaultValue={stats.dex + ""}
+                            defaultValue={stats.dex + ""} keyboardType={'numeric'}
                             onChangeText={(text) => this.setStat(text, "dex")}/>
                     </View>
                     <View style={{flexDirection: 'row'}}>
@@ -104,7 +112,7 @@ export class CharacterEdit extends Component<Props, State> {
                             Con:
                         </Text>
                         <FormInput
-                            defaultValue={stats.con + ""}
+                            defaultValue={stats.con + ""} keyboardType={'numeric'}
                             onChangeText={(text) => this.setStat(text, "con")}/>
                     </View>
                     <View style={{flexDirection: 'row'}}>
@@ -112,7 +120,7 @@ export class CharacterEdit extends Component<Props, State> {
                             Int:
                         </Text>
                         <FormInput
-                            defaultValue={stats.int + ""}
+                            defaultValue={stats.int + ""} keyboardType={'numeric'}
                             onChangeText={(text) => this.setStat(text, "int")}/>
                     </View>
                     <View style={{flexDirection: 'row'}}>
@@ -120,7 +128,7 @@ export class CharacterEdit extends Component<Props, State> {
                             Wis:
                         </Text>
                         <FormInput
-                            defaultValue={stats.wis + " "}
+                            defaultValue={stats.wis + ""} keyboardType={'numeric'}
                             onChangeText={(text) => this.setStat(text, "wis")}/>
                     </View>
                     <View style={{flexDirection: 'row'}}>
@@ -128,7 +136,7 @@ export class CharacterEdit extends Component<Props, State> {
                             Chr:
                         </Text>
                         <FormInput
-                            defaultValue={stats.cha + ""}
+                            defaultValue={stats.cha + ""} keyboardType={'numeric'}
                             onChangeText={(text) => this.setStat(text, "cha")}/>
                     </View>
                 </View>

@@ -7,8 +7,6 @@ import {NPCs} from "./src/pages/NPCs";
 import {Mobs} from "./src/pages/Mobs";
 import {Character} from "./src/pages/Character";
 import {CharacterEdit} from "./src/pages/CharacterEdit";
-import * as firebase from "firebase";
-import Firestore = firebase.firestore.Firestore;
 import {FirebaseController} from "./src/data/FirebaseController";
 
 // @ts-ignore

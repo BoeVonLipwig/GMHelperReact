@@ -40,6 +40,13 @@ var CharacterEdit = /** @class */ (function (_super) {
 
                 <View style={{ flexDirection: 'row' }}>
                     <Text style={styles.textStyle}>
+                        Name:
+                    </Text>
+                    <FormInput defaultValue={this.props.character.name} onChangeText={function (text) { return _this.setValue(text, "name"); }}/>
+                </View>
+
+                <View style={{ flexDirection: 'row' }}>
+                    <Text style={styles.textStyle}>
                         Race:
                     </Text>
                     <FormInput defaultValue={this.props.character.race} onChangeText={function (text) { return _this.setValue(text, "race"); }}/>
@@ -56,14 +63,14 @@ var CharacterEdit = /** @class */ (function (_super) {
                     <Text style={styles.textStyle}>
                         AC:
                     </Text>
-                    <FormInput defaultValue={this.props.character.armorClass + ""} onChangeText={function (text) { return _this.setValue(text, "ac"); }}/>
+                    <FormInput defaultValue={this.props.character.armorClass + ""} keyboardType={'numeric'} onChangeText={function (text) { return _this.setValue(text, "ac"); }}/>
                 </View>
 
                 <View style={{ flexDirection: 'row' }}>
                     <Text style={styles.textStyle}>
                         Max Hit Points:
                     </Text>
-                    <FormInput defaultValue={this.props.character.maxHitPoints + ""} onChangeText={function (text) { return _this.setValue(text, "maxhp"); }}/>
+                    <FormInput defaultValue={this.props.character.maxHitPoints + ""} keyboardType={'numeric'} onChangeText={function (text) { return _this.setValue(text, "maxhp"); }}/>
                 </View>
 
             </View>);
@@ -78,37 +85,37 @@ var CharacterEdit = /** @class */ (function (_super) {
                         <Text style={styles.statsStyle}>
                             Str:
                         </Text>
-                        <FormInput defaultValue={stats.str + ""} onChangeText={function (text) { return _this.setStat(text, "str"); }}/>
+                        <FormInput defaultValue={stats.str + ""} keyboardType={'numeric'} onChangeText={function (text) { return _this.setStat(text, "str"); }}/>
                     </View>
                     <View style={{ flexDirection: 'row' }}>
                         <Text style={styles.statsStyle}>
                             Dex:
                         </Text>
-                        <FormInput defaultValue={stats.dex + ""} onChangeText={function (text) { return _this.setStat(text, "dex"); }}/>
+                        <FormInput defaultValue={stats.dex + ""} keyboardType={'numeric'} onChangeText={function (text) { return _this.setStat(text, "dex"); }}/>
                     </View>
                     <View style={{ flexDirection: 'row' }}>
                         <Text style={styles.statsStyle}>
                             Con:
                         </Text>
-                        <FormInput defaultValue={stats.con + ""} onChangeText={function (text) { return _this.setStat(text, "con"); }}/>
+                        <FormInput defaultValue={stats.con + ""} keyboardType={'numeric'} onChangeText={function (text) { return _this.setStat(text, "con"); }}/>
                     </View>
                     <View style={{ flexDirection: 'row' }}>
                         <Text style={styles.statsStyle}>
                             Int:
                         </Text>
-                        <FormInput defaultValue={stats.int + ""} onChangeText={function (text) { return _this.setStat(text, "int"); }}/>
+                        <FormInput defaultValue={stats.int + ""} keyboardType={'numeric'} onChangeText={function (text) { return _this.setStat(text, "int"); }}/>
                     </View>
                     <View style={{ flexDirection: 'row' }}>
                         <Text style={styles.statsStyle}>
                             Wis:
                         </Text>
-                        <FormInput defaultValue={stats.wis + " "} onChangeText={function (text) { return _this.setStat(text, "wis"); }}/>
+                        <FormInput defaultValue={stats.wis + ""} keyboardType={'numeric'} onChangeText={function (text) { return _this.setStat(text, "wis"); }}/>
                     </View>
                     <View style={{ flexDirection: 'row' }}>
                         <Text style={styles.statsStyle}>
                             Chr:
                         </Text>
-                        <FormInput defaultValue={stats.cha + ""} onChangeText={function (text) { return _this.setStat(text, "cha"); }}/>
+                        <FormInput defaultValue={stats.cha + ""} keyboardType={'numeric'} onChangeText={function (text) { return _this.setStat(text, "cha"); }}/>
                     </View>
                 </View>
             </View>);
